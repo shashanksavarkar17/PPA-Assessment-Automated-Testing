@@ -18,9 +18,16 @@ def get_chrome_driver(headless=False):
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
 
-    # Automatically install and setup ChromeDriver
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    try:
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+    except Exception as e:
+        logger.warning(f"webdriver-manager setup failed ({e}). Falling back to Selenium native manager...")
+        try:
+            driver = webdriver.Chrome(options=chrome_options)
+        except Exception as native_err:
+            logger.error(f"Native Selenium Chrome startup failed: {native_err}")
+            raise native_err
     
     # Explicitly set window size to avoid "Mobile View Not Supported" overlay
     driver.set_window_size(1920, 1080)
@@ -28,8 +35,24 @@ def get_chrome_driver(headless=False):
 
     # Inject CDP-based proctoring bypass script at document start level
     bypass_script = """
+        // Prevent script-initiated window closing
+        window.close = function() {
+            console.log("Proctoring bypass: Blocked attempt to close browser window.");
+        };
+
+        // Mock fullscreen elements to always satisfy proctoring assertions
+        Object.defineProperty(document, 'fullscreenElement', {get: () => document.documentElement, configurable: true});
+        Object.defineProperty(document, 'webkitFullscreenElement', {get: () => document.documentElement, configurable: true});
+        Object.defineProperty(document, 'mozFullScreenElement', {get: () => document.documentElement, configurable: true});
+        Object.defineProperty(document, 'msFullscreenElement', {get: () => document.documentElement, configurable: true});
+        Object.defineProperty(document, 'fullscreenEnabled', {get: () => true, configurable: true});
+        Object.defineProperty(document, 'webkitFullscreenEnabled', {get: () => true, configurable: true});
+
+        // Mock visibility states
         Object.defineProperty(document, 'visibilityState', {get: () => 'visible', configurable: true});
+        Object.defineProperty(document, 'webkitVisibilityState', {get: () => 'visible', configurable: true});
         Object.defineProperty(document, 'hidden', {get: () => false, configurable: true});
+        Object.defineProperty(document, 'webkitHidden', {get: () => false, configurable: true});
         
         const originalAddEventListener = window.addEventListener;
         window.addEventListener = function(type, listener, options) {
