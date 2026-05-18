@@ -4,7 +4,7 @@ import os
 BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3"
 
 # --- API Keys ---
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyB1VPCVN9F238N_XNcnVkuKCAnDTftSfzE")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 # --- Test Data ---
 TEST_USER = {

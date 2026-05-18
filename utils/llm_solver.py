@@ -61,7 +61,7 @@ class GeminiSolver:
             try:
                 with open(req_file, "w", encoding="utf-8") as f:
                     json.dump(request_data, f, indent=2)
-                logger.info(f"Request written to {req_file}. Waiting for Antigravity agent to resolve...")
+                logger.info(f"Request written to {req_file}. Waiting for solver resolution...")
             except Exception as write_err:
                 logger.error(f"Failed to write request file: {write_err}")
                 raise e
@@ -83,13 +83,13 @@ class GeminiSolver:
                         try: os.remove(res_file)
                         except Exception: pass
                         
-                        logger.info("Successfully received answer from Antigravity agent.")
+                        logger.info("Successfully received answer from solver.")
                         return response_text
                     except Exception as read_err:
                         logger.warning(f"Error reading response file: {read_err}. Retrying...")
                 time.sleep(2)
                 
-            logger.error("Timeout waiting for Antigravity agent to resolve request.")
+            logger.error("Timeout waiting for solver to resolve request.")
             raise e
 
     def _search_web(self, query):

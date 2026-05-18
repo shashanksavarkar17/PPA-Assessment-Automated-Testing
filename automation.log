@@ -6011,3 +6011,47 @@ violations {
 }
 ]. Activating file-based bridge fallback...
 2026-05-18 12:47:54,385 - utils.llm_solver - INFO - Request written to C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pending_request.json. Waiting for Antigravity agent to resolve...
+2026-05-18 12:49:46,923 - utils.llm_solver - INFO - Successfully received answer from Antigravity agent.
+2026-05-18 12:49:46,923 - utils.llm_solver - INFO - MCQ answer resolved: <abbr>
+2026-05-18 12:49:46,923 - pages.question_page - INFO - Attempting to select option matching: <abbr>
+2026-05-18 12:49:47,064 - pages.question_page - WARNING - Could not find any radio button matching target text '<abbr>'.
+2026-05-18 12:49:47,064 - MainRunner - WARNING - Exact option match failed. Trying fallback matching...
+2026-05-18 12:49:47,064 - pages.question_page - INFO - Attempting to select option matching: <abbr>
+2026-05-18 12:49:47,072 - pages.question_page - WARNING - Could not find any radio button matching target text '<abbr>'.
+2026-05-18 12:49:47,072 - pages.question_page - INFO - Attempting to click Save & Next / Submit / Next button...
+2026-05-18 12:49:47,079 - pages.question_page - ERROR - Could not find any active Save/Submit/Next buttons.
+2026-05-18 12:49:47,082 - utils.selenium_helpers - ERROR - Failed to take screenshot: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1cce]
+	chromedriver!(No symbol) [0x11fb85]
+	chromedriver!(No symbol) [0x14d646]
+	chromedriver!(No symbol) [0x148869]
+	chromedriver!(No symbol) [0x148252]
+	chromedriver!(No symbol) [0xb502e]
+	chromedriver!(No symbol) [0xb55ce]
+	chromedriver!(No symbol) [0xb5aad]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!(No symbol) [0xb4ba6]
+	chromedriver!(No symbol) [0xb41e0]
+	chromedriver!GetHandleVerifier [0x6cb02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+2026-05-18 12:49:47,082 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-18 12:49:47,085 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 126, in run_assessment_flow
+    question_page.click_save_and_next()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 275, in click_save_and_next
+    raise Exception("Save/Submit/Next button not found on the page.")
+Exception: Save/Submit/Next button not found on the page.
+
+2026-05-18 12:49:47,085 - MainRunner - INFO - Closing browser session...
