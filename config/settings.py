@@ -8,7 +8,7 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyB1VPCVN9F238N_XNcnVkuKC
 
 # --- Test Data ---
 TEST_USER = {
-    "email": "narumodi@yopmail.com",
+    "email": "ppa@yopmail.com",
     "name": "BOT",
     "mobile": "9999999999",
     "roll_number": "9988774455"

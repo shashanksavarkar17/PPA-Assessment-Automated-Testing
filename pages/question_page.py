@@ -57,41 +57,102 @@ class QuestionPage(BasePage):
         
     def get_mcq_options(self):
         """Extracts the text of all available MCQ options with stale element protection."""
-        for retry in range(3):
-            try:
-                elements = self.driver.find_elements(*self.OPTIONS_TEXT_LOCATOR)
-                options = [elem.text.strip() for elem in elements if elem.text.strip()]
+        option_locators = [
+            (By.XPATH, "//input[@type='radio']/following-sibling::span | //input[@type='radio']/following-sibling::label"),
+            (By.XPATH, "//label[//input[@type='radio']]"),
+            (By.XPATH, "//div[contains(@class, 'option')]"),
+            (By.XPATH, "//input[@type='radio']/parent::*"),
+            (By.XPATH, "//input[@type='radio']/ancestor::label")
+        ]
+        
+        for loc in option_locators:
+            for retry in range(3):
+                try:
+                    elements = self.driver.find_elements(*loc)
+                    options = [elem.text.strip() for elem in elements if elem.text.strip()]
+                    # Filter out duplicate options
+                    options = list(dict.fromkeys(options)) # preserve order while deduplicating
+                    if options and len(options) >= 2:
+                        logger.info(f"Found MCQ options using locator {loc}: {options}")
+                        return options
+                except StaleElementReferenceException:
+                    logger.warning("Stale element reference while getting MCQ options. Retrying...")
+                    time.sleep(0.5)
+                    
+        # Deep fallback: find all input of type radio, and look at their parents text
+        try:
+            inputs = self.driver.find_elements(By.XPATH, "//input[@type='radio']")
+            options = []
+            for ipt in inputs:
+                parent = ipt.find_element(By.XPATH, "..")
+                parent_text = parent.text.strip()
+                if parent_text:
+                    options.append(parent_text)
+                else:
+                    grandparent = parent.find_element(By.XPATH, "..")
+                    grandparent_text = grandparent.text.strip()
+                    if grandparent_text:
+                        options.append(grandparent_text)
+            options = list(dict.fromkeys(options))
+            if options:
+                logger.info(f"Found MCQ options via parent tree matching: {options}")
                 return options
-            except StaleElementReferenceException:
-                logger.warning("Stale element reference while getting MCQ options. Retrying...")
-                time.sleep(0.5)
+        except Exception as e:
+            logger.debug(f"Deep fallback options retrieval failed: {e}")
+            
         return []
         
     def select_mcq_option(self, target_option_text):
         """Finds the radio button corresponding to the target text and clicks it."""
         logger.info(f"Attempting to select option matching: {target_option_text}")
         
-        # Try to find the radio button that is near the text
-        # This XPath looks for a label or span containing the text, and finds the preceding radio button
-        xpath = f"//*[contains(normalize-space(.), '{target_option_text}')]/preceding-sibling::input[@type='radio']"
-        try:
-            # Fallback 1: if the structure is <label><input type="radio"> Text</label>
-            xpath_fallback = f"//label[contains(normalize-space(.), '{target_option_text}')]//input[@type='radio']"
-            
-            elements = self.driver.find_elements(By.XPATH, xpath)
-            if not elements:
-                elements = self.driver.find_elements(By.XPATH, xpath_fallback)
+        # Define a list of diverse and highly robust xpaths to find the target element
+        # It looks for label, span, div, p or any element containing the target text
+        xpaths = [
+            f"//label[contains(normalize-space(.), '{target_option_text}')]//input[@type='radio' or @type='checkbox']",
+            f"//*[contains(normalize-space(.), '{target_option_text}')]/preceding-sibling::input[@type='radio' or @type='checkbox']",
+            f"//*[contains(normalize-space(.), '{target_option_text}')]/preceding::input[@type='radio' or @type='checkbox'][1]",
+            f"//*[contains(normalize-space(.), '{target_option_text}')]//input[@type='radio' or @type='checkbox']",
+            f"//input[@type='radio' or @type='checkbox']/following-sibling::*[contains(normalize-space(.), '{target_option_text}')]"
+        ]
+        
+        for xpath in xpaths:
+            try:
+                elements = self.driver.find_elements(By.XPATH, xpath)
+                for elem in elements:
+                    if elem.is_displayed():
+                        logger.info(f"Found match using XPath: {xpath}. Clicking...")
+                        self.driver.execute_script("arguments[0].click();", elem)
+                        logger.info("Successfully clicked the target option.")
+                        return True
+            except Exception as e:
+                logger.debug(f"Exception checking XPath {xpath}: {e}")
                 
-            if elements:
-                self.driver.execute_script("arguments[0].click();", elements[0])
-                logger.info("Successfully clicked the target option.")
-                return True
-            else:
-                logger.warning("Could not find the radio button for the given option text.")
-                return False
+        # Deep fallback: Find all inputs of type radio or checkbox, check if their text content or parent text content has a match
+        try:
+            inputs = self.driver.find_elements(By.XPATH, "//input[@type='radio' or @type='checkbox']")
+            for ipt in inputs:
+                parent = ipt.find_element(By.XPATH, "..")
+                parent_text = parent.text or ""
+                grandparent = parent.find_element(By.XPATH, "..")
+                grandparent_text = grandparent.text or ""
+                sibling_text = ""
+                try:
+                    siblings = ipt.find_elements(By.XPATH, "following-sibling::*")
+                    sibling_text = " ".join([s.text for s in siblings])
+                except Exception:
+                    pass
+                
+                combined_text = f"{parent_text} {grandparent_text} {sibling_text}".lower()
+                if target_option_text.lower() in combined_text:
+                    logger.info("Found input with matching parent/grandparent/sibling text. Clicking...")
+                    self.driver.execute_script("arguments[0].click();", ipt)
+                    return True
         except Exception as e:
-            logger.error(f"Failed to select MCQ option: {e}")
-            return False
+            logger.debug(f"Deep fallback option matching failed: {e}")
+            
+        logger.warning(f"Could not find any radio button matching target text '{target_option_text}'.")
+        return False
 
     def enter_code_solution(self, code):
         """Injects the C++ code into the code editor."""
@@ -183,15 +244,35 @@ class QuestionPage(BasePage):
             raise e
             
     def click_save_and_next(self):
-        """Clicks the Save & Next button."""
-        try:
-            self.helpers.scroll_into_view(self.SAVE_AND_NEXT_BTN_LOCATOR)
-            self.helpers.safe_click(self.SAVE_AND_NEXT_BTN_LOCATOR)
-            logger.info("Clicked Save & Next.")
-            time.sleep(2) # Wait for page transition
-        except Exception as e:
-            logger.error(f"Failed to click Save & Next: {e}")
-            raise e
+        """Clicks the Save & Next or Submit button resiliently."""
+        logger.info("Attempting to click Save & Next / Submit / Next button...")
+        resilient_locators = [
+            (By.XPATH, "//button[contains(normalize-space(.), 'Save') or contains(normalize-space(.), 'Submit') or contains(normalize-space(.), 'Next')]"),
+            (By.XPATH, "//a[contains(normalize-space(.), 'Save') or contains(normalize-space(.), 'Submit') or contains(normalize-space(.), 'Next')]"),
+            (By.XPATH, "//*[contains(@class, 'btn') or contains(@class, 'button') or @role='button'][contains(normalize-space(.), 'Save') or contains(normalize-space(.), 'Submit') or contains(normalize-space(.), 'Next')]"),
+            (By.XPATH, "//input[@type='button' or @type='submit'][contains(translate(@value, 'SAVENEXTSUBMIT', 'savenextsubmit'), 'save') or contains(translate(@value, 'SAVENEXTSUBMIT', 'savenextsubmit'), 'submit') or contains(translate(@value, 'SAVENEXTSUBMIT', 'savenextsubmit'), 'next')]")
+        ]
+        
+        for loc in resilient_locators:
+            try:
+                elements = self.driver.find_elements(*loc)
+                for elem in elements:
+                    if elem.is_displayed() and elem.is_enabled():
+                        text = elem.text.strip() or elem.get_attribute("value") or ""
+                        logger.info(f"Found active button matching: '{text}'. Clicking...")
+                        self.driver.execute_script("arguments[0].scrollIntoView(true);", elem)
+                        time.sleep(0.5)
+                        self.driver.execute_script("arguments[0].click();", elem)
+                        logger.info(f"Successfully clicked '{text}' button.")
+                        time.sleep(2) # Wait for transition
+                        return True
+            except Exception as e:
+                logger.debug(f"Exception checking button with locator {loc}: {e}")
+                
+        logger.error("Could not find any active Save/Submit/Next buttons.")
+        # Fallback to taking a screenshot and raising
+        self.helpers.take_screenshot("click_save_and_next_failed")
+        raise Exception("Save/Submit/Next button not found on the page.")
 
     def submit_code(self):
         """Clicks the specific Submit button for coding questions."""
@@ -261,3 +342,28 @@ class QuestionPage(BasePage):
                 time.sleep(0.5)
                 
         return False, "Stale element extraction loop failed."
+
+    def click_solve_if_present(self):
+        """
+        On coding pages, check if there is a 'Solve' button before the editor/problem details.
+        If present, clicks it to enter the coding workspace.
+        """
+        solve_btn_locators = [
+            (By.XPATH, "//button[contains(normalize-space(.), 'Solve')]"),
+            (By.XPATH, "//a[contains(normalize-space(.), 'Solve')]")
+        ]
+        for loc in solve_btn_locators:
+            try:
+                elements = self.driver.find_elements(*loc)
+                for elem in elements:
+                    if elem.is_displayed() and elem.is_enabled():
+                        logger.info("Found 'Solve' button/link. Clicking to enter workspace...")
+                        self.driver.execute_script("arguments[0].scrollIntoView(true);", elem)
+                        time.sleep(0.5)
+                        self.driver.execute_script("arguments[0].click();", elem)
+                        time.sleep(2) # Wait for editor workspace to transition/load
+                        return True
+            except Exception as e:
+                logger.debug(f"Exception checking solve button for locator {loc}: {e}")
+        logger.info("No active 'Solve' button/link detected. Proceeding directly.")
+        return False

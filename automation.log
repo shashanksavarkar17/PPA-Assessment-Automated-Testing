@@ -4535,3 +4535,1479 @@ Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMEN
 2026-05-18 12:26:28,889 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
 2026-05-18 12:26:29,720 - pages.summary_page - INFO - Downloadable summary file created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
 2026-05-18 12:26:43,946 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:30:49,875 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:30:53,356 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:30:53,357 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:30:54,253 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:30:54,255 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:30:56,005 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 12:30:56,006 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 12:30:56,014 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:30:56,572 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:30:56,704 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 12:30:56,704 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 12:30:56,705 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 12:30:56,705 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 12:30:57,570 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 12:30:57,669 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 12:30:57,670 - pages.login_page - INFO - Entered email and clicked Send OTP for: narumodi@yopmail.com
+2026-05-18 12:30:57,670 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 12:30:57,670 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'narumodi'...
+2026-05-18 12:31:04,872 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-18 12:31:05,068 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-18 12:31:05,131 - YopmailOTPFetcher - INFO - Successfully located OTP: 650364
+2026-05-18 12:31:05,153 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 12:31:06,177 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 12:31:06,256 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 12:31:06,257 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 12:31:07,279 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 12:31:07,279 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 12:31:07,279 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 12:31:07,287 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 12:31:07,614 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 12:31:07,917 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 12:31:08,235 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 12:31:08,257 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:31:08,803 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:31:08,803 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 12:31:08,803 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 12:31:08,803 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 12:31:10,334 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:31:10,873 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:31:10,874 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 12:31:10,874 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 12:31:10,874 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 12:31:12,923 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 12:31:13,390 - pages.summary_page - INFO - Downloadable summary file created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 12:31:26,905 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:38:15,893 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:38:24,624 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:38:24,624 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:38:42,706 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:38:42,706 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:38:42,840 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+242H 36M 17S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+This is an online test.
+Please make sure that you are using the latest version of the browser. We recommend using Google Chrome.
+It's mandatory to disable all the browser extensions and enabled Add-ons or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you're solving coding problems: All inputs are from STDIN and output to STDOUT.
+If test mandates you to use the webcam, please provide the required permissions and access.
+To know the results, please contact the administrator.
+To refer to the FAQ document, you can click on the HELP button which is present in the top right corner of the test environment.
+Best wishes from Programming Pathshala!
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 12:38:42,841 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 12:38:42,853 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:38:43,432 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:38:43,548 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 12:38:43,549 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 12:38:43,549 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 12:38:43,549 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 12:38:49,548 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 12:38:49,607 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 12:38:49,607 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-18 12:38:49,607 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 12:38:49,607 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-18 12:39:24,711 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-18 12:39:24,928 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-18 12:39:25,131 - YopmailOTPFetcher - INFO - Successfully located OTP: 596780
+2026-05-18 12:39:25,161 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 12:39:26,214 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 12:39:26,459 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 12:39:26,459 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 12:39:29,083 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 12:39:29,084 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 12:39:29,084 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 12:39:29,092 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 12:39:29,572 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 12:39:30,014 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 12:39:30,377 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 12:39:30,401 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:39:30,936 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:39:30,937 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 12:39:30,937 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 12:39:30,937 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 12:39:34,584 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:39:35,160 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:39:35,160 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 12:39:35,160 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 12:39:35,160 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 12:39:42,410 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 12:39:43,167 - pages.summary_page - INFO - Downloadable summary file created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 12:39:43,167 - MainRunner - INFO - Dynamically determined Section 1 count: 2 questions.
+2026-05-18 12:39:43,167 - pages.summary_page - INFO - Attempting to start the first section...
+2026-05-18 12:39:43,780 - pages.summary_page - INFO - Successfully clicked 'Solve' for the first section.
+2026-05-18 12:39:45,780 - MainRunner - INFO - --- Solving Question 1 of 2 ---
+2026-05-18 12:39:45,781 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-18 12:39:46,808 - pages.question_page - INFO - Detected question type: MCQ
+2026-05-18 12:39:46,832 - utils.selenium_helpers - INFO - Retrieved text 'Which of the following is an absolute CSS unit?' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-18 12:39:46,832 - MainRunner - INFO - Handling MCQ type question...
+2026-05-18 12:39:46,866 - MainRunner - INFO - Question options found: []
+2026-05-18 12:39:46,867 - utils.llm_solver - INFO - Performing DuckDuckGo search for: Which of the following is an absolute CSS unit?
+2026-05-18 12:39:50,837 - utils.llm_solver - INFO - Successfully fetched search snippets.
+2026-05-18 12:39:50,838 - utils.llm_solver - INFO - Sending MCQ to Gemini for solving with web search context...
+2026-05-18 12:39:52,858 - utils.llm_solver - WARNING - Generation failed with gemini-2.0-flash: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 6.747351581s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 6
+}
+]. Retrying with 'gemini-pro-latest' fallback...
+2026-05-18 12:39:53,342 - utils.llm_solver - ERROR - Error solving MCQ with Gemini: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+Please retry in 6.268266392s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerDay-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 6
+}
+]
+2026-05-18 12:39:53,342 - MainRunner - WARNING - Failed to obtain MCQ answer from LLM. Selecting first option as fallback.
+2026-05-18 12:40:06,177 - utils.selenium_helpers - ERROR - Failed to scroll to element ('xpath', "//button[contains(normalize-space(.), 'Save & Next') or contains(normalize-space(.), 'Submit')]"). Exception: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.168); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0xd0d8e]
+	chromedriver!(No symbol) [0xef97e]
+	chromedriver!(No symbol) [0x153cdd]
+	chromedriver!(No symbol) [0x16a2a9]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+2026-05-18 12:40:06,177 - pages.question_page - ERROR - Failed to click Save & Next: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.168); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0xd0d8e]
+	chromedriver!(No symbol) [0xef97e]
+	chromedriver!(No symbol) [0x153cdd]
+	chromedriver!(No symbol) [0x16a2a9]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+2026-05-18 12:40:06,177 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-18 12:40:06,180 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 125, in run_assessment_flow
+    question_page.click_save_and_next()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 194, in click_save_and_next
+    raise e
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 188, in click_save_and_next
+    self.helpers.scroll_into_view(self.SAVE_AND_NEXT_BTN_LOCATOR)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 105, in scroll_into_view
+    element = self.wait.until(EC.presence_of_element_located(locator))
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 112, in until
+    value = method(self._driver)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 92, in _predicate
+    return driver.find_element(*locator)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 868, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.168); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0xd0d8e]
+	chromedriver!(No symbol) [0xef97e]
+	chromedriver!(No symbol) [0x153cdd]
+	chromedriver!(No symbol) [0x16a2a9]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+
+2026-05-18 12:40:06,181 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:42:12,623 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:42:19,146 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:42:19,146 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:42:25,182 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:42:25,182 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:42:25,240 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 12:42:25,240 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 12:42:25,257 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:42:25,853 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:42:25,906 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 12:42:25,906 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 12:42:25,907 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 12:42:25,907 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 12:42:27,767 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 12:42:27,815 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 12:42:27,815 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-18 12:42:27,815 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 12:42:27,815 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-18 12:42:46,404 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-18 12:42:46,554 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-18 12:42:46,605 - YopmailOTPFetcher - INFO - Successfully located OTP: 816902
+2026-05-18 12:42:46,624 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 12:42:47,659 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 12:42:47,754 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 12:42:47,754 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 12:42:48,802 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 12:42:48,803 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 12:42:48,803 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 12:42:48,813 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 12:42:49,205 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 12:42:49,622 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 12:42:50,034 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 12:42:50,052 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:42:50,599 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:42:50,599 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 12:42:50,599 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 12:42:50,599 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 12:42:53,205 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:42:53,745 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:42:53,745 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 12:42:53,745 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 12:42:53,745 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 12:42:56,312 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 12:42:56,938 - pages.summary_page - INFO - Downloadable summary file created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 12:42:56,938 - MainRunner - INFO - Dynamically determined Section 1 count: 2 questions.
+2026-05-18 12:42:56,938 - pages.summary_page - INFO - Attempting to start the first section...
+2026-05-18 12:42:57,494 - pages.summary_page - INFO - Successfully clicked 'Solve' for the first section.
+2026-05-18 12:42:59,495 - MainRunner - INFO - --- Solving Question 1 of 2 ---
+2026-05-18 12:42:59,495 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-18 12:43:00,571 - pages.question_page - INFO - Detected question type: MCQ
+2026-05-18 12:43:00,663 - utils.selenium_helpers - INFO - Retrieved text 'Which of the following is an absolute CSS unit?' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-18 12:43:00,663 - MainRunner - INFO - Handling MCQ type question...
+2026-05-18 12:43:00,672 - MainRunner - INFO - Question options found: []
+2026-05-18 12:43:00,672 - utils.llm_solver - INFO - Performing DuckDuckGo search for: Which of the following is an absolute CSS unit?
+2026-05-18 12:43:03,317 - utils.llm_solver - INFO - Successfully fetched search snippets.
+2026-05-18 12:43:03,317 - utils.llm_solver - INFO - Sending MCQ to Gemini for solving with web search context...
+2026-05-18 12:43:05,189 - utils.llm_solver - WARNING - Generation failed with gemini-2.0-flash: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 54.410621392s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 54
+}
+]. Retrying with 'gemini-pro-latest' fallback...
+2026-05-18 12:43:05,512 - utils.llm_solver - ERROR - Fallback model failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+Please retry in 54.100674782s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerDay-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 54
+}
+]
+2026-05-18 12:43:05,512 - utils.llm_solver - WARNING - Local Gemini API call failed completely: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 54.410621392s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 54
+}
+]. Activating file-based bridge fallback...
+2026-05-18 12:43:05,513 - utils.llm_solver - INFO - Request written to C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pending_request.json. Waiting for Antigravity agent to resolve...
+2026-05-18 12:43:22,022 - utils.llm_solver - INFO - Successfully received answer from Antigravity agent.
+2026-05-18 12:43:22,022 - utils.llm_solver - INFO - MCQ answer resolved: px
+2026-05-18 12:43:22,022 - pages.question_page - INFO - Attempting to select option matching: px
+2026-05-18 12:43:22,103 - pages.question_page - INFO - Successfully clicked the target option.
+2026-05-18 12:43:42,510 - utils.selenium_helpers - ERROR - Failed to scroll to element ('xpath', "//button[contains(normalize-space(.), 'Save & Next') or contains(normalize-space(.), 'Submit')]"). Exception: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0x12b28a]
+	chromedriver!(No symbol) [0x12b52b]
+	chromedriver!(No symbol) [0x16d062]
+	chromedriver!(No symbol) [0x14d7d4]
+	chromedriver!(No symbol) [0x16a936]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+2026-05-18 12:43:42,510 - pages.question_page - ERROR - Failed to click Save & Next: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0x12b28a]
+	chromedriver!(No symbol) [0x12b52b]
+	chromedriver!(No symbol) [0x16d062]
+	chromedriver!(No symbol) [0x14d7d4]
+	chromedriver!(No symbol) [0x16a936]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+2026-05-18 12:43:42,510 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-18 12:43:42,512 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 125, in run_assessment_flow
+    question_page.click_save_and_next()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 194, in click_save_and_next
+    raise e
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 188, in click_save_and_next
+    self.helpers.scroll_into_view(self.SAVE_AND_NEXT_BTN_LOCATOR)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 105, in scroll_into_view
+    element = self.wait.until(EC.presence_of_element_located(locator))
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0x12b28a]
+	chromedriver!(No symbol) [0x12b52b]
+	chromedriver!(No symbol) [0x16d062]
+	chromedriver!(No symbol) [0x14d7d4]
+	chromedriver!(No symbol) [0x16a936]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+
+2026-05-18 12:43:42,512 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:44:12,948 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:44:16,390 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:44:16,391 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:44:18,473 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:44:18,473 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:44:19,509 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-18 12:44:19,512 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 44, in run_assessment_flow
+    instructions_page.wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\instructions_page.py", line 19, in wait_for_page_load
+    self.helpers.wait_for_element(self.HEADING_LOCATOR)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 29, in wait_for_element
+    element = wait_obj.until(EC.visibility_of_element_located(locator))
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 112, in until
+    value = method(self._driver)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 184, in _predicate
+    return _element_if_visible(driver.find_element(*locator))
+                               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 868, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.168); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0xd0d8e]
+	chromedriver!(No symbol) [0xef97e]
+	chromedriver!(No symbol) [0x153cdd]
+	chromedriver!(No symbol) [0x16a2a9]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+
+2026-05-18 12:44:19,512 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:44:33,163 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:44:36,196 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:44:36,196 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:44:37,229 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:44:37,229 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:44:37,231 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-18 12:44:37,233 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 44, in run_assessment_flow
+    instructions_page.wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\instructions_page.py", line 19, in wait_for_page_load
+    self.helpers.wait_for_element(self.HEADING_LOCATOR)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 29, in wait_for_element
+    element = wait_obj.until(EC.visibility_of_element_located(locator))
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 112, in until
+    value = method(self._driver)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 184, in _predicate
+    return _element_if_visible(driver.find_element(*locator))
+                               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 868, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=148.0.7778.168)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0xc0923]
+	chromedriver!(No symbol) [0x153afb]
+	chromedriver!(No symbol) [0x16a2a9]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+
+2026-05-18 12:44:37,233 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:44:58,777 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:45:03,698 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:45:03,698 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:45:05,071 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:45:05,071 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:45:07,200 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 12:45:07,200 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 12:45:07,294 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:45:07,837 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:45:07,919 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 12:45:07,919 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 12:45:07,919 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 12:45:07,919 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 12:45:09,756 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 12:45:09,821 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 12:45:09,821 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-18 12:45:09,821 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 12:45:09,821 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-18 12:45:25,254 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-18 12:45:25,412 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-18 12:45:25,562 - YopmailOTPFetcher - INFO - Successfully located OTP: 578839
+2026-05-18 12:45:25,602 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 12:45:26,627 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 12:45:26,784 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 12:45:26,784 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 12:45:27,848 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 12:45:27,848 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 12:45:27,848 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 12:45:27,869 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 12:45:28,182 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 12:45:28,520 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 12:45:28,814 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 12:45:28,820 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:45:29,380 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:45:29,380 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 12:45:29,380 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 12:45:29,380 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 12:45:30,989 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:45:31,639 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:45:31,639 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 12:45:31,639 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 12:45:31,639 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 12:45:36,835 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 12:45:37,434 - pages.summary_page - INFO - Downloadable summary file created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 12:45:37,434 - MainRunner - INFO - Dynamically determined Section 1 count: 2 questions.
+2026-05-18 12:45:37,434 - pages.summary_page - INFO - Attempting to start the first section...
+2026-05-18 12:45:38,002 - pages.summary_page - INFO - Successfully clicked 'Solve' for the first section.
+2026-05-18 12:45:40,003 - MainRunner - INFO - --- Solving Question 1 of 2 ---
+2026-05-18 12:45:40,003 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-18 12:45:41,035 - pages.question_page - INFO - Detected question type: MCQ
+2026-05-18 12:45:41,063 - utils.selenium_helpers - INFO - Retrieved text ' What is the output?
+
+abstract class Device {
+  String name;
+
+  Device(String name) {
+    this.name = name;
+  }
+
+  abstract void operate();
+}
+
+class Phone extends Device {
+  Phone(String name) {
+    super(name);
+  }
+
+  void operate() {
+    System.out.print(name + " calling");
+  }
+}
+
+// In main:
+Device d = new Phone("iPhone");
+d.operate();' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-18 12:45:41,063 - MainRunner - INFO - Handling MCQ type question...
+2026-05-18 12:45:41,074 - MainRunner - INFO - Question options found: []
+2026-05-18 12:45:41,075 - utils.llm_solver - INFO - Performing DuckDuckGo search for: What is the output?
+
+abstract class Device {
+  String name;
+
+  Device(String name) {
+    this.name = name;
+  }
+
+  abstract void operate();
+}
+
+class Phone extends Device {
+  Phone(String name) {
+    su
+2026-05-18 12:45:42,531 - utils.llm_solver - INFO - Successfully fetched search snippets.
+2026-05-18 12:45:42,531 - utils.llm_solver - INFO - Sending MCQ to Gemini for solving with web search context...
+2026-05-18 12:45:43,023 - utils.llm_solver - WARNING - Generation failed with gemini-2.0-flash: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 16.578803717s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 16
+}
+]. Retrying with 'gemini-pro-latest' fallback...
+2026-05-18 12:45:43,318 - utils.llm_solver - ERROR - Fallback model failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+Please retry in 16.27926195s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerDay-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 16
+}
+]
+2026-05-18 12:45:43,319 - utils.llm_solver - WARNING - Local Gemini API call failed completely: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 16.578803717s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 16
+}
+]. Activating file-based bridge fallback...
+2026-05-18 12:45:43,322 - utils.llm_solver - INFO - Request written to C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pending_request.json. Waiting for Antigravity agent to resolve...
+2026-05-18 12:46:53,869 - utils.llm_solver - INFO - Successfully received answer from Antigravity agent.
+2026-05-18 12:46:53,869 - utils.llm_solver - INFO - MCQ answer resolved: iPhone calling
+2026-05-18 12:46:53,869 - pages.question_page - INFO - Attempting to select option matching: iPhone calling
+2026-05-18 12:46:53,922 - pages.question_page - INFO - Successfully clicked the target option.
+2026-05-18 12:46:53,922 - pages.question_page - INFO - Attempting to click Save & Next / Submit / Next button...
+2026-05-18 12:46:53,954 - pages.question_page - INFO - Found active button matching: 'Next'. Clicking...
+2026-05-18 12:46:54,464 - pages.question_page - INFO - Successfully clicked 'Next' button.
+2026-05-18 12:46:56,464 - MainRunner - INFO - --- Solving Question 2 of 2 ---
+2026-05-18 12:46:56,465 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-18 12:46:57,573 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-18 12:46:57,575 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 97, in run_assessment_flow
+    q_type = question_page.get_question_type()
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 45, in get_question_type
+    radio_buttons = self.driver.find_elements(*self.RADIO_BUTTONS_LOCATOR)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 899, in find_elements
+    return self.execute(Command.FIND_ELEMENTS, {"using": by, "value": value})["value"] or []
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.168); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x2c7123+10a23]
+	chromedriver!GetHandleVerifier [0x2c7254+10b54]
+	chromedriver!(No symbol) [0xe1e90]
+	chromedriver!(No symbol) [0xd0d8e]
+	chromedriver!(No symbol) [0xef97e]
+	chromedriver!(No symbol) [0x153cdd]
+	chromedriver!(No symbol) [0x16a2a9]
+	chromedriver!(No symbol) [0x14d526]
+	chromedriver!(No symbol) [0x1208f9]
+	chromedriver!(No symbol) [0x1216b4]
+	chromedriver!GetHandleVerifier [0x561ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x55d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x57e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x2e1128+2aa28]
+	chromedriver!GetHandleVerifier [0x2e8bbd+324bd]
+	chromedriver!GetHandleVerifier [0x2cfb28+19428]
+	chromedriver!GetHandleVerifier [0x2cfcd5+195d5]
+	chromedriver!GetHandleVerifier [0x2b91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x760b5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770fd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770fd7c1+231]
+	(No symbol) [(nil)]
+
+
+2026-05-18 12:46:57,576 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:47:09,205 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:47:14,842 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:47:14,844 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:47:16,033 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:47:16,034 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:47:19,223 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 12:47:19,224 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 12:47:19,231 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:47:19,789 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:47:19,877 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 12:47:19,877 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 12:47:19,878 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 12:47:19,878 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 12:47:22,808 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 12:47:22,851 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 12:47:22,851 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-18 12:47:22,851 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 12:47:22,851 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-18 12:47:35,840 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-18 12:47:36,122 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-18 12:47:36,204 - YopmailOTPFetcher - INFO - Successfully located OTP: 959173
+2026-05-18 12:47:36,222 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 12:47:37,249 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 12:47:37,397 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 12:47:37,398 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 12:47:38,942 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 12:47:38,943 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 12:47:38,943 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 12:47:38,951 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 12:47:39,295 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 12:47:39,629 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 12:47:39,934 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 12:47:39,941 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:47:40,482 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:47:40,483 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 12:47:40,483 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 12:47:40,483 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 12:47:42,519 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:47:43,054 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:47:43,054 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 12:47:43,054 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 12:47:43,055 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 12:47:46,660 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 12:47:47,228 - pages.summary_page - INFO - Downloadable summary file created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 12:47:47,228 - MainRunner - INFO - Dynamically determined Section 1 count: 2 questions.
+2026-05-18 12:47:47,228 - pages.summary_page - INFO - Attempting to start the first section...
+2026-05-18 12:47:47,782 - pages.summary_page - INFO - Successfully clicked 'Solve' for the first section.
+2026-05-18 12:47:49,784 - MainRunner - INFO - --- Solving Question 1 of 2 ---
+2026-05-18 12:47:49,787 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-18 12:47:50,889 - pages.question_page - INFO - Detected question type: MCQ
+2026-05-18 12:47:50,900 - utils.selenium_helpers - INFO - Retrieved text 'Which tag is used to show abbreviated text with full form on hover?' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-18 12:47:50,900 - MainRunner - INFO - Handling MCQ type question...
+2026-05-18 12:47:51,048 - pages.question_page - INFO - Found MCQ options using locator ('xpath', "//label[//input[@type='radio']]"): ['<abbr>', '<acronym>', '<short>', '<tooltip>']
+2026-05-18 12:47:51,048 - MainRunner - INFO - Question options found: ['<abbr>', '<acronym>', '<short>', '<tooltip>']
+2026-05-18 12:47:51,048 - utils.llm_solver - INFO - Performing DuckDuckGo search for: Which tag is used to show abbreviated text with full form on hover?
+2026-05-18 12:47:52,558 - utils.llm_solver - INFO - Successfully fetched search snippets.
+2026-05-18 12:47:52,559 - utils.llm_solver - INFO - Sending MCQ to Gemini for solving with web search context...
+2026-05-18 12:47:53,876 - utils.llm_solver - WARNING - Generation failed with gemini-2.0-flash: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 5.734485227s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 5
+}
+]. Retrying with 'gemini-pro-latest' fallback...
+2026-05-18 12:47:54,379 - utils.llm_solver - ERROR - Fallback model failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+Please retry in 5.247767586s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerDay-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 5
+}
+]
+2026-05-18 12:47:54,381 - utils.llm_solver - WARNING - Local Gemini API call failed completely: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 5.734485227s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 5
+}
+]. Activating file-based bridge fallback...
+2026-05-18 12:47:54,385 - utils.llm_solver - INFO - Request written to C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pending_request.json. Waiting for Antigravity agent to resolve...

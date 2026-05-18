@@ -25,6 +25,7 @@ def run_assessment_flow():
     driver = None
     try:
         driver = get_chrome_driver(headless=False)
+        time.sleep(2)
 
         instructions_page = InstructionsPage(driver)
         login_page = LoginPage(driver)
@@ -76,17 +77,102 @@ def run_assessment_flow():
         summary_page.wait_for_page_load()
         
         # Scan and dynamically identify sections and question count per section
-        summary_page.scan_sections_and_questions()
+        section_data = summary_page.scan_sections_and_questions()
         
+        # Extract first section details dynamically
+        first_section_count = list(section_data.values())[0] if section_data else 2
+        logger.info(f"Dynamically determined Section 1 count: {first_section_count} questions.")
+        
+        # Start Section 1
+        summary_page.start_first_section()
+        time.sleep(2)
+        
+        # Traversing questions
+        for q_idx in range(1, first_section_count + 1):
+            logger.info(f"--- Solving Question {q_idx} of {first_section_count} ---")
+            question_page.wait_for_page_load()
+            time.sleep(1)
+            
+            # Detect Question Type
+            q_type = question_page.get_question_type()
+            q_text = question_page.get_question_text()
+            
+            if q_type == "MCQ":
+                logger.info("Handling MCQ type question...")
+                options = question_page.get_mcq_options()
+                logger.info(f"Question options found: {options}")
+                
+                # Solve using Gemini (grounded with web search)
+                answer_option = solver.solve_mcq(q_text, options)
+                if answer_option:
+                    selected = question_page.select_mcq_option(answer_option)
+                    if not selected:
+                        logger.warning("Exact option match failed. Trying fallback matching...")
+                        # Fuzzy match or fallback
+                        matched = False
+                        for opt in options:
+                            if answer_option.lower() in opt.lower() or opt.lower() in answer_option.lower():
+                                question_page.select_mcq_option(opt)
+                                matched = True
+                                break
+                        if not matched and options:
+                            question_page.select_mcq_option(options[0])
+                else:
+                    logger.warning("Failed to obtain MCQ answer from LLM. Selecting first option as fallback.")
+                    if options:
+                        question_page.select_mcq_option(options[0])
+                        
+                # Click Save & Next
+                question_page.click_save_and_next()
+                
+            elif q_type == "CODING":
+                logger.info("Handling Coding type question...")
+                
+                # Check and click Solve button if present (enters coding workspace)
+                question_page.click_solve_if_present()
+                
+                # Problem details could be re-read after workspace entry
+                time.sleep(1.5)
+                q_text = question_page.get_question_text()
+                
+                # Self-healing feedback loop
+                max_retries = 3
+                current_code = None
+                error_msg = None
+                
+                for attempt in range(max_retries):
+                    logger.info(f"Coding attempt {attempt+1} of {max_retries}...")
+                    answer_code = solver.solve_coding(q_text, previous_code=current_code, error_message=error_msg)
+                    
+                    if answer_code:
+                        current_code = answer_code
+                        question_page.enter_code_solution(answer_code)
+                        question_page.submit_code()
+                        
+                        passed, err = question_page.get_code_result()
+                        if passed:
+                            logger.info("All testcases passed successfully!")
+                            break
+                        else:
+                            logger.warning(f"Testcase failures detected on attempt {attempt+1}. Error detail: {err}")
+                            error_msg = err
+                    else:
+                        logger.error("Solver returned empty code.")
+                        break
+                else:
+                    logger.error("Failed to solve coding question within the retry limit.")
+                    
+                # Click Save & Next to proceed
+                question_page.click_save_and_next()
+                
         # Bring the browser window to the front/foreground so it is visible on your screen
         try:
             driver.minimize_window()
             driver.maximize_window()
         except Exception:
             pass
-        
-        print("\n>>> Overall Summary Page parsed dynamically!")
-        print(">>> A downloadable summary has been generated in your workspace: assessment_summary.txt")
+            
+        print("\n>>> Section 1 solved completely and successfully!")
         print(">>> Browser will remain open. Press Enter in this terminal to close the browser and exit.")
         input()
     except Exception as e:
