@@ -75,7 +75,15 @@ def run_assessment_flow():
         # Scan and dynamically identify sections and question count per section
         summary_page.scan_sections_and_questions()
         
+        # Bring the browser window to the front/foreground so it is visible on your screen
+        try:
+            driver.minimize_window()
+            driver.maximize_window()
+        except Exception:
+            pass
+        
         print("\n>>> Overall Summary Page parsed dynamically!")
+        print(">>> A downloadable summary has been generated in your workspace: assessment_summary.txt")
         print(">>> Browser will remain open. Press Enter in this terminal to close the browser and exit.")
         input()
     except Exception as e:

@@ -98,13 +98,30 @@ class SummaryPage(BasePage):
             print("="*45)
             
             total_questions = 0
+            summary_lines = []
             for idx, (section, count) in enumerate(section_data.items(), 1):
                 total_questions += count
-                print(f"{idx}. {section} - Q {count}")
+                line = f"{idx}. {section} - Q {count}"
+                print(line)
+                summary_lines.append(line)
                 
-            print(f"\nTotal Questions: {total_questions}")
+            total_line = f"\nTotal Questions: {total_questions}"
+            print(total_line)
+            summary_lines.append(total_line)
             print("="*45 + "\n")
             
+            # Generate a downloadable summary file in the workspace base directory
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            summary_file_path = os.path.join(base_dir, "assessment_summary.txt")
+            with open(summary_file_path, "w", encoding="utf-8") as f:
+                f.write("="*45 + "\n")
+                f.write("              ASSESSMENT SUMMARY\n")
+                f.write("="*45 + "\n")
+                for line in summary_lines:
+                    f.write(line + "\n")
+                f.write("="*45 + "\n")
+                
+            logger.info(f"Downloadable summary file created successfully at: {summary_file_path}")
             return section_data
             
         except Exception as e:

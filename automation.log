@@ -4205,3 +4205,247 @@ Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMEN
 2026-05-18 12:02:09,648 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
 2026-05-18 12:02:10,619 - pages.summary_page - INFO - Downloadable summary file created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
 2026-05-18 12:03:10,950 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:09:20,155 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:09:24,906 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:09:24,907 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:09:28,602 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:09:28,603 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:09:29,183 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 12:09:29,184 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 12:09:29,214 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:09:29,862 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:09:29,994 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 12:09:29,995 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 12:09:29,995 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 12:09:29,995 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 12:09:31,023 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 12:09:31,200 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 12:09:31,201 - pages.login_page - INFO - Entered email and clicked Send OTP for: shashanksavarkar17@gmail.com
+2026-05-18 12:09:31,202 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 12:09:42,934 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 12:09:44,018 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 12:09:44,241 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 12:09:44,241 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 12:09:45,819 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 12:09:45,820 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 12:09:45,821 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 12:09:45,854 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 12:09:46,233 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 12:09:46,616 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 12:09:47,010 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 12:09:47,032 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:09:47,664 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:09:47,664 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 12:09:47,665 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 12:09:47,665 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 12:09:49,251 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:09:49,956 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:09:49,957 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 12:09:49,957 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 12:09:49,957 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 12:09:52,064 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 12:09:56,175 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:11:50,667 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:11:54,761 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:11:54,771 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:11:56,135 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:11:56,136 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:11:57,288 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 12:11:57,288 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 12:11:57,314 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:11:57,912 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:11:58,070 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 12:11:58,070 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 12:11:58,071 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 12:11:58,071 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 12:11:59,061 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 12:11:59,167 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 12:11:59,168 - pages.login_page - INFO - Entered email and clicked Send OTP for: shashanksavarkar17@gmail.com
+2026-05-18 12:11:59,168 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 12:12:10,440 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 12:12:11,556 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 12:12:11,719 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 12:12:11,719 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 12:12:12,799 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 12:12:12,799 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 12:12:12,799 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 12:12:12,833 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 12:12:13,228 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 12:12:13,611 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 12:12:14,010 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 12:12:14,032 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:12:14,651 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:12:14,652 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 12:12:14,652 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 12:12:14,652 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 12:12:16,217 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:12:16,800 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:12:16,801 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 12:12:16,801 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 12:12:16,801 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 12:12:18,890 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 12:13:14,938 - MainRunner - INFO - Closing browser session...
+2026-05-18 12:16:18,929 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 12:16:23,028 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 12:16:23,028 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 12:16:24,452 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 12:16:24,453 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 12:16:25,613 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 12:16:25,618 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 12:16:25,674 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:16:26,368 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 12:16:26,595 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 12:16:26,596 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 12:16:26,596 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 12:16:26,597 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 12:16:27,668 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 12:16:27,778 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 12:16:27,778 - pages.login_page - INFO - Entered email and clicked Send OTP for: shashanksavarkar17@gmail.com
+2026-05-18 12:16:27,779 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 12:16:47,486 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 12:16:48,539 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 12:16:48,762 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 12:16:48,762 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 12:16:49,808 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 12:16:49,809 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 12:16:49,809 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 12:16:49,838 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 12:16:50,181 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 12:16:50,612 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 12:16:50,962 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 12:16:50,974 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:16:51,553 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 12:16:51,554 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 12:16:51,554 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 12:16:51,554 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 12:16:53,163 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:16:53,925 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 12:16:53,926 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 12:16:53,926 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 12:16:53,926 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 12:16:56,009 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 12:16:57,212 - pages.summary_page - INFO - Downloadable summary file created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 12:17:15,026 - MainRunner - INFO - Closing browser session...
