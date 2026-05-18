@@ -6674,3 +6674,1018 @@ violations {
 2026-05-18 15:39:41,679 - pages.question_page - INFO - Attempting to click Save & Next / Submit / Next button...
 2026-05-18 15:39:41,696 - pages.question_page - INFO - Found active button matching: 'Submit'. Clicking...
 2026-05-18 15:39:42,215 - pages.question_page - INFO - Successfully clicked 'Submit' button.
+2026-05-18 15:44:08,348 - MainRunner - INFO - Closing browser session...
+2026-05-18 23:26:31,530 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 23:26:37,475 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 23:26:37,476 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 23:26:39,539 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 23:26:39,540 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 23:26:41,225 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+This is an online test.
+Please make sure that you are using the latest version of the browser. We recommend using Google Chrome.
+It's mandatory to disable all the browser extensions and enabled Add-ons or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you're solving coding problems: All inputs are from STDIN and output to STDOUT.
+If test mandates you to use the webcam, please provide the required permissions and access.
+To know the results, please contact the administrator.
+To refer to the FAQ document, you can click on the HELP button which is present in the top right corner of the test environment.
+Best wishes from Programming Pathshala!
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 23:26:41,225 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 23:26:41,234 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 23:26:41,908 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 23:26:42,083 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 23:26:42,085 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 23:26:42,085 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 23:26:42,085 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 23:26:42,928 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 23:26:42,973 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 23:26:42,974 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-18 23:26:42,974 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 23:26:42,974 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-18 23:26:48,778 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-18 23:26:48,992 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-18 23:26:49,066 - YopmailOTPFetcher - INFO - Successfully located OTP: 251588
+2026-05-18 23:26:49,086 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 23:26:50,119 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 23:26:50,203 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 23:26:50,204 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 23:26:51,228 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 23:26:51,228 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 23:26:51,228 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 23:26:51,237 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 23:26:51,631 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 23:26:52,054 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 23:26:52,383 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 23:26:52,437 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 23:26:53,013 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 23:26:53,013 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 23:26:53,013 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 23:26:53,013 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 23:26:55,087 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 23:26:55,656 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 23:26:55,656 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 23:26:55,657 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 23:26:55,657 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 23:26:58,775 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 23:26:59,468 - pages.summary_page - INFO - Downloadable summary TXT created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 23:26:59,469 - pages.summary_page - INFO - Downloadable summary HTML created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.html
+2026-05-18 23:26:59,469 - MainRunner - INFO - Dynamically determined Section 1 count: 2 questions.
+2026-05-18 23:26:59,470 - pages.summary_page - INFO - Attempting to start the first section...
+2026-05-18 23:27:00,049 - pages.summary_page - INFO - Successfully clicked 'Solve' for the first section.
+2026-05-18 23:27:02,051 - MainRunner - INFO - --- Solving Question 1 of 2 ---
+2026-05-18 23:27:02,055 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-18 23:27:03,115 - pages.question_page - INFO - Detected question type: CODING
+2026-05-18 23:27:03,182 - MainRunner - INFO - Handling Coding type question...
+2026-05-18 23:27:03,255 - pages.question_page - INFO - No active 'Solve' button/link detected. Proceeding directly.
+2026-05-18 23:27:04,803 - MainRunner - INFO - Coding attempt 1 of 3...
+2026-05-18 23:27:04,804 - utils.llm_solver - INFO - Sending Coding problem to Gemini for solving (C++)...
+2026-05-18 23:27:08,636 - utils.llm_solver - WARNING - Generation failed with gemini-2.0-flash: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 50.716090335s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 50
+}
+]. Retrying with 'gemini-pro-latest' fallback...
+2026-05-18 23:27:08,985 - utils.llm_solver - ERROR - Fallback model failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+Please retry in 50.259382591s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerDay-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 50
+}
+]
+2026-05-18 23:27:08,986 - utils.llm_solver - WARNING - Local Gemini API call failed completely: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 50.716090335s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 50
+}
+]. Activating file-based bridge fallback...
+2026-05-18 23:27:08,987 - utils.llm_solver - INFO - Request written to C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pending_request.json. Waiting for solver resolution...
+2026-05-18 23:29:09,036 - utils.llm_solver - ERROR - Timeout waiting for solver to resolve request.
+2026-05-18 23:29:09,037 - utils.llm_solver - ERROR - Error solving Coding problem: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 50.716090335s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 50
+}
+]
+2026-05-18 23:29:09,037 - MainRunner - ERROR - Solver returned empty code.
+2026-05-18 23:29:09,038 - pages.question_page - INFO - Attempting to click Save & Next / Submit / Next button...
+2026-05-18 23:29:09,108 - pages.question_page - ERROR - Could not find any active Save/Submit/Next buttons.
+2026-05-18 23:29:09,109 - utils.selenium_helpers - ERROR - Failed to take screenshot: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x8b7123+10a23]
+	chromedriver!GetHandleVerifier [0x8b7254+10b54]
+	chromedriver!(No symbol) [0x6d1cce]
+	chromedriver!(No symbol) [0x70fb85]
+	chromedriver!(No symbol) [0x73d646]
+	chromedriver!(No symbol) [0x738869]
+	chromedriver!(No symbol) [0x738252]
+	chromedriver!(No symbol) [0x6a502e]
+	chromedriver!(No symbol) [0x6a55ce]
+	chromedriver!(No symbol) [0x6a5aad]
+	chromedriver!GetHandleVerifier [0xb51ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0xb4d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0xb6e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x8d1128+2aa28]
+	chromedriver!GetHandleVerifier [0x8d8bbd+324bd]
+	chromedriver!(No symbol) [0x6a4ba6]
+	chromedriver!(No symbol) [0x6a41e0]
+	chromedriver!GetHandleVerifier [0xcbb02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x77705d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77dfd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77dfd7c1+231]
+
+2026-05-18 23:29:09,109 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-18 23:29:09,110 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 166, in run_assessment_flow
+    question_page.click_save_and_next()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 275, in click_save_and_next
+    raise Exception("Save/Submit/Next button not found on the page.")
+Exception: Save/Submit/Next button not found on the page.
+
+2026-05-18 23:29:09,111 - MainRunner - INFO - Closing browser session...
+2026-05-18 23:32:05,544 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 23:32:10,284 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 23:32:10,284 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 23:32:16,822 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 23:32:16,824 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 23:32:18,992 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+This is an online test.
+Please make sure that you are using the latest version of the browser. We recommend using Google Chrome.
+It's mandatory to disable all the browser extensions and enabled Add-ons or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you're solving coding problems: All inputs are from STDIN and output to STDOUT.
+If test mandates you to use the webcam, please provide the required permissions and access.
+To know the results, please contact the administrator.
+To refer to the FAQ document, you can click on the HELP button which is present in the top right corner of the test environment.
+Best wishes from Programming Pathshala!
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 23:32:18,993 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 23:32:19,001 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 23:32:19,556 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 23:32:19,631 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 23:32:19,631 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 23:32:19,631 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 23:32:19,631 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 23:32:20,993 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 23:32:21,054 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 23:32:21,054 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-18 23:32:21,055 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 23:32:21,058 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-18 23:32:33,406 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-18 23:32:33,563 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-18 23:32:33,622 - YopmailOTPFetcher - INFO - Successfully located OTP: 641225
+2026-05-18 23:32:33,646 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 23:32:34,671 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 23:32:34,807 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 23:32:34,808 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 23:32:35,859 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 23:32:35,859 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 23:32:35,859 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 23:32:35,870 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 23:32:36,218 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 23:32:36,570 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 23:32:36,952 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 23:32:36,977 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 23:32:37,517 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 23:32:37,517 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 23:32:37,521 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 23:32:37,524 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 23:32:39,579 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 23:32:40,126 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 23:32:40,127 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 23:32:40,127 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 23:32:40,128 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 23:32:42,729 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 23:32:43,025 - pages.summary_page - INFO - Downloadable summary TXT created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 23:32:43,026 - pages.summary_page - INFO - Downloadable summary HTML created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.html
+2026-05-18 23:32:43,027 - MainRunner - INFO - Dynamically determined Section 1 count: 2 questions.
+2026-05-18 23:32:43,027 - pages.summary_page - INFO - Attempting to start the first section...
+2026-05-18 23:32:43,714 - pages.summary_page - INFO - Successfully clicked 'Solve' for the first section.
+2026-05-18 23:32:45,716 - MainRunner - INFO - --- Solving Question 1 of 2 ---
+2026-05-18 23:32:45,721 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-18 23:32:46,804 - pages.question_page - INFO - Detected question type: CODING
+2026-05-18 23:32:46,855 - MainRunner - INFO - Handling Coding type question...
+2026-05-18 23:32:46,881 - pages.question_page - INFO - No active 'Solve' button/link detected. Proceeding directly.
+2026-05-18 23:32:48,422 - MainRunner - INFO - Coding attempt 1 of 3...
+2026-05-18 23:32:48,422 - utils.llm_solver - INFO - Sending Coding problem to Gemini for solving (C++)...
+2026-05-18 23:32:50,303 - utils.llm_solver - WARNING - Generation failed with gemini-2.0-flash: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 8.836759149s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 8
+}
+]. Retrying with 'gemini-pro-latest' fallback...
+2026-05-18 23:32:50,619 - utils.llm_solver - ERROR - Fallback model failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+Please retry in 8.536654952s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerDay-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 8
+}
+]
+2026-05-18 23:32:50,620 - utils.llm_solver - WARNING - Local Gemini API call failed completely: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 8.836759149s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 8
+}
+]. Activating file-based bridge fallback...
+2026-05-18 23:32:50,623 - utils.llm_solver - INFO - Request written to C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pending_request.json. Waiting for solver resolution...
+2026-05-18 23:34:50,677 - utils.llm_solver - ERROR - Timeout waiting for solver to resolve request.
+2026-05-18 23:34:50,678 - utils.llm_solver - ERROR - Error solving Coding problem: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+Please retry in 8.836759149s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 8
+}
+]
+2026-05-18 23:34:50,679 - MainRunner - ERROR - Solver returned empty code.
+2026-05-18 23:34:50,679 - pages.question_page - INFO - Attempting to click Save & Next / Submit / Next button...
+2026-05-18 23:34:50,812 - pages.question_page - ERROR - Could not find any active Save/Submit/Next buttons.
+2026-05-18 23:34:50,816 - utils.selenium_helpers - ERROR - Failed to take screenshot: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x8b7123+10a23]
+	chromedriver!GetHandleVerifier [0x8b7254+10b54]
+	chromedriver!(No symbol) [0x6d1cce]
+	chromedriver!(No symbol) [0x70fb85]
+	chromedriver!(No symbol) [0x73d646]
+	chromedriver!(No symbol) [0x738869]
+	chromedriver!(No symbol) [0x738252]
+	chromedriver!(No symbol) [0x6a502e]
+	chromedriver!(No symbol) [0x6a55ce]
+	chromedriver!(No symbol) [0x6a5aad]
+	chromedriver!GetHandleVerifier [0xb51ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0xb4d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0xb6e4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x8d1128+2aa28]
+	chromedriver!GetHandleVerifier [0x8d8bbd+324bd]
+	chromedriver!(No symbol) [0x6a4ba6]
+	chromedriver!(No symbol) [0x6a41e0]
+	chromedriver!GetHandleVerifier [0xcbb02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x77705d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77dfd83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77dfd7c1+231]
+
+2026-05-18 23:34:50,818 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-18 23:34:50,819 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 166, in run_assessment_flow
+    question_page.click_save_and_next()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 275, in click_save_and_next
+    raise Exception("Save/Submit/Next button not found on the page.")
+Exception: Save/Submit/Next button not found on the page.
+
+2026-05-18 23:34:50,819 - MainRunner - INFO - Closing browser session...
+2026-05-18 23:36:12,213 - MainRunner - INFO - Starting Assessment Automation Flow...
+2026-05-18 23:36:20,351 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.0-flash
+2026-05-18 23:36:20,356 - MainRunner - INFO - Navigating to https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-18 23:36:27,282 - MainRunner - INFO - Executing Step 2: Instructions Page
+2026-05-18 23:36:27,282 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-18 23:36:27,329 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+231H 38M 33S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+8
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+This is an online test.
+Please make sure that you are using the latest version of the browser. We recommend using Google Chrome.
+It's mandatory to disable all the browser extensions and enabled Add-ons or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you're solving coding problems: All inputs are from STDIN and output to STDOUT.
+If test mandates you to use the webcam, please provide the required permissions and access.
+To know the results, please contact the administrator.
+To refer to the FAQ document, you can click on the HELP button which is present in the top right corner of the test environment.
+Best wishes from Programming Pathshala!
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-18 23:36:27,331 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-18 23:36:27,345 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 23:36:27,891 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-18 23:36:27,952 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-18 23:36:27,952 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-18 23:36:27,952 - MainRunner - INFO - Executing Step 3: Login
+2026-05-18 23:36:27,952 - pages.login_page - INFO - Waiting for Login page...
+2026-05-18 23:36:29,818 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-18 23:36:29,861 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-18 23:36:29,862 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-18 23:36:29,862 - MainRunner - INFO - Executing Step 4: OTP Handling
+2026-05-18 23:36:29,862 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-18 23:36:58,500 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-18 23:36:58,653 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-18 23:36:58,695 - YopmailOTPFetcher - INFO - Successfully located OTP: 315794
+2026-05-18 23:36:58,710 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-18 23:36:59,775 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-18 23:36:59,902 - pages.login_page - INFO - Clicked Verify button.
+2026-05-18 23:36:59,903 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-18 23:37:01,974 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-18 23:37:01,975 - MainRunner - INFO - Executing Step 5: Candidate Details
+2026-05-18 23:37:01,976 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-18 23:37:01,994 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-18 23:37:02,356 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-18 23:37:02,738 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-18 23:37:03,082 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-18 23:37:03,090 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 23:37:03,708 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-18 23:37:03,709 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-18 23:37:03,710 - MainRunner - INFO - Executing Step 6: Start Test
+2026-05-18 23:37:03,710 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-18 23:37:06,833 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 23:37:07,394 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-18 23:37:07,394 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-18 23:37:07,394 - MainRunner - INFO - Executing Step 7: Summary Page
+2026-05-18 23:37:07,394 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-18 23:37:13,536 - pages.summary_page - INFO - Scanning Overall Summary Page dynamically...
+2026-05-18 23:37:13,983 - pages.summary_page - INFO - Downloadable summary TXT created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-18 23:37:13,984 - pages.summary_page - INFO - Downloadable summary HTML created successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.html
+2026-05-18 23:37:13,984 - MainRunner - INFO - Dynamically determined Section 1 count: 2 questions.
+2026-05-18 23:37:13,984 - pages.summary_page - INFO - Attempting to start the first section...
+2026-05-18 23:37:14,609 - pages.summary_page - INFO - Successfully clicked 'Solve' for the first section.
+2026-05-18 23:37:16,609 - MainRunner - INFO - --- Solving Question 1 of 2 ---
+2026-05-18 23:37:16,610 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-18 23:37:17,643 - pages.question_page - INFO - Detected question type: CODING
+2026-05-18 23:37:17,702 - MainRunner - INFO - Handling Coding type question...
+2026-05-18 23:37:17,745 - pages.question_page - INFO - No active 'Solve' button/link detected. Proceeding directly.
+2026-05-18 23:37:19,813 - MainRunner - INFO - Coding attempt 1 of 6 using 'Run'...
+2026-05-18 23:37:19,814 - utils.llm_solver - INFO - Sending Coding problem to Gemini for solving (C++)...
+2026-05-18 23:37:22,232 - utils.llm_solver - WARNING - Generation failed with gemini-2.0-flash: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 37.045558295s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 37
+}
+]. Retrying with 'gemini-pro-latest' fallback...
+2026-05-18 23:37:23,569 - utils.llm_solver - ERROR - Fallback model failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+Please retry in 35.602903608s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerDay-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3.1-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 35
+}
+]
+2026-05-18 23:37:23,571 - utils.llm_solver - WARNING - Local Gemini API call failed completely: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 37.045558295s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 37
+}
+]. Activating file-based bridge fallback...
+2026-05-18 23:37:23,573 - utils.llm_solver - INFO - Request written to C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pending_request.json. Waiting for solver resolution...
+2026-05-18 23:39:23,620 - utils.llm_solver - ERROR - Timeout waiting for solver to resolve request.
+2026-05-18 23:39:23,620 - utils.llm_solver - ERROR - Error solving Coding problem: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 37.045558295s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 37
+}
+]
+2026-05-18 23:39:23,621 - MainRunner - ERROR - Solver returned empty code.
+2026-05-18 23:39:23,621 - MainRunner - ERROR - Failed to compile or run code successfully within the retry limit.
+2026-05-18 23:39:23,621 - pages.question_page - INFO - Attempting to click Save & Next / Submit / Next button...
+2026-05-18 23:39:23,646 - pages.question_page - INFO - Found active button matching: 'Submit'. Clicking...
+2026-05-18 23:39:24,196 - pages.question_page - INFO - Successfully clicked 'Submit' button.
+2026-05-18 23:39:26,197 - MainRunner - INFO - One coding question solved! Exiting question loop as requested by the user.
+2026-05-18 23:39:26,595 - MainRunner - INFO - Closing browser session...
