@@ -11,6 +11,7 @@ from pages.start_test_page import StartTestPage
 from pages.summary_page import SummaryPage
 from utils.driver_factory import get_chrome_driver
 from utils.llm_solver import GeminiSolver
+from utils.otp_fetcher import YopmailOTPFetcher
 from utils.logger import get_logger
 
 logger = get_logger("MainRunner")
@@ -51,8 +52,10 @@ def run_assessment_flow():
         
         # STEP 4: OTP Handling
         logger.info("Executing Step 4: OTP Handling")
-        otp_code = input("\n\n>>> ACTION REQUIRED: Please enter the OTP sent to your email: ")
-        login_page.enter_otp_and_verify(otp_code.strip())
+        otp_fetcher = YopmailOTPFetcher(driver)
+        email_username = settings.TEST_USER["email"].split("@")[0]
+        otp_code = otp_fetcher.fetch_latest_otp(username=email_username, timeout=60)
+        login_page.enter_otp_and_verify(otp_code)
         
         # STEP 5: Candidate Details
         logger.info("Executing Step 5: Candidate Details")
