@@ -71,61 +71,13 @@ def run_assessment_flow():
         # STEP 7: Overall Summary Page
         logger.info("Executing Step 7: Summary Page")
         summary_page.wait_for_page_load()
-        sections = summary_page.get_all_sections()
-        summary_page.start_first_section()
         
-        # STEP 8: Answering Questions Loop
-        logger.info("Executing Step 8: Answering Questions")
+        # Scan and dynamically identify sections and question count per section
+        summary_page.scan_sections_and_questions()
         
-        # We will loop infinitely until we can't find a question (e.g., reaching the end of the section)
-        # Note: In a real scenario, you'd check for a 'Finish Test' or 'Submit Section' button to break the loop.
-        for question_num in range(1, 7): # We saw 6 questions in the screenshot
-            logger.info(f"--- Processing Question {question_num} ---")
-            question_page.wait_for_page_load()
-            
-            q_type = question_page.get_question_type()
-            q_text = question_page.get_question_text()
-            logger.info(f"Question Text: {q_text[:50]}...")
-            
-            if q_type == "MCQ":
-                options = question_page.get_mcq_options()
-                logger.info(f"Found {len(options)} options.")
-                answer = solver.solve_mcq(q_text, options)
-                if answer:
-                    question_page.select_mcq_option(answer)
-                question_page.click_save_and_next()
-            else:
-                max_retries = 3
-                current_code = None
-                error_msg = None
-                
-                for attempt in range(max_retries):
-                    logger.info(f"Attempt {attempt + 1} for Coding Question {question_num}")
-                    
-                    answer_code = solver.solve_coding(q_text, previous_code=current_code, error_message=error_msg)
-                    if answer_code:
-                        current_code = answer_code
-                        question_page.enter_code_solution(answer_code)
-                        question_page.submit_code()
-                        
-                        passed, err = question_page.get_code_result()
-                        if passed:
-                            logger.info("Code passed! Proceeding to next question.")
-                            question_page.click_save_and_next()
-                            break
-                        else:
-                            error_msg = err
-                            logger.warning(f"Code failed. Error: {error_msg}. Retrying...")
-                    else:
-                        logger.error("Solver failed to return code.")
-                        question_page.click_save_and_next()
-                        break
-                else:
-                    logger.error(f"Failed to solve Coding Question {question_num} after {max_retries} attempts.")
-                    question_page.click_save_and_next()
-            
-        logger.info("Automation Flow Completed Successfully!")
-        time.sleep(15)
+        print("\n>>> Overall Summary Page parsed dynamically!")
+        print(">>> Browser will remain open. Press Enter in this terminal to close the browser and exit.")
+        input()
     except Exception as e:
         logger.error("An error occurred during the automation flow.")
         logger.error(traceback.format_exc())
