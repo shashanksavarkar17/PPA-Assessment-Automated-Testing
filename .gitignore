@@ -1,0 +1,58 @@
+# ==============================================================================
+# Git Ignore Configuration for Selenium Python Automation Tool
+# ==============================================================================
+
+# --- Python Virtual Environments ---
+.venv/
+venv/
+env/
+ENV/
+bin/
+lib/
+include/
+pip-selfcheck.json
+
+# --- Python Cache and Compiled Files ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# --- Environment & Sensitive Secret Files ---
+.env
+.env.*
+*.env
+secrets.json
+credentials.json
+
+# --- Automation Logs & Execution Reports ---
+automation.log
+*.log
+assessment_summary.html
+assessment_summary.txt
+pending_request.json
+
+# --- Selenium / Test Artifacts ---
+screenshots/
+failures/
+test-results/
+
+# --- IDEs / Editors Configuration ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*~
+
+# --- System / OS Specific Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
