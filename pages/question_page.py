@@ -40,6 +40,67 @@ class QuestionPage(BasePage):
     def get_question_text(self):
         return self.helpers.get_text(self.QUESTION_TEXT_LOCATOR)
         
+    def get_selected_language(self):
+        """
+        Dynamically detects the language selected in the assessment editor using dropdown selectors and JS scans.
+        """
+        logger.info("Scanning for selected coding language...")
+        
+        # 1. Standard dropdown, select elements and language-specific buttons/labels
+        locators = [
+            (By.XPATH, "//select[contains(@class, 'lang') or contains(@class, 'language') or contains(@id, 'lang') or contains(@id, 'language')]"),
+            (By.XPATH, "//*[contains(@class, 'lang-select') or contains(@class, 'language-select')]//button"),
+            (By.XPATH, "//*[contains(@class, 'dropdown') or contains(@class, 'select')]//*[contains(text(), 'C++') or contains(text(), 'Python') or contains(text(), 'Java') or contains(text(), 'C') or contains(text(), 'JavaScript')]")
+        ]
+        
+        for loc in locators:
+            try:
+                elements = self.driver.find_elements(*loc)
+                for elem in elements:
+                    if elem.is_displayed():
+                        # If standard SELECT, read the active option value/text
+                        if elem.tag_name == "select":
+                            from selenium.webdriver.support.ui import Select
+                            select = Select(elem)
+                            selected_lang = select.first_selected_option.text.strip()
+                            if selected_lang:
+                                logger.info(f"Language auto-detected via select dropdown: {selected_lang}")
+                                return selected_lang
+                        # Otherwise return the inner text directly
+                        text = elem.text.strip()
+                        if text:
+                            logger.info(f"Language auto-detected via element text: {text}")
+                            return text
+            except Exception:
+                pass
+                
+        # 2. Resilient dynamic browser DOM-tree JS fallback
+        try:
+            js_script = """
+            let select = document.querySelector('select');
+            if (select && select.selectedIndex >= 0) {
+                return select.options[select.selectedIndex].text.trim();
+            }
+            // Search all elements containing common coding language text
+            let active = Array.from(document.querySelectorAll('*')).find(el => {
+                if (!el.children.length && el.innerText) {
+                    let text = el.innerText.trim();
+                    return /^(C\\+\\+|Python|Java|JavaScript|C|Ruby|Go)$/i.test(text);
+                }
+                return false;
+            });
+            return active ? active.innerText.trim() : null;
+            """
+            detected = self.driver.execute_script(js_script)
+            if detected:
+                logger.info(f"Language auto-detected via dynamic DOM JS fallback: {detected}")
+                return detected
+        except Exception as e:
+            logger.warning(f"DOM JS language scan failed: {e}")
+            
+        logger.warning("Could not auto-detect language. Falling back to default C++.")
+        return "C++"
+        
     def get_mcq_options(self):
         option_locators = [
             (By.XPATH, "//input[@type='radio']/following-sibling::span | //input[@type='radio']/following-sibling::label"),
