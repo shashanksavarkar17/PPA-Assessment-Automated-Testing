@@ -88,154 +88,164 @@ def run_assessment_flow():
         report.set_scanned_structure(section_data)
         report.add_timeline_event("Overall assessment structure scanned and logged.")
         
-        # Dynamically determine the question counts in the active section
-        first_section_count = list(section_data.values())[0] if section_data else 2
-        logger.info(f"Detected {first_section_count} questions in Section 1.")
+        # Loop dynamically through all sections and questions scanned
+        global_q_idx = 1
         
-        summary_page.start_first_section()
-        time.sleep(2)
-        
-        # 6. Question Resolution Traversal
-        for q_idx in range(1, first_section_count + 1):
-            logger.info(f"Processing Question {q_idx}/{first_section_count}")
-            question_page.wait_for_page_load()
-            time.sleep(1)
+        for sec_idx, (section_name, q_count) in enumerate(section_data.items(), 1):
+            logger.info(f"=== Starting Section {sec_idx}: {section_name} ({q_count} questions) ===")
+            report.add_timeline_event(f"Starting Section {sec_idx}: {section_name}")
             
-            q_type = question_page.get_question_type()
-            q_text = question_page.get_question_text()
+            # Start the specific section
+            summary_page.start_section(sec_idx)
+            time.sleep(2)
             
-            if q_type == "MCQ":
-                logger.info("Resolving Multiple Choice Question...")
-                options = question_page.get_mcq_options()
+            # Question Traversal within the current Section
+            for q_idx in range(1, q_count + 1):
+                logger.info(f"Processing Section {sec_idx} Question {q_idx}/{q_count} (Global Q{global_q_idx})")
+                question_page.wait_for_page_load()
+                time.sleep(1)
                 
-                # Start question telemetry
-                report.start_question(q_idx, "MCQ", q_text)
-                
-                reasoning, answer_option = solver.solve_mcq(q_text, options)
-                if answer_option:
-                    selected = question_page.select_mcq_option(answer_option)
-                    if not selected:
-                        logger.warning("Fuzzy fallback selection triggered...")
-                        matched = False
-                        for opt in options:
-                            if answer_option.lower() in opt.lower() or opt.lower() in answer_option.lower():
-                                question_page.select_mcq_option(opt)
-                                answer_option = opt
-                                matched = True
-                                break
-                        if not matched and options:
-                            question_page.select_mcq_option(options[0])
-                            answer_option = options[0]
-                else:
-                    logger.warning("No answer resolved from model. Selecting first option as fallback.")
-                    reasoning = "Fallback selection due to empty model response."
-                    if options:
-                        question_page.select_mcq_option(options[0])
-                        answer_option = options[0]
-                        
-                report.set_mcq_result(q_idx, options, reasoning, answer_option, "PASSED")
-                question_page.click_save_and_next()
-                
-            elif q_type == "CODING":
-                logger.info("Resolving Coding workspace question...")
-                question_page.click_solve_if_present()
-                
-                time.sleep(2.0)
+                q_type = question_page.get_question_type()
                 q_text = question_page.get_question_text()
                 
-                # 1. Dynamically Auto-Detect editor language
-                selected_lang = question_page.get_selected_language()
-                logger.info(f"Auto-detected Editor Language: {selected_lang}")
-                
-                # Start question telemetry
-                report.start_question(q_idx, "CODING", q_text)
-                
-                # Self-healing feedback loop using standard 'Run' compilation checks
-                max_retries = 6
-                current_code = None
-                error_msg = None
-                run_success = False
-                
-                for attempt in range(max_retries):
-                    logger.info(f"Self-healing loop: Attempt {attempt + 1}/{max_retries}")
+                if q_type == "MCQ":
+                    logger.info("Resolving Multiple Choice Question...")
+                    options = question_page.get_mcq_options()
                     
-                    # 2. Call solver passing detected language
-                    answer_code = solver.solve_coding(
-                        q_text, 
-                        previous_code=current_code, 
-                        error_message=error_msg, 
-                        language=selected_lang
-                    )
+                    # Start question telemetry
+                    report.start_question(global_q_idx, "MCQ", f"[{section_name}] {q_text}")
                     
-                    if answer_code:
-                        current_code = answer_code
-                        question_page.enter_code_solution(answer_code)
+                    reasoning, answer_option = solver.solve_mcq(q_text, options)
+                    if answer_option:
+                        selected = question_page.select_mcq_option(answer_option)
+                        if not selected:
+                            logger.warning("Fuzzy fallback selection triggered...")
+                            matched = False
+                            for opt in options:
+                                if answer_option.lower() in opt.lower() or opt.lower() in answer_option.lower():
+                                    question_page.select_mcq_option(opt)
+                                    answer_option = opt
+                                    matched = True
+                                    break
+                            if not matched and options:
+                                question_page.select_mcq_option(options[0])
+                                answer_option = options[0]
+                    else:
+                        logger.warning("No answer resolved from model. Selecting first option as fallback.")
+                        reasoning = "Fallback selection due to empty model response."
+                        if options:
+                            question_page.select_mcq_option(options[0])
+                            answer_option = options[0]
+                            
+                    report.set_mcq_result(global_q_idx, options, reasoning, answer_option, "PASSED")
+                    question_page.click_save_and_next()
+                    
+                elif q_type == "CODING":
+                    logger.info("Resolving Coding workspace question...")
+                    question_page.click_solve_if_present()
+                    
+                    time.sleep(2.0)
+                    q_text = question_page.get_question_text()
+                    
+                    # 1. Dynamically Auto-Detect editor language
+                    selected_lang = question_page.get_selected_language()
+                    logger.info(f"Auto-detected Editor Language: {selected_lang}")
+                    
+                    # Start question telemetry
+                    report.start_question(global_q_idx, "CODING", f"[{section_name}] {q_text}")
+                    
+                    # Self-healing feedback loop using standard 'Run' compilation checks
+                    max_retries = 6
+                    current_code = None
+                    error_msg = None
+                    run_success = False
+                    
+                    for attempt in range(max_retries):
+                        logger.info(f"Self-healing loop: Attempt {attempt + 1}/{max_retries}")
                         
-                        question_page.run_code()
-                        passed, err = question_page.get_run_result()
-                        
-                        # Take screenshot if attempt fails
-                        screenshot_path = None
-                        if not passed:
-                            screenshot_name = f"failure_Q{q_idx}_attempt{attempt + 1}"
-                            try:
-                                screenshot_path = question_page.helpers.take_screenshot(screenshot_name)
-                            except Exception as ss_err:
-                                logger.warning(f"Failed to capture failure screenshot: {ss_err}")
-                        
-                        # 3. Log attempt details to Report Telemetry
-                        report.add_coding_attempt(
-                            index=q_idx,
-                            attempt_idx=attempt + 1,
-                            code=answer_code,
-                            error=err if not passed else None,
-                            screenshot=screenshot_path
+                        # 2. Call solver passing detected language
+                        answer_code = solver.solve_coding(
+                            q_text, 
+                            previous_code=current_code, 
+                            error_message=error_msg, 
+                            language=selected_lang
                         )
                         
-                        if passed:
-                            logger.info("All compiler and sample testcases passed successfully on 'Run'!")
-                            run_success = True
-                            break
+                        if answer_code:
+                            current_code = answer_code
+                            question_page.enter_code_solution(answer_code)
+                            
+                            question_page.run_code()
+                            passed, err = question_page.get_run_result()
+                            
+                            # Take screenshot if attempt fails
+                            screenshot_path = None
+                            if not passed:
+                                screenshot_name = f"failure_Q{global_q_idx}_attempt{attempt + 1}"
+                                try:
+                                    screenshot_path = question_page.helpers.take_screenshot(screenshot_name)
+                                except Exception as ss_err:
+                                    logger.warning(f"Failed to capture failure screenshot: {ss_err}")
+                            
+                            # 3. Log attempt details to Report Telemetry
+                            report.add_coding_attempt(
+                                index=global_q_idx,
+                                attempt_idx=attempt + 1,
+                                code=answer_code,
+                                error=err if not passed else None,
+                                screenshot=screenshot_path
+                            )
+                            
+                            if passed:
+                                logger.info("All compiler and sample testcases passed successfully on 'Run'!")
+                                run_success = True
+                                break
+                            else:
+                                logger.warning(f"Compilation/testcase mismatch found: {err}")
+                                error_msg = err
                         else:
-                            logger.warning(f"Compilation/testcase mismatch found: {err}")
-                            error_msg = err
-                    else:
-                        logger.error("Solver returned empty response.")
-                        break
-                
-                final_status = "FAILED"
-                final_err_msg = "N/A"
-                if run_success or current_code:
-                    logger.info("Executing final 'Submit' run...")
-                    question_page.submit_code()
-                    passed_submit, submit_err = question_page.get_code_result()
+                            logger.error("Solver returned empty response.")
+                            break
                     
-                    if passed_submit:
-                        logger.info("All final testcases passed successfully!")
-                        final_status = "PASSED"
+                    final_status = "FAILED"
+                    final_err_msg = "N/A"
+                    if run_success or current_code:
+                        logger.info("Executing final 'Submit' run...")
+                        question_page.submit_code()
+                        passed_submit, submit_err = question_page.get_code_result()
+                        
+                        if passed_submit:
+                            logger.info("All final testcases passed successfully!")
+                            final_status = "PASSED"
+                        else:
+                            logger.warning(f"Final submission had partial failures: {submit_err}")
+                            final_status = "PARTIAL_SUCCESS"
+                            final_err_msg = submit_err
                     else:
-                        logger.warning(f"Final submission had partial failures: {submit_err}")
-                        final_status = "PARTIAL_SUCCESS"
-                        final_err_msg = submit_err
-                else:
-                    logger.error("Failed to compile or run code successfully within the retry limit.")
-                    final_err_msg = error_msg if error_msg else "Compilation failed during retry limit."
+                        logger.error("Failed to compile or run code successfully within the retry limit.")
+                        final_err_msg = error_msg if error_msg else "Compilation failed during retry limit."
+                    
+                    # 4. Finalize Coding telemetries
+                    report.set_coding_final(
+                        index=global_q_idx,
+                        final_code=current_code if current_code else "N/A",
+                        status=final_status,
+                        language=selected_lang,
+                        error_msg=final_err_msg
+                    )
+                    
+                    question_page.click_save_and_next()
+                    
+                global_q_idx += 1
                 
-                # 4. Finalize Coding telemetries
-                report.set_coding_final(
-                    index=q_idx,
-                    final_code=current_code if current_code else "N/A",
-                    status=final_status,
-                    language=selected_lang,
-                    error_msg=final_err_msg
-                )
-                
-                question_page.click_save_and_next()
-                
-                # Break after resolving the first coding question as per single-problem testing instruction
-                logger.info("Single question C++ validation completed successfully.")
-                break
-                
+            # Returning to summary/sections dashboard to proceed with next section
+            logger.info(f"Finished all questions in Section {sec_idx}. Returning to dashboard...")
+            if not question_page.return_to_summary():
+                logger.info("Direct UI button not found. Fallback: navigating directly to Base URL...")
+                driver.get(settings.BASE_URL)
+            time.sleep(3)
+            summary_page.wait_for_page_load()
+            
         # Minimize and maximize to force screen focus in foreground
         try:
             driver.minimize_window()
@@ -248,7 +258,7 @@ def run_assessment_flow():
         # 5. Build premium interactive HTML visual dashboard
         report.build_html_dashboard()
         
-        print("\n>>> Section 1 solved completely and successfully!")
+        print("\n>>> All assessment sections solved completely and successfully!")
         print(">>> Dynamic visual HTML dashboard created at 'assessment_summary.html'")
         print(">>> Browser will remain open. Press Enter in this terminal to close the browser and exit.")
         input()

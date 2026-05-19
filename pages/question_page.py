@@ -430,3 +430,23 @@ class QuestionPage(BasePage):
             except Exception:
                 pass
         return False
+
+    def return_to_summary(self):
+        """Resiliently clicks the button to go back to the assessment summary page."""
+        logger.info("Attempting to return to the summary/sections dashboard...")
+        locators = [
+            (By.XPATH, "//*[contains(text(), 'Summary') or contains(text(), 'Dashboard') or contains(text(), 'Back') or contains(text(), 'Sections') or contains(text(), 'End Test')]"),
+            (By.XPATH, "//a[contains(@href, 'summary') or contains(@href, 'dashboard') or contains(@href, 'assessment')]"),
+            (By.CSS_SELECTOR, ".back-btn, .summary-btn, .dashboard-link, .sections-btn")
+        ]
+        for loc in locators:
+            try:
+                elements = self.driver.find_elements(*loc)
+                for elem in elements:
+                    if elem.is_displayed() and elem.is_enabled():
+                        self.driver.execute_script("arguments[0].click();", elem)
+                        time.sleep(2)
+                        return True
+            except Exception:
+                pass
+        return False
