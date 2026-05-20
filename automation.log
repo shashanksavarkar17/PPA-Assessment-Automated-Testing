@@ -9422,3 +9422,1505 @@ Exception: Save/Submit/Next button not found on the page.
 2026-05-19 11:38:09,247 - utils.report_generator - INFO - Telemetry Timeline Event: Fatal execution crash: Save/Submit/Next button not found on the page.
 2026-05-19 11:38:09,252 - utils.report_generator - INFO - Interactive dashboard generated successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.html
 2026-05-19 11:38:09,254 - MainRunner - INFO - Closing browser session...
+2026-05-19 15:31:14,200 - MainRunner - INFO - Initializing Selenium Web Automation...
+2026-05-19 15:31:14,201 - utils.report_generator - INFO - Telemetry Timeline Event: Selenium Web Automation initialized.
+2026-05-19 15:31:14,202 - utils.report_generator - INFO - ReportGenerator telemetry initialized.
+2026-05-19 15:31:25,043 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.5-flash-preview-05-20
+2026-05-19 15:31:25,044 - MainRunner - INFO - Navigating to assessment page: https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-19 15:31:27,702 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-19 15:31:28,960 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+29
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It�s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you�re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click �Submit� to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-19 15:31:28,961 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-19 15:31:29,004 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 15:31:29,976 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 15:31:30,388 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-19 15:31:30,389 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-19 15:31:30,389 - utils.report_generator - INFO - Telemetry Timeline Event: Instructions page validated and accepted.
+2026-05-19 15:31:30,389 - pages.login_page - INFO - Waiting for Login page...
+2026-05-19 15:31:32,584 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-19 15:31:33,070 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-19 15:31:33,071 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-19 15:31:33,071 - utils.report_generator - INFO - Telemetry Timeline Event: Triggered login with Candidate email.
+2026-05-19 15:31:33,072 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-19 15:32:18,874 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-19 15:32:19,687 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-19 15:32:20,149 - YopmailOTPFetcher - INFO - Successfully located OTP: 988434
+2026-05-19 15:32:20,269 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-19 15:32:21,475 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-19 15:32:22,126 - pages.login_page - INFO - Clicked Verify button.
+2026-05-19 15:32:22,127 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-19 15:32:23,274 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-19 15:32:23,275 - utils.report_generator - INFO - Telemetry Timeline Event: OTP scraped from Yopmail and validated.
+2026-05-19 15:32:23,275 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-19 15:32:23,340 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-19 15:32:23,952 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-19 15:32:24,704 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-19 15:32:25,408 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-19 15:32:25,461 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 15:32:26,342 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 15:32:26,343 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-19 15:32:26,343 - utils.report_generator - INFO - Telemetry Timeline Event: Candidate detail fields successfully submitted.
+2026-05-19 15:32:26,344 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-19 15:32:27,638 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 15:32:28,428 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 15:32:28,429 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-19 15:32:28,430 - utils.report_generator - INFO - Telemetry Timeline Event: Assessment start confirmed.
+2026-05-19 15:32:28,430 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-19 15:32:30,658 - pages.summary_page - INFO - Scanning Overall Summary Page...
+2026-05-19 15:32:35,732 - pages.summary_page - INFO - Downloadable summary TXT created: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-19 15:32:35,733 - utils.report_generator - INFO - Telemetry scanned structure set. Total questions: 29
+2026-05-19 15:32:35,734 - utils.report_generator - INFO - Telemetry Timeline Event: Overall assessment structure scanned and logged.
+2026-05-19 15:32:35,735 - MainRunner - INFO - === Starting Section 1: Section: Section I (9 questions) ===
+2026-05-19 15:32:35,735 - utils.report_generator - INFO - Telemetry Timeline Event: Starting Section 1: Section: Section I
+2026-05-19 15:32:35,736 - pages.summary_page - INFO - Attempting to start section 1 dynamically...
+2026-05-19 15:32:36,648 - pages.summary_page - INFO - Successfully started section 1.
+2026-05-19 15:32:38,649 - MainRunner - INFO - Processing Section 1 Question 1/9 (Global Q1)
+2026-05-19 15:32:38,650 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-19 15:32:42,399 - pages.question_page - INFO - Detected Coding question workspace.
+2026-05-19 15:32:42,614 - MainRunner - INFO - Resolving Coding workspace question...
+2026-05-19 15:32:44,955 - pages.question_page - INFO - Scanning for selected coding language...
+2026-05-19 15:32:45,320 - pages.question_page - INFO - Language auto-detected via element text: C++
+2026-05-19 15:32:45,321 - MainRunner - INFO - Auto-detected Editor Language: C++
+2026-05-19 15:32:45,321 - utils.report_generator - INFO - Telemetry Timeline Event: Processing Question 1 (CODING) in test context.
+2026-05-19 15:32:45,322 - MainRunner - INFO - Self-healing loop: Attempt 1/6
+2026-05-19 15:32:45,322 - utils.llm_solver - INFO - Sending Coding problem to model in language: C++...
+2026-05-19 15:32:46,151 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.5-flash-preview-05-20. Retrying in 10s...
+2026-05-19 15:32:56,609 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.5-flash-preview-05-20. Retrying in 20s...
+2026-05-19 15:33:17,666 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.5-flash-preview-05-20. Retrying in 30s...
+2026-05-19 15:33:48,008 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.0-flash. Retrying in 10s...
+2026-05-19 15:33:58,244 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.0-flash. Retrying in 20s...
+2026-05-19 15:34:18,484 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.0-flash. Retrying in 30s...
+2026-05-19 15:34:48,727 - utils.llm_solver - WARNING - Quota exceeded on gemini-1.5-flash. Retrying in 10s...
+2026-05-19 15:34:58,968 - utils.llm_solver - WARNING - Quota exceeded on gemini-1.5-flash. Retrying in 20s...
+2026-05-19 15:35:22,656 - utils.llm_solver - WARNING - Quota exceeded on gemini-1.5-flash. Retrying in 30s...
+2026-05-19 15:35:52,657 - utils.llm_solver - WARNING - All models failed. Using IPC bridge.
+2026-05-19 15:35:52,659 - utils.llm_solver - INFO - Waiting up to 120s for IPC bridge response (place resolved_response.json in workspace)...
+2026-05-19 15:37:52,778 - utils.llm_solver - ERROR - IPC bridge timed out. Returning None to allow graceful skip.
+2026-05-19 15:37:52,779 - utils.llm_solver - ERROR - Error solving Coding problem: 'NoneType' object has no attribute 'strip'
+2026-05-19 15:37:52,779 - MainRunner - WARNING - Solver returned empty response (attempt 1). Retrying...
+2026-05-19 15:37:57,780 - MainRunner - INFO - Self-healing loop: Attempt 2/6
+2026-05-19 15:37:57,780 - utils.llm_solver - INFO - Sending Coding problem to model in language: C++...
+2026-05-19 15:37:58,135 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.5-flash-preview-05-20. Retrying in 10s...
+2026-05-19 15:38:08,409 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.5-flash-preview-05-20. Retrying in 20s...
+2026-05-19 15:38:28,689 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.5-flash-preview-05-20. Retrying in 30s...
+2026-05-19 15:38:58,951 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.0-flash. Retrying in 10s...
+2026-05-19 15:39:10,144 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.0-flash. Retrying in 20s...
+2026-05-19 15:39:31,489 - utils.llm_solver - WARNING - Quota exceeded on gemini-2.0-flash. Retrying in 30s...
+2026-05-19 15:40:01,767 - utils.llm_solver - WARNING - Quota exceeded on gemini-1.5-flash. Retrying in 10s...
+2026-05-19 15:40:11,937 - utils.llm_solver - WARNING - Quota exceeded on gemini-1.5-flash. Retrying in 20s...
+2026-05-19 15:40:33,617 - utils.llm_solver - WARNING - Quota exceeded on gemini-1.5-flash. Retrying in 30s...
+2026-05-19 15:41:03,619 - utils.llm_solver - WARNING - All models failed. Using IPC bridge.
+2026-05-19 15:41:03,621 - utils.llm_solver - INFO - Waiting up to 120s for IPC bridge response (place resolved_response.json in workspace)...
+2026-05-19 15:42:11,883 - MainRunner - INFO - Initializing Selenium Web Automation...
+2026-05-19 15:42:11,883 - utils.report_generator - INFO - Telemetry Timeline Event: Selenium Web Automation initialized.
+2026-05-19 15:42:11,883 - utils.report_generator - INFO - ReportGenerator telemetry initialized.
+2026-05-19 15:42:21,511 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.5-flash-preview-05-20 using 1 API key(s)
+2026-05-19 15:42:21,512 - MainRunner - INFO - Navigating to assessment page: https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-19 15:42:25,453 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-19 15:42:30,147 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+29
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-19 15:42:30,147 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-19 15:42:30,160 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 15:42:30,821 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 15:42:30,892 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-19 15:42:30,892 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-19 15:42:30,892 - utils.report_generator - INFO - Telemetry Timeline Event: Instructions page validated and accepted.
+2026-05-19 15:42:30,892 - pages.login_page - INFO - Waiting for Login page...
+2026-05-19 15:42:32,818 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-19 15:42:33,018 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-19 15:42:33,018 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-19 15:42:33,018 - utils.report_generator - INFO - Telemetry Timeline Event: Triggered login with Candidate email.
+2026-05-19 15:42:33,018 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-19 15:42:38,268 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-19 15:42:38,452 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-19 15:42:38,568 - YopmailOTPFetcher - INFO - Successfully located OTP: 221533
+2026-05-19 15:42:38,599 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-19 15:42:39,672 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-19 15:42:39,785 - pages.login_page - INFO - Clicked Verify button.
+2026-05-19 15:42:39,785 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-19 15:42:43,401 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-19 15:42:43,401 - utils.report_generator - INFO - Telemetry Timeline Event: OTP scraped from Yopmail and validated.
+2026-05-19 15:42:43,401 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-19 15:42:43,414 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-19 15:42:43,734 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-19 15:42:44,081 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-19 15:42:44,386 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-19 15:42:44,396 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 15:42:44,978 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 15:42:44,978 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-19 15:42:44,978 - utils.report_generator - INFO - Telemetry Timeline Event: Candidate detail fields successfully submitted.
+2026-05-19 15:42:44,978 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-19 15:42:59,990 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 15:43:00,561 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 15:43:00,561 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-19 15:43:00,561 - utils.report_generator - INFO - Telemetry Timeline Event: Assessment start confirmed.
+2026-05-19 15:43:00,561 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-19 15:43:03,664 - utils.llm_solver - ERROR - IPC bridge timed out. Returning None to allow graceful skip.
+2026-05-19 15:43:03,665 - utils.llm_solver - ERROR - Error solving Coding problem: 'NoneType' object has no attribute 'strip'
+2026-05-19 15:43:03,665 - MainRunner - WARNING - Solver returned empty response (attempt 2). Aborting retry loop.
+2026-05-19 15:43:03,665 - MainRunner - ERROR - Two consecutive empty solver responses. Skipping this question.
+2026-05-19 15:43:03,665 - MainRunner - ERROR - No code was generated. Skipping submission for this question.
+2026-05-19 15:43:03,666 - utils.report_generator - INFO - Telemetry Timeline Event: Question 1 (CODING) finalized with status: 'FAILED'
+2026-05-19 15:43:03,666 - pages.question_page - INFO - Transitioning to the next question...
+2026-05-19 15:43:03,815 - utils.selenium_helpers - ERROR - Failed to take screenshot: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021cce]
+	chromedriver!(No symbol) [0x105fb85]
+	chromedriver!(No symbol) [0x108d646]
+	chromedriver!(No symbol) [0x1088869]
+	chromedriver!(No symbol) [0x1088252]
+	chromedriver!(No symbol) [0xff502e]
+	chromedriver!(No symbol) [0xff55ce]
+	chromedriver!(No symbol) [0xff5aad]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!(No symbol) [0xff4ba6]
+	chromedriver!(No symbol) [0xff41e0]
+	chromedriver!GetHandleVerifier [0x160b02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+2026-05-19 15:43:03,816 - MainRunner - WARNING - Save/Next failed for CODING Q1: Save/Submit/Next button not found on the page.. Continuing to next question.
+2026-05-19 15:43:03,816 - MainRunner - INFO - Processing Section 1 Question 2/9 (Global Q2)
+2026-05-19 15:43:03,816 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-19 15:43:03,818 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-19 15:43:03,828 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 105, in run_assessment_flow
+    question_page.wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 30, in wait_for_page_load
+    self.helpers.wait_for_element(self.QUESTION_TEXT_LOCATOR)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 29, in wait_for_element
+    element = wait_obj.until(EC.visibility_of_element_located(locator))
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 112, in until
+    value = method(self._driver)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 184, in _predicate
+    return _element_if_visible(driver.find_element(*locator))
+                               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 868, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021cce]
+	chromedriver!(No symbol) [0x105fb85]
+	chromedriver!(No symbol) [0x108d646]
+	chromedriver!(No symbol) [0x1088869]
+	chromedriver!(No symbol) [0x1088252]
+	chromedriver!(No symbol) [0xff502e]
+	chromedriver!(No symbol) [0xff55ce]
+	chromedriver!(No symbol) [0xff5aad]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!(No symbol) [0xff4ba6]
+	chromedriver!(No symbol) [0xff41e0]
+	chromedriver!GetHandleVerifier [0x160b02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+
+2026-05-19 15:43:03,828 - utils.report_generator - INFO - Telemetry Timeline Event: Fatal execution crash: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021cce]
+	chromedriver!(No symbol) [0x105fb85]
+	chromedriver!(No symbol) [0x108d646]
+	chromedriver!(No symbol) [0x1088869]
+	chromedriver!(No symbol) [0x1088252]
+	chromedriver!(No symbol) [0xff502e]
+	chromedriver!(No symbol) [0xff55ce]
+	chromedriver!(No symbol) [0xff5aad]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!(No symbol) [0xff4ba6]
+	chromedriver!(No symbol) [0xff41e0]
+	chromedriver!GetHandleVerifier [0x160b02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+2026-05-19 15:43:03,831 - utils.report_generator - INFO - Interactive dashboard generated successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.html
+2026-05-19 15:43:03,831 - MainRunner - INFO - Closing browser session...
+2026-05-19 15:43:05,204 - pages.summary_page - INFO - Scanning Overall Summary Page...
+2026-05-19 15:43:06,260 - pages.summary_page - INFO - Downloadable summary TXT created: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-19 15:43:06,261 - utils.report_generator - INFO - Telemetry scanned structure set. Total questions: 29
+2026-05-19 15:43:06,261 - utils.report_generator - INFO - Telemetry Timeline Event: Overall assessment structure scanned and logged.
+2026-05-19 15:43:06,261 - MainRunner - INFO - === Starting Section 1: Section: Section I (9 questions) ===
+2026-05-19 15:43:06,261 - utils.report_generator - INFO - Telemetry Timeline Event: Starting Section 1: Section: Section I
+2026-05-19 15:43:06,261 - pages.summary_page - INFO - Attempting to start section 1 dynamically...
+2026-05-19 15:43:06,840 - pages.summary_page - INFO - Successfully started section 1.
+2026-05-19 15:43:08,840 - MainRunner - INFO - Processing Section 1 Question 1/9 (Global Q1)
+2026-05-19 15:43:08,842 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-19 15:43:09,870 - pages.question_page - INFO - Detected Coding question workspace.
+2026-05-19 15:43:09,911 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 15:43:09,911 - MainRunner - INFO - Resolving Coding workspace question...
+2026-05-19 15:43:12,172 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 15:43:12,172 - pages.question_page - INFO - Scanning for selected coding language...
+2026-05-19 15:43:12,413 - pages.question_page - INFO - Language auto-detected via element text: C++
+2026-05-19 15:43:12,413 - MainRunner - INFO - Auto-detected Editor Language: C++
+2026-05-19 15:43:12,413 - utils.report_generator - INFO - Telemetry Timeline Event: Processing Question 1 (CODING) in test context.
+2026-05-19 15:43:12,413 - MainRunner - INFO - Self-healing loop: Attempt 1/6
+2026-05-19 15:43:12,413 - utils.llm_solver - INFO - Sending Coding problem to model in language: C++...
+2026-05-19 15:43:13,365 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.5-flash-preview-05-20. Trying next key...
+2026-05-19 15:43:13,834 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.5-flash-preview-05-20 (all keys tried). Waiting 10s...
+2026-05-19 15:43:24,279 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.0-flash. Trying next key...
+2026-05-19 15:43:24,857 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.0-flash (all keys tried). Waiting 10s...
+2026-05-19 15:43:35,242 - utils.llm_solver - WARNING - Quota on key[0]/gemini-1.5-flash. Trying next key...
+2026-05-19 15:43:35,561 - utils.llm_solver - WARNING - Quota on key[0]/gemini-1.5-flash (all keys tried). Waiting 10s...
+2026-05-19 15:43:45,562 - utils.llm_solver - WARNING - All models failed. Using IPC bridge.
+2026-05-19 15:43:45,563 - utils.llm_solver - INFO - Waiting up to 120s for IPC bridge response (place resolved_response.json in workspace)...
+2026-05-19 15:44:37,072 - MainRunner - INFO - Initializing Selenium Web Automation...
+2026-05-19 15:44:37,072 - utils.report_generator - INFO - Telemetry Timeline Event: Selenium Web Automation initialized.
+2026-05-19 15:44:37,073 - utils.report_generator - INFO - ReportGenerator telemetry initialized.
+2026-05-19 15:44:43,159 - utils.llm_solver - INFO - GeminiSolver initialized with gemini-2.5-flash-preview-05-20 using 1 API key(s)
+2026-05-19 15:44:43,159 - MainRunner - INFO - Navigating to assessment page: https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-19 15:44:44,869 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-19 15:44:46,413 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+29
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-19 15:44:46,414 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-19 15:44:46,429 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 15:44:47,000 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 15:44:47,073 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-19 15:44:47,074 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-19 15:44:47,074 - utils.report_generator - INFO - Telemetry Timeline Event: Instructions page validated and accepted.
+2026-05-19 15:44:47,074 - pages.login_page - INFO - Waiting for Login page...
+2026-05-19 15:44:48,519 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-19 15:44:48,603 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-19 15:44:48,603 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-19 15:44:48,604 - utils.report_generator - INFO - Telemetry Timeline Event: Triggered login with Candidate email.
+2026-05-19 15:44:48,604 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-19 15:44:56,200 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-19 15:44:57,376 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-19 15:44:57,478 - YopmailOTPFetcher - INFO - Successfully located OTP: 347026
+2026-05-19 15:44:57,504 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-19 15:44:58,568 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-19 15:44:58,695 - pages.login_page - INFO - Clicked Verify button.
+2026-05-19 15:44:58,695 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-19 15:44:59,749 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-19 15:44:59,750 - utils.report_generator - INFO - Telemetry Timeline Event: OTP scraped from Yopmail and validated.
+2026-05-19 15:44:59,750 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-19 15:44:59,767 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-19 15:45:00,113 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-19 15:45:00,663 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-19 15:45:00,984 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-19 15:45:00,996 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 15:45:01,565 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 15:45:01,565 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-19 15:45:01,566 - utils.report_generator - INFO - Telemetry Timeline Event: Candidate detail fields successfully submitted.
+2026-05-19 15:45:01,566 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-19 15:45:03,134 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 15:45:03,723 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 15:45:03,723 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-19 15:45:03,723 - utils.report_generator - INFO - Telemetry Timeline Event: Assessment start confirmed.
+2026-05-19 15:45:03,723 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-19 15:45:06,310 - pages.summary_page - INFO - Scanning Overall Summary Page...
+2026-05-19 15:45:07,529 - pages.summary_page - INFO - Downloadable summary TXT created: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-19 15:45:07,529 - utils.report_generator - INFO - Telemetry scanned structure set. Total questions: 29
+2026-05-19 15:45:07,529 - utils.report_generator - INFO - Telemetry Timeline Event: Overall assessment structure scanned and logged.
+2026-05-19 15:45:07,530 - MainRunner - INFO - === Starting Section 1: Section: Section I (9 questions) ===
+2026-05-19 15:45:07,530 - utils.report_generator - INFO - Telemetry Timeline Event: Starting Section 1: Section: Section I
+2026-05-19 15:45:07,530 - pages.summary_page - INFO - Attempting to start section 1 dynamically...
+2026-05-19 15:45:08,123 - pages.summary_page - INFO - Successfully started section 1.
+2026-05-19 15:45:10,125 - MainRunner - INFO - Processing Section 1 Question 1/9 (Global Q1)
+2026-05-19 15:45:10,126 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-19 15:45:11,156 - pages.question_page - INFO - Detected Coding question workspace.
+2026-05-19 15:45:11,193 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 15:45:11,194 - MainRunner - INFO - Resolving Coding workspace question...
+2026-05-19 15:45:13,269 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 15:45:13,270 - pages.question_page - INFO - Scanning for selected coding language...
+2026-05-19 15:45:13,339 - pages.question_page - INFO - Language auto-detected via element text: C++
+2026-05-19 15:45:13,339 - MainRunner - INFO - Auto-detected Editor Language: C++
+2026-05-19 15:45:13,340 - utils.report_generator - INFO - Telemetry Timeline Event: Processing Question 1 (CODING) in test context.
+2026-05-19 15:45:13,340 - MainRunner - INFO - Self-healing loop: Attempt 1/6
+2026-05-19 15:45:13,340 - utils.llm_solver - INFO - Sending Coding problem to model in language: C++...
+2026-05-19 15:45:13,969 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.5-flash-preview-05-20. Trying next key...
+2026-05-19 15:45:14,824 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.5-flash-preview-05-20 (all keys tried). Waiting 10s...
+2026-05-19 15:45:25,328 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.0-flash. Trying next key...
+2026-05-19 15:45:25,717 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.0-flash (all keys tried). Waiting 10s...
+2026-05-19 15:45:36,192 - utils.llm_solver - WARNING - Quota on key[0]/gemini-1.5-flash. Trying next key...
+2026-05-19 15:45:36,506 - utils.llm_solver - WARNING - Quota on key[0]/gemini-1.5-flash (all keys tried). Waiting 10s...
+2026-05-19 15:45:45,606 - utils.llm_solver - ERROR - IPC bridge timed out. Returning None to allow graceful skip.
+2026-05-19 15:45:45,607 - utils.llm_solver - WARNING - Solver returned empty/None response for coding question.
+2026-05-19 15:45:45,607 - MainRunner - WARNING - Solver returned empty response (attempt 1). Retrying...
+2026-05-19 15:45:46,506 - utils.llm_solver - WARNING - All models failed. Using IPC bridge.
+2026-05-19 15:45:46,508 - utils.llm_solver - INFO - Waiting up to 120s for IPC bridge response (place resolved_response.json in workspace)...
+2026-05-19 15:45:50,607 - MainRunner - INFO - Self-healing loop: Attempt 2/6
+2026-05-19 15:45:50,607 - utils.llm_solver - INFO - Sending Coding problem to model in language: C++...
+2026-05-19 15:45:51,184 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.5-flash-preview-05-20. Trying next key...
+2026-05-19 15:45:51,619 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.5-flash-preview-05-20 (all keys tried). Waiting 10s...
+2026-05-19 15:46:02,002 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.0-flash. Trying next key...
+2026-05-19 15:46:02,578 - utils.llm_solver - WARNING - Quota on key[0]/gemini-2.0-flash (all keys tried). Waiting 10s...
+2026-05-19 15:46:12,991 - utils.llm_solver - WARNING - Quota on key[0]/gemini-1.5-flash. Trying next key...
+2026-05-19 15:46:13,378 - utils.llm_solver - WARNING - Quota on key[0]/gemini-1.5-flash (all keys tried). Waiting 10s...
+2026-05-19 15:46:23,378 - utils.llm_solver - WARNING - All models failed. Using IPC bridge.
+2026-05-19 15:46:23,381 - utils.llm_solver - INFO - Waiting up to 120s for IPC bridge response (place resolved_response.json in workspace)...
+2026-05-19 15:48:23,435 - utils.llm_solver - ERROR - IPC bridge timed out. Returning None to allow graceful skip.
+2026-05-19 15:48:23,435 - utils.llm_solver - WARNING - Solver returned empty/None response for coding question.
+2026-05-19 15:48:23,435 - MainRunner - WARNING - Solver returned empty response (attempt 2). Aborting retry loop.
+2026-05-19 15:48:23,435 - MainRunner - ERROR - Two consecutive empty solver responses. Skipping this question.
+2026-05-19 15:48:23,435 - MainRunner - ERROR - No code was generated. Skipping submission for this question.
+2026-05-19 15:48:23,436 - utils.report_generator - INFO - Telemetry Timeline Event: Question 1 (CODING) finalized with status: 'FAILED'
+2026-05-19 15:48:23,436 - pages.question_page - INFO - Transitioning to the next question...
+2026-05-19 15:48:23,672 - utils.selenium_helpers - ERROR - Failed to take screenshot: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021cce]
+	chromedriver!(No symbol) [0x105fb85]
+	chromedriver!(No symbol) [0x108d646]
+	chromedriver!(No symbol) [0x1088869]
+	chromedriver!(No symbol) [0x1088252]
+	chromedriver!(No symbol) [0xff502e]
+	chromedriver!(No symbol) [0xff55ce]
+	chromedriver!(No symbol) [0xff5aad]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!(No symbol) [0xff4ba6]
+	chromedriver!(No symbol) [0xff41e0]
+	chromedriver!GetHandleVerifier [0x160b02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+2026-05-19 15:48:23,672 - MainRunner - WARNING - Save/Next failed for CODING Q1: Save/Submit/Next button not found on the page.. Continuing to next question.
+2026-05-19 15:48:23,672 - MainRunner - INFO - Processing Section 1 Question 2/9 (Global Q2)
+2026-05-19 15:48:23,672 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-19 15:48:23,674 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-19 15:48:23,690 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 105, in run_assessment_flow
+    question_page.wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 30, in wait_for_page_load
+    self.helpers.wait_for_element(self.QUESTION_TEXT_LOCATOR)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 29, in wait_for_element
+    element = wait_obj.until(EC.visibility_of_element_located(locator))
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 112, in until
+    value = method(self._driver)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 184, in _predicate
+    return _element_if_visible(driver.find_element(*locator))
+                               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 868, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021cce]
+	chromedriver!(No symbol) [0x105fb85]
+	chromedriver!(No symbol) [0x108d646]
+	chromedriver!(No symbol) [0x1088869]
+	chromedriver!(No symbol) [0x1088252]
+	chromedriver!(No symbol) [0xff502e]
+	chromedriver!(No symbol) [0xff55ce]
+	chromedriver!(No symbol) [0xff5aad]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!(No symbol) [0xff4ba6]
+	chromedriver!(No symbol) [0xff41e0]
+	chromedriver!GetHandleVerifier [0x160b02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+
+2026-05-19 15:48:23,691 - utils.report_generator - INFO - Telemetry Timeline Event: Fatal execution crash: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021cce]
+	chromedriver!(No symbol) [0x105fb85]
+	chromedriver!(No symbol) [0x108d646]
+	chromedriver!(No symbol) [0x1088869]
+	chromedriver!(No symbol) [0x1088252]
+	chromedriver!(No symbol) [0xff502e]
+	chromedriver!(No symbol) [0xff55ce]
+	chromedriver!(No symbol) [0xff5aad]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!(No symbol) [0xff4ba6]
+	chromedriver!(No symbol) [0xff41e0]
+	chromedriver!GetHandleVerifier [0x160b02f+41492f]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+2026-05-19 15:48:23,695 - utils.report_generator - INFO - Interactive dashboard generated successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.html
+2026-05-19 15:48:23,695 - MainRunner - INFO - Closing browser session...
+2026-05-19 15:55:35,551 - MainRunner - INFO - Initializing Selenium Web Automation...
+2026-05-19 15:55:35,551 - utils.report_generator - INFO - Telemetry Timeline Event: Selenium Web Automation initialized.
+2026-05-19 15:55:35,552 - utils.report_generator - INFO - ReportGenerator telemetry initialized.
+2026-05-19 15:55:44,645 - utils.llm_solver - INFO - GeminiSolver initialized (Model: gemini-2.5-flash-preview-05-20, Keys: 1)
+2026-05-19 15:55:44,645 - MainRunner - INFO - Navigating to assessment page: https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-19 15:55:56,834 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-19 15:55:58,959 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+29
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-19 15:55:58,959 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-19 15:55:58,974 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 15:55:59,606 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 15:55:59,873 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-19 15:55:59,873 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-19 15:55:59,873 - utils.report_generator - INFO - Telemetry Timeline Event: Instructions page validated and accepted.
+2026-05-19 15:55:59,874 - pages.login_page - INFO - Waiting for Login page...
+2026-05-19 15:56:01,282 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-19 15:56:01,357 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-19 15:56:01,357 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-19 15:56:01,357 - utils.report_generator - INFO - Telemetry Timeline Event: Triggered login with Candidate email.
+2026-05-19 15:56:01,357 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-19 15:56:24,116 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-19 15:56:24,312 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-19 15:56:24,496 - YopmailOTPFetcher - INFO - Successfully located OTP: 130418
+2026-05-19 15:56:24,518 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-19 15:56:25,566 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-19 15:56:25,725 - pages.login_page - INFO - Clicked Verify button.
+2026-05-19 15:56:25,725 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-19 15:56:26,774 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-19 15:56:26,774 - utils.report_generator - INFO - Telemetry Timeline Event: OTP scraped from Yopmail and validated.
+2026-05-19 15:56:26,774 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-19 15:56:26,800 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-19 15:56:27,116 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-19 15:56:27,442 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-19 15:56:27,832 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-19 15:56:27,843 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 15:56:28,458 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 15:56:28,458 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-19 15:56:28,459 - utils.report_generator - INFO - Telemetry Timeline Event: Candidate detail fields successfully submitted.
+2026-05-19 15:56:28,459 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-19 15:56:30,063 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 15:56:30,681 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 15:56:30,682 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-19 15:56:30,682 - utils.report_generator - INFO - Telemetry Timeline Event: Assessment start confirmed.
+2026-05-19 15:56:30,682 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-19 15:56:33,270 - pages.summary_page - INFO - Scanning Overall Summary Page...
+2026-05-19 15:56:34,566 - pages.summary_page - INFO - Downloadable summary TXT created: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-19 15:56:34,566 - utils.report_generator - INFO - Telemetry scanned structure set. Total questions: 29
+2026-05-19 15:56:34,566 - utils.report_generator - INFO - Telemetry Timeline Event: Overall assessment structure scanned and logged.
+2026-05-19 15:56:34,566 - MainRunner - INFO - === Starting Section 1: Section: Section I (9 questions) ===
+2026-05-19 15:56:34,566 - utils.report_generator - INFO - Telemetry Timeline Event: Starting Section 1: Section: Section I
+2026-05-19 15:56:34,566 - pages.summary_page - INFO - Attempting to start section 1 dynamically...
+2026-05-19 15:56:35,177 - pages.summary_page - INFO - Successfully started section 1.
+2026-05-19 15:56:37,177 - MainRunner - INFO - Processing Section 1 Question 1/9 (Global Q1)
+2026-05-19 15:56:37,178 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-19 15:56:38,206 - pages.question_page - INFO - Detected Coding question workspace.
+2026-05-19 15:56:38,232 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 15:56:38,233 - MainRunner - INFO - Resolving Coding workspace question...
+2026-05-19 15:57:00,679 - utils.selenium_helpers - ERROR - Timeout waiting for element to be visible: ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 15:57:00,773 - utils.selenium_helpers - INFO - Screenshot saved to C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\screenshots\timeout_wait_visible_20260519-155700.png
+2026-05-19 15:57:00,773 - utils.selenium_helpers - ERROR - Failed to get text from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]"). Exception: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021e90]
+	chromedriver!(No symbol) [0x106b28a]
+	chromedriver!(No symbol) [0x106b52b]
+	chromedriver!(No symbol) [0x10ad062]
+	chromedriver!(No symbol) [0x108d7d4]
+	chromedriver!(No symbol) [0x10aa936]
+	chromedriver!(No symbol) [0x108d526]
+	chromedriver!(No symbol) [0x10608f9]
+	chromedriver!(No symbol) [0x10616b4]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!GetHandleVerifier [0x120fb28+19428]
+	chromedriver!GetHandleVerifier [0x120fcd5+195d5]
+	chromedriver!GetHandleVerifier [0x11f91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+2026-05-19 15:57:00,773 - MainRunner - ERROR - An error occurred during the automation flow.
+2026-05-19 15:57:00,775 - MainRunner - ERROR - Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 151, in run_assessment_flow
+    q_text = question_page.get_question_text()
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 41, in get_question_text
+    return self.helpers.get_text(self.QUESTION_TEXT_LOCATOR)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 119, in get_text
+    element = self.wait_for_element(locator)
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 29, in wait_for_element
+    element = wait_obj.until(EC.visibility_of_element_located(locator))
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021e90]
+	chromedriver!(No symbol) [0x106b28a]
+	chromedriver!(No symbol) [0x106b52b]
+	chromedriver!(No symbol) [0x10ad062]
+	chromedriver!(No symbol) [0x108d7d4]
+	chromedriver!(No symbol) [0x10aa936]
+	chromedriver!(No symbol) [0x108d526]
+	chromedriver!(No symbol) [0x10608f9]
+	chromedriver!(No symbol) [0x10616b4]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!GetHandleVerifier [0x120fb28+19428]
+	chromedriver!GetHandleVerifier [0x120fcd5+195d5]
+	chromedriver!GetHandleVerifier [0x11f91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+
+2026-05-19 15:57:00,775 - utils.report_generator - INFO - Telemetry Timeline Event: Fatal execution crash: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x1207123+10a23]
+	chromedriver!GetHandleVerifier [0x1207254+10b54]
+	chromedriver!(No symbol) [0x1021e90]
+	chromedriver!(No symbol) [0x106b28a]
+	chromedriver!(No symbol) [0x106b52b]
+	chromedriver!(No symbol) [0x10ad062]
+	chromedriver!(No symbol) [0x108d7d4]
+	chromedriver!(No symbol) [0x10aa936]
+	chromedriver!(No symbol) [0x108d526]
+	chromedriver!(No symbol) [0x10608f9]
+	chromedriver!(No symbol) [0x10616b4]
+	chromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]
+	chromedriver!GetHandleVerifier [0x149d0ed+2a69ed]
+	chromedriver!GetHandleVerifier [0x14be4f5+2c7df5]
+	chromedriver!GetHandleVerifier [0x1221128+2aa28]
+	chromedriver!GetHandleVerifier [0x1228bbd+324bd]
+	chromedriver!GetHandleVerifier [0x120fb28+19428]
+	chromedriver!GetHandleVerifier [0x120fcd5+195d5]
+	chromedriver!GetHandleVerifier [0x11f91cf+2acf]
+	KERNEL32!BaseThreadInitThunk [0x77065d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7724d83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]
+
+2026-05-19 15:57:00,776 - utils.report_generator - INFO - Interactive dashboard generated successfully at: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.html
+2026-05-19 15:57:00,776 - MainRunner - INFO - Closing browser session...
+2026-05-19 16:00:09,943 - MainRunner - INFO - Initializing Selenium Web Automation...
+2026-05-19 16:00:09,943 - utils.report_generator - INFO - Telemetry Timeline Event: Selenium Web Automation initialized.
+2026-05-19 16:00:09,943 - utils.report_generator - INFO - ReportGenerator telemetry initialized.
+2026-05-19 16:00:15,853 - utils.llm_solver - INFO - GeminiSolver initialized (Model: gemini-2.5-flash-preview-05-20, Keys: 1)
+2026-05-19 16:00:15,853 - MainRunner - INFO - Navigating to assessment page: https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-19 16:00:17,049 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-19 16:00:18,129 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+29
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-19 16:00:18,129 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-19 16:00:18,142 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 16:00:18,700 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-19 16:00:18,759 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-19 16:00:18,759 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-19 16:00:18,759 - utils.report_generator - INFO - Telemetry Timeline Event: Instructions page validated and accepted.
+2026-05-19 16:00:18,759 - pages.login_page - INFO - Waiting for Login page...
+2026-05-19 16:00:19,679 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-19 16:00:19,763 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-19 16:00:19,764 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-19 16:00:19,764 - utils.report_generator - INFO - Telemetry Timeline Event: Triggered login with Candidate email.
+2026-05-19 16:00:19,764 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-19 16:00:27,867 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-19 16:00:28,043 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-19 16:00:28,151 - YopmailOTPFetcher - INFO - Successfully located OTP: 638581
+2026-05-19 16:00:28,180 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-19 16:00:29,223 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-19 16:00:29,400 - pages.login_page - INFO - Clicked Verify button.
+2026-05-19 16:00:29,400 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-19 16:00:30,437 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-19 16:00:30,437 - utils.report_generator - INFO - Telemetry Timeline Event: OTP scraped from Yopmail and validated.
+2026-05-19 16:00:30,437 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-19 16:00:30,451 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-19 16:00:30,764 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-19 16:00:31,102 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-19 16:00:31,427 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-19 16:00:31,438 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 16:00:32,022 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-19 16:00:32,022 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-19 16:00:32,022 - utils.report_generator - INFO - Telemetry Timeline Event: Candidate detail fields successfully submitted.
+2026-05-19 16:00:32,022 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-19 16:00:33,586 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 16:00:34,152 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-19 16:00:34,152 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-19 16:00:34,152 - utils.report_generator - INFO - Telemetry Timeline Event: Assessment start confirmed.
+2026-05-19 16:00:34,152 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-19 16:00:36,213 - pages.summary_page - INFO - Scanning Overall Summary Page...
+2026-05-19 16:00:37,268 - pages.summary_page - INFO - Downloadable summary TXT created: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-19 16:00:37,268 - utils.report_generator - INFO - Telemetry scanned structure set. Total questions: 29
+2026-05-19 16:00:37,268 - utils.report_generator - INFO - Telemetry Timeline Event: Overall assessment structure scanned and logged.
+2026-05-19 16:00:37,268 - MainRunner - INFO - === Starting Section 1: Section: Section I (9 questions) ===
+2026-05-19 16:00:37,268 - utils.report_generator - INFO - Telemetry Timeline Event: Starting Section 1: Section: Section I
+2026-05-19 16:00:37,268 - pages.summary_page - INFO - Attempting to start section 1 dynamically...
+2026-05-19 16:00:37,860 - pages.summary_page - INFO - Successfully started section 1.
+2026-05-19 16:00:39,862 - MainRunner - INFO - Processing Section 1 Question 1/9 (Global Q1)
+2026-05-19 16:00:39,863 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-19 16:00:41,046 - pages.question_page - INFO - Detected Coding question workspace.
+2026-05-19 16:00:41,074 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 16:00:41,074 - MainRunner - INFO - Resolving Coding workspace question...
+2026-05-19 16:00:43,124 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 16:00:43,124 - pages.question_page - INFO - Scanning for selected coding language...
+2026-05-19 16:00:43,172 - pages.question_page - INFO - Language auto-detected via element text: C++
+2026-05-19 16:00:43,172 - MainRunner - INFO - Auto-detected Editor Language: C++
+2026-05-19 16:00:43,172 - utils.report_generator - INFO - Telemetry Timeline Event: Processing Question 1 (CODING) in test context.
+2026-05-19 16:00:43,172 - MainRunner - INFO - Self-healing loop: Attempt 1/6
+2026-05-19 16:00:43,609 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.5-flash-preview-05-20. Rotating...
+2026-05-19 16:00:49,252 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.0-flash. Rotating...
+2026-05-19 16:00:54,955 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-1.5-flash. Rotating...
+2026-05-19 16:01:00,325 - utils.llm_solver - WARNING - All LLM attempts exhausted. Activating local IPC bridge.
+2026-05-19 16:01:00,332 - utils.llm_solver - INFO - Waiting up to 120s for manual input in 'resolved_response.json'...
+2026-05-19 16:03:00,385 - utils.llm_solver - ERROR - IPC bridge timed out. Skipping question.
+2026-05-19 16:03:00,385 - MainRunner - WARNING - Solver returned empty response (attempt 1). Retrying...
+2026-05-19 16:03:05,386 - MainRunner - INFO - Self-healing loop: Attempt 2/6
+2026-05-19 16:03:05,723 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.5-flash-preview-05-20. Rotating...
+2026-05-19 16:03:11,410 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.0-flash. Rotating...
+2026-05-19 16:03:17,088 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-1.5-flash. Rotating...
+2026-05-19 16:03:22,429 - utils.llm_solver - WARNING - All LLM attempts exhausted. Activating local IPC bridge.
+2026-05-19 16:03:22,434 - utils.llm_solver - INFO - Waiting up to 120s for manual input in 'resolved_response.json'...
+2026-05-19 16:05:22,478 - utils.llm_solver - ERROR - IPC bridge timed out. Skipping question.
+2026-05-19 16:05:22,479 - MainRunner - WARNING - Solver returned empty response (attempt 2). Aborting retry loop.
+2026-05-19 16:05:22,479 - MainRunner - ERROR - Two consecutive empty solver responses. Skipping this question.
+2026-05-19 16:05:22,479 - MainRunner - ERROR - No code was generated. Skipping submission for this question.
+2026-05-19 16:05:22,480 - utils.report_generator - INFO - Telemetry Timeline Event: Question 1 (CODING) finalized with status: 'FAILED'
+2026-05-19 16:05:22,481 - pages.question_page - INFO - Transitioning to the next question...
+2026-05-19 16:05:25,082 - MainRunner - INFO - Processing Section 1 Question 2/9 (Global Q2)
+2026-05-19 16:05:25,082 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-19 16:05:26,128 - pages.question_page - INFO - Detected Coding question workspace.
+2026-05-19 16:05:26,209 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 16:05:26,209 - MainRunner - INFO - Resolving Coding workspace question...
+2026-05-19 16:05:28,286 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-19 16:05:28,287 - pages.question_page - INFO - Scanning for selected coding language...
+2026-05-19 16:05:28,427 - pages.question_page - INFO - Language auto-detected via dynamic DOM JS fallback: C++
+2026-05-19 16:05:28,427 - MainRunner - INFO - Auto-detected Editor Language: C++
+2026-05-19 16:05:28,427 - utils.report_generator - INFO - Telemetry Timeline Event: Processing Question 2 (CODING) in test context.
+2026-05-19 16:05:28,427 - MainRunner - INFO - Self-healing loop: Attempt 1/6
+2026-05-19 16:05:28,736 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.5-flash-preview-05-20. Rotating...
+2026-05-19 16:05:34,451 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.0-flash. Rotating...
+2026-05-19 16:05:40,164 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-1.5-flash. Rotating...
+2026-05-19 16:05:45,490 - utils.llm_solver - WARNING - All LLM attempts exhausted. Activating local IPC bridge.
+2026-05-19 16:05:45,491 - utils.llm_solver - INFO - Waiting up to 120s for manual input in 'resolved_response.json'...
+2026-05-20 11:52:15,476 - MainRunner - INFO - Initializing Selenium Web Automation...
+2026-05-20 11:52:15,478 - utils.report_generator - INFO - Telemetry Timeline Event: Selenium Web Automation initialized.
+2026-05-20 11:52:15,478 - utils.report_generator - INFO - ReportGenerator telemetry initialized.
+2026-05-20 11:54:00,070 - MainRunner - INFO - Initializing Selenium Web Automation...
+2026-05-20 11:54:00,071 - utils.report_generator - INFO - Telemetry Timeline Event: Selenium Web Automation initialized.
+2026-05-20 11:54:00,071 - utils.report_generator - INFO - ReportGenerator telemetry initialized.
+2026-05-20 11:54:07,414 - utils.llm_solver - INFO - GeminiSolver initialized (Model: gemini-2.5-flash-preview-05-20, Keys: 1)
+2026-05-20 11:54:07,414 - MainRunner - INFO - Navigating to assessment page: https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-20 11:54:12,291 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-20 11:54:15,454 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+29
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-20 11:54:15,454 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-20 11:54:15,473 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-20 11:54:16,118 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-20 11:54:16,279 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-20 11:54:16,279 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-20 11:54:16,279 - utils.report_generator - INFO - Telemetry Timeline Event: Instructions page validated and accepted.
+2026-05-20 11:54:16,279 - pages.login_page - INFO - Waiting for Login page...
+2026-05-20 11:54:17,780 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-20 11:54:17,955 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-20 11:54:17,956 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-20 11:54:17,956 - utils.report_generator - INFO - Telemetry Timeline Event: Triggered login with Candidate email.
+2026-05-20 11:54:17,956 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-20 11:55:05,616 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-20 11:55:05,851 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-20 11:55:05,948 - YopmailOTPFetcher - INFO - Successfully located OTP: 436423
+2026-05-20 11:55:05,974 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-20 11:55:07,074 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-20 11:55:07,268 - pages.login_page - INFO - Clicked Verify button.
+2026-05-20 11:55:07,269 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-20 11:55:09,418 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-20 11:55:09,418 - utils.report_generator - INFO - Telemetry Timeline Event: OTP scraped from Yopmail and validated.
+2026-05-20 11:55:09,418 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-20 11:55:09,471 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-20 11:55:09,822 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-20 11:55:10,141 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-20 11:55:10,516 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-20 11:55:10,535 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-20 11:55:11,226 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-20 11:55:11,226 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-20 11:55:11,227 - utils.report_generator - INFO - Telemetry Timeline Event: Candidate detail fields successfully submitted.
+2026-05-20 11:55:11,227 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-20 11:55:14,927 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-20 11:55:15,586 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-20 11:55:15,586 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-20 11:55:15,586 - utils.report_generator - INFO - Telemetry Timeline Event: Assessment start confirmed.
+2026-05-20 11:55:15,586 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-20 11:55:19,782 - pages.summary_page - INFO - Scanning Overall Summary Page...
+2026-05-20 11:55:21,582 - pages.summary_page - INFO - Downloadable summary TXT created: c:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-20 11:55:21,582 - utils.report_generator - INFO - Telemetry scanned structure set. Total questions: 29
+2026-05-20 11:55:21,584 - utils.report_generator - INFO - Telemetry Timeline Event: Overall assessment structure scanned and logged.
+2026-05-20 11:55:21,584 - MainRunner - INFO - === Starting Section 1: Section: Section I (9 questions) ===
+2026-05-20 11:55:21,584 - utils.report_generator - INFO - Telemetry Timeline Event: Starting Section 1: Section: Section I
+2026-05-20 11:55:21,584 - pages.summary_page - INFO - Attempting to start section 1 dynamically...
+2026-05-20 11:55:22,361 - pages.summary_page - INFO - Successfully started section 1.
+2026-05-20 11:55:24,362 - MainRunner - INFO - Processing Section 1 Question 1/9 (Global Q1)
+2026-05-20 11:55:24,362 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-20 11:55:28,102 - pages.question_page - INFO - Detected Coding question workspace.
+2026-05-20 11:55:28,144 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-20 11:55:28,144 - MainRunner - INFO - Resolving Coding workspace question...
+2026-05-20 11:55:30,236 - utils.selenium_helpers - INFO - Retrieved text 'Coloring a Banner
+Difficulty: HARD | Max Score: 75
+You have a banner that needs to be painted using a special brush with the following rules:
+The brush can only paint one type of color in a single stroke.
+In one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.
+
+You are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.
+
+Input Format:
+A single string S, consisting of lowercase English letters, representing the banner colors.
+
+Output Format:
+A single integer representing the minimum number of strokes required to completely paint the banner.
+
+Constraints:
+1 ≤ s.length ≤ 100
+s consists of lowercase English letters only.
+
+
+Example 1:
+Input:
+aaabbb
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "bbb".
+
+Thus, 2 strokes are required.
+
+
+Example 2:
+Input:
+aba
+
+Output:
+2
+
+Explanation:
+Stroke 1: Paint "aaa" first.
+Stroke 2: Paint "b" at the middle position, overwriting the "a" in that spot.
+
+Thus, 2 strokes are required.' from ('xpath', "//div[contains(@class, 'problem-details')] | //div[contains(@class, 'ql-editor')]")
+2026-05-20 11:55:30,236 - pages.question_page - INFO - Scanning for selected coding language...
+2026-05-20 11:55:30,322 - pages.question_page - INFO - Language auto-detected via element text: C++
+2026-05-20 11:55:30,323 - MainRunner - INFO - Auto-detected Editor Language: C++
+2026-05-20 11:55:30,323 - utils.report_generator - INFO - Telemetry Timeline Event: Processing Question 1 (CODING) in test context.
+2026-05-20 11:55:30,323 - MainRunner - INFO - Self-healing loop: Attempt 1/6
+2026-05-20 11:55:34,753 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.5-flash-preview-05-20. Rotating...
+2026-05-20 11:55:44,073 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.0-flash. Rotating...

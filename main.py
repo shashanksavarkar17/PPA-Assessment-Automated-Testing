@@ -2,6 +2,8 @@ import sys
 import time
 import traceback
 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from config import settings
 from pages.candidate_details_page import CandidateDetailsPage
 from pages.instructions_page import InstructionsPage
@@ -15,12 +17,19 @@ from utils.report_generator import ReportGenerator
 from utils.otp_fetcher import YopmailOTPFetcher
 from utils.logger import get_logger
 
+options = Options()
+
+options.add_argument("--headless")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+driver = webdriver.Chrome(options=options)
+
 logger = get_logger("MainRunner")
 
 def run_assessment_flow():
     logger.info("Initializing Selenium Web Automation...")
     
-    # 1. Initialize Telemetry State Manager
     report = ReportGenerator()
     report.initialize(
         email=settings.TEST_USER["email"],
@@ -35,7 +44,6 @@ def run_assessment_flow():
         driver = get_chrome_driver(headless=False)
         time.sleep(2)
 
-        # Page Object initializations
         instructions_page = InstructionsPage(driver)
         login_page = LoginPage(driver)
         details_page = CandidateDetailsPage(driver)
@@ -45,7 +53,6 @@ def run_assessment_flow():
         
         solver = GeminiSolver()
         
-        # 1. Access Assessment Portal
         logger.info(f"Navigating to assessment page: {settings.BASE_URL}")
         instructions_page.navigate_to(settings.BASE_URL)
         
@@ -54,19 +61,16 @@ def run_assessment_flow():
         instructions_page.accept_instructions()
         report.add_timeline_event("Instructions page validated and accepted.")
         
-        # 2. Candidate Authentication
         login_page.wait_for_page_load()
         login_page.login_with_email(settings.TEST_USER["email"])
         report.add_timeline_event("Triggered login with Candidate email.")
         
-        # Scrape Multi-Factor OTP from temporary email inbox in a new tab context
         otp_fetcher = YopmailOTPFetcher(driver)
         email_username = settings.TEST_USER["email"].split("@")[0]
         otp_code = otp_fetcher.fetch_latest_otp(username=email_username, timeout=60)
         login_page.enter_otp_and_verify(otp_code)
         report.add_timeline_event("OTP scraped from Yopmail and validated.")
         
-        # 3. Enter Candidate Information
         details_page.wait_for_page_load()
         details_page.fill_details_and_proceed(
             name=settings.TEST_USER["name"],
@@ -75,31 +79,25 @@ def run_assessment_flow():
         )
         report.add_timeline_event("Candidate detail fields successfully submitted.")
         
-        # 4. Initiate Assessment
         start_test_page.wait_for_page_load()
         start_test_page.click_start_test()
         report.add_timeline_event("Assessment start confirmed.")
         
-        # 5. Extract Assessment Structures
         summary_page.wait_for_page_load()
         section_data = summary_page.scan_sections_and_questions()
         
-        # Log scanned structure in report
         report.set_scanned_structure(section_data)
         report.add_timeline_event("Overall assessment structure scanned and logged.")
         
-        # Loop dynamically through all sections and questions scanned
         global_q_idx = 1
         
         for sec_idx, (section_name, q_count) in enumerate(section_data.items(), 1):
             logger.info(f"=== Starting Section {sec_idx}: {section_name} ({q_count} questions) ===")
             report.add_timeline_event(f"Starting Section {sec_idx}: {section_name}")
             
-            # Start the specific section
             summary_page.start_section(sec_idx)
             time.sleep(2)
             
-            # Question Traversal within the current Section
             for q_idx in range(1, q_count + 1):
                 logger.info(f"Processing Section {sec_idx} Question {q_idx}/{q_count} (Global Q{global_q_idx})")
                 question_page.wait_for_page_load()
@@ -112,7 +110,6 @@ def run_assessment_flow():
                     logger.info("Resolving Multiple Choice Question...")
                     options = question_page.get_mcq_options()
                     
-                    # Start question telemetry
                     report.start_question(global_q_idx, "MCQ", f"[{section_name}] {q_text}")
                     
                     reasoning, answer_option = solver.solve_mcq(q_text, options)
@@ -138,7 +135,10 @@ def run_assessment_flow():
                             answer_option = options[0]
                             
                     report.set_mcq_result(global_q_idx, options, reasoning, answer_option, "PASSED")
-                    question_page.click_save_and_next()
+                    try:
+                        question_page.click_save_and_next()
+                    except Exception as nav_err:
+                        logger.warning(f"Save/Next failed for MCQ Q{global_q_idx}: {nav_err}. Continuing to next question.")
                     
                 elif q_type == "CODING":
                     logger.info("Resolving Coding workspace question...")
@@ -147,23 +147,20 @@ def run_assessment_flow():
                     time.sleep(2.0)
                     q_text = question_page.get_question_text()
                     
-                    # 1. Dynamically Auto-Detect editor language
                     selected_lang = question_page.get_selected_language()
                     logger.info(f"Auto-detected Editor Language: {selected_lang}")
                     
-                    # Start question telemetry
                     report.start_question(global_q_idx, "CODING", f"[{section_name}] {q_text}")
                     
-                    # Self-healing feedback loop using standard 'Run' compilation checks
                     max_retries = 6
                     current_code = None
                     error_msg = None
                     run_success = False
+                    consecutive_empty = 0
                     
                     for attempt in range(max_retries):
                         logger.info(f"Self-healing loop: Attempt {attempt + 1}/{max_retries}")
                         
-                        # 2. Call solver passing detected language
                         answer_code = solver.solve_coding(
                             q_text, 
                             previous_code=current_code, 
@@ -172,13 +169,13 @@ def run_assessment_flow():
                         )
                         
                         if answer_code:
+                            consecutive_empty = 0
                             current_code = answer_code
                             question_page.enter_code_solution(answer_code)
                             
                             question_page.run_code()
                             passed, err = question_page.get_run_result()
                             
-                            # Take screenshot if attempt fails
                             screenshot_path = None
                             if not passed:
                                 screenshot_name = f"failure_Q{global_q_idx}_attempt{attempt + 1}"
@@ -187,7 +184,6 @@ def run_assessment_flow():
                                 except Exception as ss_err:
                                     logger.warning(f"Failed to capture failure screenshot: {ss_err}")
                             
-                            # 3. Log attempt details to Report Telemetry
                             report.add_coding_attempt(
                                 index=global_q_idx,
                                 attempt_idx=attempt + 1,
@@ -204,28 +200,36 @@ def run_assessment_flow():
                                 logger.warning(f"Compilation/testcase mismatch found: {err}")
                                 error_msg = err
                         else:
-                            logger.error("Solver returned empty response.")
-                            break
+                            consecutive_empty += 1
+                            logger.warning(f"Solver returned empty response (attempt {attempt+1}). {'Aborting retry loop.' if consecutive_empty >= 2 else 'Retrying...'}")
+                            if consecutive_empty >= 2:
+                                logger.error("Two consecutive empty solver responses. Skipping this question.")
+                                break
+                            time.sleep(5)
                     
                     final_status = "FAILED"
                     final_err_msg = "N/A"
-                    if run_success or current_code:
+                    if current_code:
                         logger.info("Executing final 'Submit' run...")
-                        question_page.submit_code()
-                        passed_submit, submit_err = question_page.get_code_result()
-                        
-                        if passed_submit:
-                            logger.info("All final testcases passed successfully!")
-                            final_status = "PASSED"
-                        else:
-                            logger.warning(f"Final submission had partial failures: {submit_err}")
-                            final_status = "PARTIAL_SUCCESS"
-                            final_err_msg = submit_err
+                        try:
+                            question_page.submit_code()
+                            passed_submit, submit_err = question_page.get_code_result()
+                            
+                            if passed_submit:
+                                logger.info("All final testcases passed successfully!")
+                                final_status = "PASSED"
+                            else:
+                                logger.warning(f"Final submission had partial failures: {submit_err}")
+                                final_status = "PARTIAL_SUCCESS" if run_success else "FAILED"
+                                final_err_msg = submit_err
+                        except Exception as submit_ex:
+                            logger.warning(f"Submit step encountered an error: {submit_ex}")
+                            final_status = "PARTIAL_SUCCESS" if run_success else "FAILED"
+                            final_err_msg = str(submit_ex)
                     else:
-                        logger.error("Failed to compile or run code successfully within the retry limit.")
-                        final_err_msg = error_msg if error_msg else "Compilation failed during retry limit."
+                        logger.error("No code was generated. Skipping submission for this question.")
+                        final_err_msg = "Solver returned no code within retry limit."
                     
-                    # 4. Finalize Coding telemetries
                     report.set_coding_final(
                         index=global_q_idx,
                         final_code=current_code if current_code else "N/A",
@@ -234,11 +238,13 @@ def run_assessment_flow():
                         error_msg=final_err_msg
                     )
                     
-                    question_page.click_save_and_next()
+                    try:
+                        question_page.click_save_and_next()
+                    except Exception as nav_err:
+                        logger.warning(f"Save/Next failed for CODING Q{global_q_idx}: {nav_err}. Continuing to next question.")
                     
                 global_q_idx += 1
                 
-            # Returning to summary/sections dashboard to proceed with next section
             logger.info(f"Finished all questions in Section {sec_idx}. Returning to dashboard...")
             if not question_page.return_to_summary():
                 logger.info("Direct UI button not found. Fallback: navigating directly to Base URL...")
@@ -246,7 +252,6 @@ def run_assessment_flow():
             time.sleep(3)
             summary_page.wait_for_page_load()
             
-        # Minimize and maximize to force screen focus in foreground
         try:
             driver.minimize_window()
             driver.maximize_window()
@@ -255,7 +260,6 @@ def run_assessment_flow():
             
         report.add_timeline_event("Assessment flow completed.")
         
-        # 5. Build premium interactive HTML visual dashboard
         report.build_html_dashboard()
         
         print("\n>>> All assessment sections solved completely and successfully!")
@@ -266,7 +270,6 @@ def run_assessment_flow():
         logger.error("An error occurred during the automation flow.")
         logger.error(traceback.format_exc())
         
-        # Log failure and build partial dashboard
         try:
             report.add_timeline_event(f"Fatal execution crash: {str(e)}")
             report.build_html_dashboard()

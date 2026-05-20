@@ -1,3 +1,9 @@
+import os
+import json
+import time
+import urllib.request
+import urllib.parse
+import re
 import google.generativeai as genai
 from config import settings
 from utils.logger import get_logger
@@ -5,308 +11,177 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 class GeminiSolver:
-    """
-    Core solving broker connecting to Gemini models for resolving MCQs (grounded with search)
-    and Coding questions (with support for self-healing error corrections).
-    """
     def __init__(self):
-        if not settings.GEMINI_API_KEY:
-            raise ValueError("GEMINI_API_KEY is not set in config/settings.py")
+        self._api_keys = getattr(settings, "GEMINI_API_KEYS", []) or [settings.GEMINI_API_KEY]
+        if not self._api_keys or not self._api_keys[0]:
+            raise ValueError("No GEMINI_API_KEY found in config/settings.py")
         
-        genai.configure(api_key=settings.GEMINI_API_KEY)
-        self.model_name = 'gemini-2.0-flash'
+        self.model_name = 'gemini-2.5-flash-preview-05-20'
+        genai.configure(api_key=self._api_keys[0])
         self.model = genai.GenerativeModel(self.model_name)
-        logger.info(f"GeminiSolver initialized with {self.model_name}")
+        logger.info(f"GeminiSolver initialized (Model: {self.model_name}, Keys: {len(self._api_keys)})")
 
     def _generate_content_with_fallback(self, prompt, req_type="coding"):
-        import os
-        import json
-        import time
+        models = ['gemini-2.5-flash-preview-05-20', 'gemini-2.0-flash', 'gemini-1.5-flash']
+        
+        for model_name in models:
+            for key_idx, api_key in enumerate(self._api_keys):
+                for attempt in range(2):
+                    try:
+                        genai.configure(api_key=api_key)
+                        model = genai.GenerativeModel(model_name)
+                        result = model.generate_content(prompt).text
+                        if result:
+                            return result.strip()
+                    except Exception as e:
+                        err = str(e).lower()
+                        if any(x in err for x in ["429", "quota", "rate", "resource_exhausted"]):
+                            if attempt == 0:
+                                logger.warning(f"Key[{key_idx}] quota hit on {model_name}. Rotating...")
+                            else:
+                                time.sleep(5)
+                        else:
+                            logger.warning(f"Model {model_name} error: {e}")
+                            break
+        
+        logger.warning("All LLM attempts exhausted. Activating local IPC bridge.")
+        workspace = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        req_path = os.path.join(workspace, "pending_request.json")
+        res_path = os.path.join(workspace, "resolved_response.json")
         
         try:
-            res = self.model.generate_content(prompt)
-            return res.text.strip()
+            with open(req_path, "w") as f:
+                json.dump({"type": req_type, "prompt": prompt}, f)
         except Exception as e:
-            if self.model_name == 'gemini-2.0-flash':
-                logger.warning(f"Generation failed with {self.model_name}: {e}. Retrying with 'gemini-pro-latest' fallback...")
+            logger.error(f"Failed to write IPC request: {e}")
+            return None
+
+        logger.info("Waiting up to 120s for manual input in 'resolved_response.json'...")
+        for _ in range(60):
+            if os.path.exists(res_path):
                 try:
-                    self.model_name = 'gemini-pro-latest'
-                    self.model = genai.GenerativeModel(self.model_name)
-                    res = self.model.generate_content(prompt)
-                    return res.text.strip()
-                except Exception as e2:
-                    logger.error(f"Fallback model failed: {e2}")
+                    with open(res_path, "r") as f:
+                        data = json.load(f)
+                    for path in [req_path, res_path]:
+                        if os.path.exists(path): os.remove(path)
+                    logger.info("IPC response successfully loaded.")
+                    return data.get("response", "").strip()
+                except Exception as e:
+                    logger.warning(f"IPC read error: {e}")
+            time.sleep(2)
             
-            logger.warning(f"Local Gemini API call failed: {e}. Activating file-based bridge IPC fallback...")
-            
-            workspace_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            req_file = os.path.join(workspace_dir, "pending_request.json")
-            res_file = os.path.join(workspace_dir, "resolved_response.json")
-            
-            if os.path.exists(req_file):
-                try: os.remove(req_file)
-                except Exception: pass
-            if os.path.exists(res_file):
-                try: os.remove(res_file)
-                except Exception: pass
-                
-            request_data = {
-                "type": req_type,
-                "prompt": prompt
-            }
-            try:
-                with open(req_file, "w", encoding="utf-8") as f:
-                    json.dump(request_data, f, indent=2)
-                logger.info(f"Request written to IPC bridge. Waiting for response...")
-            except Exception as write_err:
-                logger.error(f"Failed to write request file: {write_err}")
-                raise e
-                
-            start_time = time.time()
-            while time.time() - start_time < 120:
-                if os.path.exists(res_file):
-                    try:
-                        time.sleep(0.5)
-                        with open(res_file, "r", encoding="utf-8") as f:
-                            res_data = json.load(f)
-                        response_text = res_data.get("response", "").strip()
-                        
-                        try: os.remove(req_file)
-                        except Exception: pass
-                        try: os.remove(res_file)
-                        except Exception: pass
-                        
-                        logger.info("Successfully received answer from external solver.")
-                        return response_text
-                    except Exception as read_err:
-                        logger.warning(f"Error reading response file: {read_err}. Retrying...")
-                time.sleep(2)
-                
-            logger.error("Timeout waiting for solver response.")
-            raise e
+        logger.error("IPC bridge timed out. Skipping question.")
+        return None
 
     def _search_web(self, query):
-        logger.info(f"DuckDuckGo search: {query}")
+        logger.info(f"Searching Web (DuckDuckGo): {query}")
         try:
-            import urllib.request
-            import urllib.parse
-            import re
-
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36'
-            }
-            encoded_query = urllib.parse.quote_plus(query)
-            url = f"https://html.duckduckgo.com/html/?q={encoded_query}"
-            
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Safari/537.36'}
+            url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote_plus(query)}"
             req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=10) as response:
+            with urllib.request.urlopen(req, timeout=8) as response:
                 html = response.read().decode('utf-8')
             
-            snippets = []
-            results = re.findall(r'<a class="result__snippet"[^>]*>(.*?)</a>', html, re.DOTALL)
-            for res in results:
-                clean_text = re.sub(r'<[^>]+>', '', res)
-                clean_text = clean_text.replace('\n', ' ').strip()
-                if clean_text:
-                    snippets.append(clean_text)
-                    if len(snippets) >= 5:
-                        break
-                        
-            snippet_str = "\n".join([f"- {s}" for s in snippets])
-            return snippet_str
+            snippets = re.findall(r'<a class="result__snippet"[^>]*>(.*?)</a>', html, re.DOTALL)
+            clean_snippets = []
+            for s in snippets[:4]:
+                clean = re.sub(r'<[^>]+>', '', s).replace('\n', ' ').strip()
+                if clean:
+                    clean_snippets.append(clean)
+            return "\n".join(f"- {s}" for s in clean_snippets)
         except Exception as e:
-            logger.warning(f"Web search failed: {e}. Falling back to default Gemini generation.")
+            logger.warning(f"Web search skipped: {e}")
             return ""
 
-    def solve_mcq(self, question_text, options):
-        search_query = question_text.strip()[:200]
-        search_context = self._search_web(search_query)
-
-        logger.info("Sending MCQ to model...")
-        prompt = f"""
-        You are an expert taking a programming assessment.
-        Please answer the following Multiple Choice Question.
+    def solve_mcq(self, question, options):
+        search_ctx = self._search_web(question.strip()[:200])
         
-        """
-        if search_context:
-            prompt += f"""
-            Below is search engine snippet data from the web regarding this topic:
-            {search_context}
-            
-            """
+        prompt = f"""You are taking a programming test. Select the correct option.
+Question: {question}
 
-        prompt += f"""
-        Question:
-        {question_text}
-        
-        Options:
-        """
-        for i, option in enumerate(options):
-            prompt += f"{i+1}. {option}\n"
+Options:
+"""
+        for i, opt in enumerate(options):
+            prompt += f"{i+1}. {opt}\n"
             
+        if search_ctx:
+            prompt += f"\nReference context found from web search:\n{search_ctx}\n"
+
         prompt += """
-        
-        Analyze the question, the options, and any provided web search context.
-        Provide your reasoning first, and then the exact matching option as your final answer.
-        
-        You MUST respond strictly in the following format:
-        REASONING: <brief step-by-step logic explaining the choice>
-        ANSWER: <the exact text of the correct option from the list above, character for character>
-        
-        Rules:
-        1. In the ANSWER field, write ONLY the exact text of the option. Do not prefix with option numbers like '1.', 'A.', etc., unless it's part of the option text itself.
-        2. Do not include markdown codeblocks or quotes.
-        """
-        
+Strictly output in this exact format:
+REASONING: <short step-by-step logic>
+ANSWER: <exact matching option string from list above, character for character>
+"""
         try:
-            response = self._generate_content_with_fallback(prompt, req_type="mcq")
-            logger.info(f"MCQ Raw Response:\n{response}")
+            resp = self._generate_content_with_fallback(prompt, "mcq")
+            if not resp:
+                return "No reasoning (solver quota hit).", None
             
-            reasoning = "No reasoning provided."
-            answer = None
+            logger.info(f"MCQ response: {resp}")
+            reasoning, answer = "No reasoning.", None
             
-            if "REASONING:" in response and "ANSWER:" in response:
-                parts = response.split("ANSWER:")
+            if "REASONING:" in resp and "ANSWER:" in resp:
+                parts = resp.split("ANSWER:")
                 reasoning = parts[0].replace("REASONING:", "").strip()
                 answer = parts[1].strip()
             else:
-                # Fallback parser if format was slightly ignored
-                lines = [l.strip() for l in response.split("\n") if l.strip()]
-                for line in reversed(lines):
-                    clean = line.replace("ANSWER:", "").strip()
+                lines = [l.strip() for l in resp.split("\n") if l.strip()]
+                for l in reversed(lines):
+                    clean = l.replace("ANSWER:", "").strip()
                     if clean in options:
                         answer = clean
                         break
                 if not answer and lines:
                     answer = lines[-1].replace("ANSWER:", "").strip()
                     
-            logger.info(f"Parsed MCQ - Reasoning: {reasoning} | Answer: {answer}")
             return reasoning, answer
         except Exception as e:
-            logger.error(f"Error solving MCQ: {e}")
-            return "Error during MCQ resolution.", None
+            logger.error(f"MCQ solving error: {e}")
+            return "Resolution error.", None
 
-    def solve_coding(self, problem_statement, previous_code=None, error_message=None, language="C++"):
-        logger.info(f"Sending Coding problem to model in language: {language}...")
+    def solve_coding(self, question, previous_code=None, error_message=None, language="C++"):
+        lang = language.lower()
         
-        # Determine language specific guidelines
-        lang_lower = language.lower()
-        if "python" in lang_lower:
-            lang_name = "Python 3"
-            lang_rules = """
-        1. Write ONLY valid Python 3 code. No markdown formatting (like ```python ... ```).
-        2. No explanations, no comments unless absolutely necessary.
-        3. Make sure to import necessary standard modules (like `sys`, `collections`, `math`, `heapq`, `bisect` etc.).
-        4. Read input from standard input (`sys.stdin`) and print output to standard output (`print()`).
-        5. Keep computations fast and optimize algorithms.
-            """
-        elif "java" in lang_lower:
-            lang_name = "Java"
-            lang_rules = """
-        1. Write ONLY valid Java code. No markdown formatting (like ```java ... ```).
-        2. No explanations, no comments unless absolutely necessary.
-        3. Make sure to import necessary packages (like `java.util.*`, `java.io.*`).
-        4. Provide the full executable class. The class name MUST be `Main` (`public class Main`). Include the `public static void main(String[] args)` method.
-        5. Read input from standard input (`Scanner` or `BufferedReader`) and print output to standard output (`System.out.println()`).
-            """
-        elif "javascript" in lang_lower or "js" in lang_lower:
-            lang_name = "JavaScript (Node.js)"
-            lang_rules = """
-        1. Write ONLY valid JavaScript code. No markdown formatting (like ```javascript ... ```).
-        2. No explanations, no comments unless absolutely necessary.
-        3. Provide clean, execution-ready Node.js code.
-        4. Read input from standard input (`fs.readFileSync(0, 'utf-8')` or standard readline) and print output to standard output (`console.log()`).
-            """
-        else:  # Default to C++
-            lang_name = "C++"
-            lang_rules = """
-        1. Write ONLY valid C++ code. No markdown formatting (like ```cpp ... ```).
-        2. No explanations, no comments unless absolutely necessary.
-        3. Make sure to `#include` necessary libraries like `<iostream>`, `<vector>`, `<algorithm>`, `<string>`, `<map>`, `<set>`, `<queue>`, `<cmath>`, `<climits>` etc.
-        4. Include `using namespace std;`.
-        5. Provide the full executable code including `int main()`.
-        6. Read input from standard input (`cin`) and print output to standard output (`cout`).
-            """
+        if "python" in lang:
+            lang_rules = "Write ONLY valid Python 3 code. Read standard input (sys.stdin) and write to standard output. Do not include markdown wraps."
+        elif "java" in lang:
+            lang_rules = "Write ONLY valid Java code. Public class MUST be 'Main'. Include standard main method. Read from standard input, print to standard output."
+        elif "javascript" in lang or "js" in lang:
+            lang_rules = "Write ONLY valid Node.js code. Read from standard input, print to standard output."
+        else:
+            lang_rules = "Write ONLY valid C++ code. Include necessary libraries like <iostream>, <vector>, <algorithm>. Use namespace std. Provide int main()."
 
-        prompt = f"""
-        You are an expert competitive programmer.
-        Please provide a {lang_name} solution for the following coding problem.
-        
-        Problem Statement:
-        {problem_statement}
-        """
-        
+        prompt = f"""You are a competitive programmer. Write complete executable code in {language}.
+Problem:
+{question}
+"""
         if previous_code and error_message:
-            error_lower = error_message.lower()
-            
-            # 1. Performance TLE Warning
-            if any(term in error_lower for term in ["time limit exceeded", "tle", "timeout", "timed out"]):
-                prompt += f"""
-                
-                ### CRITICAL PERFORMANCE WARNING: TIME LIMIT EXCEEDED (TLE)
-                Your previous {lang_name} solution compiled but failed on large test cases because its time complexity was too high.
-                You MUST optimize your algorithm's time complexity to be highly optimal (e.g. from O(N^2) or O(2^N) to O(N log N) or O(N)).
-                - Avoid nested loops, brute-force recursion, or redundant computations.
-                - Utilize optimal data structures like HashMaps, HashSets, Heaps/Priority Queues, Two Pointers, Sliding Window, Prefix Sums, or Binary Search.
-                - Use fast I/O libraries if relevant.
-                """
-            
-            # 2. Correctness WA Warning
-            elif any(term in error_lower for term in ["wrong answer", "wa", "failed", "mismatch", "expected"]):
-                prompt += f"""
-                
-                ### CRITICAL CORRECTNESS WARNING: WRONG ANSWER (WA) / LOGIC FAIL
-                Your previous {lang_name} solution compiled and ran but returned incorrect results for certain validation test cases.
-                Please perform a thorough dry-run trace of the algorithm. Pay strict attention to these edge cases:
-                - Extremely small, empty, or single-element inputs (e.g., N = 0, N = 1, empty strings).
-                - Extremely large boundary inputs (check for potential integer overflow, use `long long` in C++ or big integers).
-                - Negative values, zero boundaries, duplicates, or unsorted ranges.
-                - Review your index offsets, off-by-one errors, and array out-of-bounds limits.
-                """
-                
-            # 3. Compilation / General Runtime Error Warning
-            else:
-                prompt += f"""
-                
-                My previous {lang_name} code failed with the following compilation/runtime error:
-                {error_message}
-                """
-            
             prompt += f"""
-            
-            Previous Code that failed:
-            {previous_code}
-            
-            Please rewrite and correct the {lang_name} code to pass all test cases successfully.
-            """
-            
-        prompt += f"""
-        
-        IMPORTANT RULES:
-        {lang_rules}
-        """
-        
+Previous Code:
+{previous_code}
+
+Execution/Compilation Error:
+{error_message}
+
+Correct this code to be fast and correct.
+"""
+        prompt += f"\nRules:\n{lang_rules}\nReturn ONLY executable code without comments or explanation. No markdown syntax wrapper."
+
         try:
-            code = self._generate_content_with_fallback(prompt, req_type="coding")
+            code = self._generate_content_with_fallback(prompt, "coding")
+            if not code:
+                return None
             
-            # Resilient cleaning of markdown backticks for various programming language wrappers
-            lang_cleaners = ["cpp", "c++", "python", "py", "java", "javascript", "js", "node"]
-            code_cleaned = code.strip()
-            for lc in lang_cleaners:
-                if code_cleaned.lower().startswith(f"``` {lc}"):
-                    code_cleaned = code_cleaned[len(lc) + 4:]
-                    break
-                elif code_cleaned.lower().startswith(f"```{lc}"):
-                    code_cleaned = code_cleaned[len(lc) + 3:]
-                    break
-            if code_cleaned.startswith("```"):
-                code_cleaned = code_cleaned[3:]
-            if code_cleaned.endswith("```"):
-                code_cleaned = code_cleaned[:-3]
-                
-            code_cleaned = code_cleaned.strip()
-            logger.info(f"Coding solution resolved for {lang_name}.")
-            return code_cleaned
+            for wrap in ["cpp", "c++", "python", "py", "java", "javascript", "js"]:
+                for prefix in [f"``` {wrap}", f"```{wrap}"]:
+                    if code.lower().startswith(prefix):
+                        code = code[len(prefix):]
+                        break
+            if code.startswith("```"): code = code[3:]
+            if code.endswith("```"): code = code[:-3]
+            
+            cleaned = code.strip()
+            return cleaned if cleaned else None
         except Exception as e:
-            logger.error(f"Error solving Coding problem: {e}")
+            logger.error(f"Coding resolution error: {e}")
             return None
