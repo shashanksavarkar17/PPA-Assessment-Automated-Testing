@@ -36,7 +36,7 @@ def run_assessment_flow():
             'question': QuestionPage(driver)
         }
         
-        solver = GeminiSolver()
+        solver = GeminiSolver(driver)
         
         # Navigate and login
         pages['instructions'].navigate_to(settings.BASE_URL)
@@ -67,11 +67,11 @@ def run_assessment_flow():
         for sec_idx, (sec_name, q_count) in enumerate(section_data.items(), 1):
             log.info(f"Section {sec_idx}: {sec_name}")
             pages['summary'].start_section(sec_idx)
-            time.sleep(2)
+            time.sleep(0.5)
             
             for q_idx in range(1, q_count + 1):
                 pages['question'].wait_for_page_load()
-                time.sleep(1)
+                time.sleep(0.3)
                 
                 q_type = pages['question'].get_question_type()
                 q_text = pages['question'].get_question_text()
@@ -85,7 +85,7 @@ def run_assessment_flow():
                 
             if not pages['question'].return_to_summary():
                 driver.get(settings.BASE_URL)
-            time.sleep(2)
+            time.sleep(0.5)
             pages['summary'].wait_for_page_load()
             
         report.build_html_dashboard()
@@ -96,13 +96,18 @@ def run_assessment_flow():
         log.error(f"Fatal error: {traceback.format_exc()}")
         sys.exit(1)
     finally:
-        if driver: driver.quit()
+        # Prevent webdriver closure as requested to keep all pages opened
+        pass
 
 def _solve_mcq(page, solver, report, sec_name, q_text, q_idx):
     opts = page.get_mcq_options()
     report.start_question(q_idx, "MCQ", f"[{sec_name}] {q_text}")
     
-    reasoning, ans = solver.solve_mcq(q_text, opts)
+    import os
+    screenshot_path = os.path.abspath(f"screenshots/q_{q_idx}.png")
+    page.take_question_screenshot(screenshot_path)
+    
+    reasoning, ans = solver.solve_mcq(q_text, opts, screenshot_path=screenshot_path)
     if not ans or not page.select_mcq_option(ans):
         ans = next((o for o in opts if (ans and ans.lower() in o.lower()) or (ans and o.lower() in ans.lower())), opts[0] if opts else None)
         if ans: page.select_mcq_option(ans)
@@ -113,28 +118,37 @@ def _solve_mcq(page, solver, report, sec_name, q_text, q_idx):
 
 def _solve_coding(page, solver, report, sec_name, q_text, q_idx):
     page.click_solve_if_present()
-    time.sleep(2)
+    time.sleep(0.5)
     
     lang = page.get_selected_language()
     report.start_question(q_idx, "CODING", f"[{sec_name}] {q_text}")
     
-    code = solver.solve_coding(q_text, lang)
+    log.info(f"Solving coding question Q{q_idx} (Single Pass Solver)...")
+    # We copy and paste the question ONLY (no screenshot) as requested
+    code = solver.solve_coding(q_text, lang, screenshot_path=None)
+    
+    passed = False
+    err = ""
     if code:
+        # Paste the code in the designated code area forcefully
         page.enter_code_solution(code)
+        
+        # Run code and wait for execution results
         page.run_code()
         passed, err = page.get_run_result()
+        log.info(f"Execution completed. Testcase passed: {passed}. Error output: {err}")
         
+        # Save screenshot if it failed
         ss = None
         if not passed:
-            try: ss = page.helpers.take_screenshot(f"fail_Q{q_idx}_0")
+            try: ss = page.helpers.take_screenshot(f"fail_Q{q_idx}")
             except: pass
             
         report.add_coding_attempt(q_idx, 1, code, err if not passed else None, ss)
-        status = "PASSED" if passed else "FAILED"
     else:
-        status = "FAILED"
         err = "No code generated"
-            
+        
+    status = "PASSED" if passed else "FAILED"
     report.set_coding_final(q_idx, code or "N/A", status, lang, err or "N/A")
     try: page.click_save_and_next()
     except: pass

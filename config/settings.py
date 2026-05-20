@@ -11,7 +11,7 @@ if os.path.exists(env_path):
                 key, val = line.split("=", 1)
                 os.environ[key.strip()] = val.strip()
 
-BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KS2DCCN9SHTCJ2SZM3G7BG2D"
+BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3"
 
 DEFAULT_LEAKED_KEY = "AIzaSyCjM1b0E5wlVNCHa1OdDiD6TdNwfnRdYRk"
 

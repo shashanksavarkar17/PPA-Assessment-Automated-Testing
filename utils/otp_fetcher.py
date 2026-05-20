@@ -47,6 +47,4 @@ class YopmailOTPFetcher:
                 
             raise TimeoutError("Failed to retrieve OTP from Yopmail.")
         finally:
-            try: self.driver.close()
-            except: pass
             self.driver.switch_to.window(main_win)
