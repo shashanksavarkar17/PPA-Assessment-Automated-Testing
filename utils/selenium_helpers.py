@@ -8,25 +8,25 @@ from utils.logger import get_logger
 
 log = get_logger(__name__)
 
+# Reusable wrapper offering bulletproof, resilient Selenium web element interactions.
 class SeleniumHelpers:
-    """Reusable wrapper for robust Selenium interactions."""
-
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, settings.EXPLICIT_WAIT)
 
     def wait_for_element(self, locator, timeout=None):
-        wait = WebDriverWait(self.driver, timeout) if timeout else self.wait
-        return wait.until(EC.visibility_of_element_located(locator))
+        # Retrieve the element dynamically as soon as it becomes visible on our page.
+        return (WebDriverWait(self.driver, timeout) if timeout else self.wait).until(EC.visibility_of_element_located(locator))
 
     def wait_for_element_clickable(self, locator, timeout=None):
-        wait = WebDriverWait(self.driver, timeout) if timeout else self.wait
-        return wait.until(EC.element_to_be_clickable(locator))
+        # Wait until the element is clickable (not covered by modal, overlay, etc.)
+        return (WebDriverWait(self.driver, timeout) if timeout else self.wait).until(EC.element_to_be_clickable(locator))
 
     def click_element(self, locator):
         self.wait_for_element_clickable(locator).click()
 
     def safe_click(self, locator):
+        # Try a regular click first. If it's intercepted, forcefully execute the click via JavaScript!
         try:
             self.wait_for_element_clickable(locator).click()
         except ElementClickInterceptedException:
@@ -35,6 +35,7 @@ class SeleniumHelpers:
     def enter_text(self, locator, text, clear_first=True):
         el = self.wait_for_element(locator)
         if clear_first:
+            # Clean out any pre-existing text inside the target input using key sequences.
             el.send_keys(Keys.CONTROL + "a")
             time.sleep(0.1)
             el.send_keys(Keys.BACKSPACE)
@@ -42,6 +43,7 @@ class SeleniumHelpers:
         el.send_keys(text)
 
     def scroll_into_view(self, locator):
+        # Pull the element into our active browser view port before trying to click/hover.
         el = self.wait.until(EC.presence_of_element_located(locator))
         self.driver.execute_script("arguments[0].scrollIntoView(true);", el)
         time.sleep(0.5)
@@ -50,6 +52,7 @@ class SeleniumHelpers:
         return self.wait_for_element(locator).text
 
     def take_screenshot(self, name_prefix):
+        # Take a snapshot and place it in the screenshots directory.
         path = os.path.join(settings.SCREENSHOTS_DIR, f"{name_prefix}_{time.strftime('%Y%m%d-%H%M%S')}.png")
         try: self.driver.save_screenshot(path)
         except: pass

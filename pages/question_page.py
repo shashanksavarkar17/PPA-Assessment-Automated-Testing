@@ -14,16 +14,15 @@ try:
 except ImportError:
     tk = None
 
+# This handles both MCQ selection and coding answer submission for the active questions.
 class QuestionPage(BasePage):
-    """Dynamic question space for MCQ and Coding interactions."""
-
     def wait_for_page_load(self):
-        # Dynamically self-heal proctoring overlay if it appears
+        # Let's clear any proctoring violation alerts if they try to block us.
         for _ in range(5):
             try:
                 violation_btns = self.driver.find_elements(By.XPATH, "//button[contains(text(), 'Return Back') or contains(text(), 'Return')]")
                 if violation_btns and violation_btns[0].is_displayed():
-                    log.info("Proctoring Violation detected! Clicking 'Return Back'...")
+                    log.info("Proctoring alert spotted! Dismissing it right away...")
                     self.driver.execute_script("arguments[0].click();", violation_btns[0])
                     time.sleep(1)
             except: pass
@@ -32,13 +31,14 @@ class QuestionPage(BasePage):
                 self.helpers.wait_for_element((By.XPATH, "//*[contains(@class, 'problem-details') or contains(@class, 'ql-editor') or contains(@class, 'problem')]"), timeout=2)
                 return
             except: pass
-        # Final block fallback wait
         self.helpers.wait_for_element((By.XPATH, "//*[contains(@class, 'problem-details') or contains(@class, 'ql-editor') or contains(@class, 'problem')]"))
         
     def get_question_type(self):
+        # If we see any radio buttons on the page, it's definitely an MCQ question!
         return "MCQ" if self.driver.find_elements(By.XPATH, "//input[@type='radio']") else "CODING"
             
     def get_question_text(self):
+        # We try to extract text from common problem-statement containers.
         selectors = [
             "//*[contains(@class, 'problem-details') or contains(@class, 'ql-editor') or contains(@class, 'problem-statement')]",
             "//*[contains(@class, 'question-text') or contains(@class, 'problem-container') or contains(@class, 'question-body')]",
@@ -51,6 +51,7 @@ class QuestionPage(BasePage):
         return self.driver.find_element(By.TAG_NAME, "body").text
         
     def get_selected_language(self):
+        # Let's identify which programming language is selected in the editor.
         locs = [
             "//select[contains(@class, 'lang') or contains(@class, 'language') or contains(@id, 'lang')]",
             "//*[contains(@class, 'lang-select')]//button",
@@ -68,6 +69,7 @@ class QuestionPage(BasePage):
         return self.driver.execute_script(script) or "C++"
         
     def get_mcq_options(self):
+        # Scan standard option elements to present options to the solver.
         locs = [
             "//input[@type='radio']/following-sibling::span | //input[@type='radio']/following-sibling::label",
             "//label[//input[@type='radio']]", 
@@ -78,16 +80,13 @@ class QuestionPage(BasePage):
             try:
                 opts = [e.text.strip() for e in self.driver.find_elements(By.XPATH, loc) if e.text.strip()]
                 clean_opts = list(dict.fromkeys([o for o in opts if len(o) > 0]))
-                if len(clean_opts) >= 2:
-                    return clean_opts
+                if len(clean_opts) >= 2: return clean_opts
             except: pass
             
         opts = []
         for inp in self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox']"):
             try:
-                parent = inp.find_element(By.XPATH, "..")
-                gparent = inp.find_element(By.XPATH, "../..")
-                text = parent.text.strip() or gparent.text.strip()
+                text = inp.find_element(By.XPATH, "..").text.strip() or inp.find_element(By.XPATH, "../..").text.strip()
                 if text and text not in opts: opts.append(text)
             except: pass
         return opts
@@ -97,7 +96,7 @@ class QuestionPage(BasePage):
         norm = lambda s: "".join(c for c in s.lower() if c.isalnum()) if s else ""
         t_norm = norm(target)
         
-        # Use targeted locators matching get_mcq_options to avoid scanning the entire DOM
+        # Look for target matches inside text labels or sibling inputs.
         locs = [
             "//input[@type='radio']/following-sibling::span | //input[@type='radio']/following-sibling::label",
             "//label[//input[@type='radio']]", 
@@ -123,6 +122,7 @@ class QuestionPage(BasePage):
             except: pass
             
         try:
+            # Fallback to absolute index choice match if exact text failed.
             radios = [r for r in self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox'] | //*[contains(@class, 'choice') or contains(@class, 'option')]") if r.is_displayed()]
             if radios:
                 idx = -1
@@ -132,64 +132,52 @@ class QuestionPage(BasePage):
                         break
                 if 0 <= idx < len(radios):
                     self.driver.execute_script("arguments[0].click();", radios[idx])
-                    return True
-                self.driver.execute_script("arguments[0].click();", radios[0])
+                else:
+                    self.driver.execute_script("arguments[0].click();", radios[0])
                 return True
         except: pass
         return False
 
     def enter_code_solution(self, code):
-        log.info("Forcefully entering code solution via multi-tier injection framework...")
+        log.info("Starting direct injection script to bypass autocomplete duplicates...")
         
-        # Tier 1: Direct JS API Invocation (Monaco / CodeMirror)
+        # Tier 1: Manipulate Monaco or CodeMirror models directly.
         try:
             self.driver.execute_script("if (typeof monaco !== 'undefined') { monaco.editor.getModels()[0].setValue(arguments[0]); }", code)
-            log.info("Tier 1: Successfully injected code via Monaco editor API!")
-        except Exception as e:
-            log.debug(f"Monaco JS API not available or failed: {e}")
+            log.info("Successfully loaded solution directly inside Monaco API!")
+        except Exception as e: log.debug(f"Monaco JS API failed: {e}")
             
         try:
             self.driver.execute_script("if (document.querySelector('.CodeMirror')) { document.querySelector('.CodeMirror').CodeMirror.setValue(arguments[0]); }", code)
-            log.info("Tier 1: Successfully injected code via CodeMirror editor API!")
-        except Exception as e:
-            log.debug(f"CodeMirror JS API not available or failed: {e}")
+            log.info("Successfully loaded solution directly inside CodeMirror API!")
+        except Exception as e: log.debug(f"CodeMirror JS API failed: {e}")
 
-        # Tier 1.5: Generic DOM Textarea Value Injection & Event Dispatching (React/Vue/Angular bypass)
+        # Tier 1.5: Force change triggers on DOM textareas so JS frameworks (React/Vue/etc.) sync immediately.
         try:
             self.driver.execute_script("""
                 var code = arguments[0];
                 var elements = document.querySelectorAll('textarea, [contenteditable="true"], .monaco-editor textarea, .CodeMirror textarea');
                 elements.forEach(function(el) {
                     try {
-                        if (el.tagName === 'TEXTAREA') {
-                            el.value = code;
-                        } else {
-                            el.innerText = code;
-                        }
-                        // Dispatch comprehensive bubble events to force frameworks to sync value changes
-                        el.dispatchEvent(new Event('input', { bubbles: true }));
-                        el.dispatchEvent(new Event('change', { bubbles: true }));
-                        el.dispatchEvent(new Event('keydown', { bubbles: true }));
-                        el.dispatchEvent(new Event('keyup', { bubbles: true }));
+                        if (el.tagName === 'TEXTAREA') { el.value = code; } else { el.innerText = code; }
+                        ['input', 'change', 'keydown', 'keyup'].forEach(function(ev) {
+                            el.dispatchEvent(new Event(ev, { bubbles: true }));
+                        });
                     } catch (err) {}
                 });
             """, code)
-            log.info("Tier 1.5: Dispatched force-value input events to all DOM editors successfully!")
-        except Exception as e:
-            log.warning(f"Tier 1.5: DOM event injection error: {e}")
+        except Exception as e: log.warning(f"DOM framework event injection error: {e}")
 
-        # Tier 2: Focus + Clipboard Keyboard Emulation (CTRL+V)
+        # Tier 2: Focus, clear, and paste via standard OS clipboard.
         locs = [".monaco-editor textarea.inputarea", ".CodeMirror textarea", "textarea.code-input", "textarea", "[contenteditable='true']"]
         for loc in locs:
             try:
                 ta = self.driver.find_element(By.CSS_SELECTOR, loc)
-                if not ta.is_displayed():
-                    continue
+                if not ta.is_displayed(): continue
                 self.driver.execute_script("arguments[0].focus(); arguments[0].click();", ta)
                 time.sleep(0.3)
                 
-                actions = ActionChains(self.driver)
-                actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).send_keys(Keys.DELETE).perform()
+                ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).send_keys(Keys.DELETE).perform()
                 time.sleep(0.2)
                 
                 use_clipboard = False
@@ -199,19 +187,19 @@ class QuestionPage(BasePage):
                         use_clipboard = True
                     except: pass
                 
-                actions2 = ActionChains(self.driver)
+                actions = ActionChains(self.driver)
                 if use_clipboard:
-                    actions2.key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
-                    log.info(f"Tier 2: Clipboard paste simulated successfully on locator '{loc}'!")
+                    actions.key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+                    log.info("Pasted complete code solution from system clipboard!")
                 else:
-                    actions2.send_keys(code).perform()
-                    log.info(f"Tier 3: Sent keystrokes simulated successfully on locator '{loc}'!")
+                    actions.send_keys(code).perform()
+                    log.info("Simulated fast keyboard typing input solver fallback.")
                 time.sleep(0.5)
-            except:
-                continue
+            except: continue
         log.info("Finished entering code solution successfully.")
 
     def _click_button(self, xpath_match_strings):
+        # A super clean dynamic locator searching for lowercased button labels.
         conds = " or ".join([f"contains(translate(normalize-space(.), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{s}')" for s in xpath_match_strings])
         xpath = f"//button[{conds}] | //a[{conds}] | //input[{conds}]"
         
@@ -226,14 +214,11 @@ class QuestionPage(BasePage):
         return False
             
     def click_save_and_next(self):
-        if not self._click_button(['save', 'next', 'submit']):
-            self.return_to_summary()
- 
-    def submit_code(self):
-        self._click_button(['submit'])
+        if not self._click_button(['save', 'next', 'submit']): self.return_to_summary()
+  
+    def submit_code(self): self._click_button(['submit'])
             
-    def run_code(self):
-        self._click_button(['run'])
+    def run_code(self): self._click_button(['run'])
 
     def get_run_result(self):
         time.sleep(2)
@@ -260,39 +245,30 @@ class QuestionPage(BasePage):
             fails = self.driver.find_elements(By.XPATH, "//*[contains(translate(text(), 'FAIL', 'fail'), 'fail') or contains(translate(text(), 'ERROR', 'error'), 'error')]")
             errs = [f.text for f in fails if f.is_displayed() and len(f.text) > 2]
             return (False, "\n".join(errs)) if errs else (not bool(fails), "")
-        except:
-            return False, "Error extracting code result."
+        except: return False, "Error extracting code result."
 
-    def click_solve_if_present(self):
-        self._click_button(['solve'])
+    def click_solve_if_present(self): self._click_button(['solve'])
 
     def take_question_screenshot(self, screenshot_path):
         import os
         os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
         
-        # Click Return Back first if proctoring modal is covering the screen
+        # Clear overlays first so we get a crystal clear screenshot of the problem statement.
         try:
             violation_btns = self.driver.find_elements(By.XPATH, "//button[contains(text(), 'Return Back') or contains(text(), 'Return')]")
             if violation_btns and violation_btns[0].is_displayed():
-                log.info("Proctoring Violation detected prior to screenshot! Clicking 'Return Back'...")
                 self.driver.execute_script("arguments[0].click();", violation_btns[0])
                 time.sleep(1)
         except: pass
 
-        # Dynamically unblur any elements in the DOM to guarantee sharp screenshots
+        # Strip CSS blurs if assessment uses any blur strategies during tab changes.
         try:
             unblur_js = """
             document.querySelectorAll('*').forEach(el => {
                 let style = window.getComputedStyle(el);
-                if (style.filter && style.filter.includes('blur')) {
-                    el.style.filter = 'none';
-                }
-                if (style.backdropFilter && style.backdropFilter.includes('blur')) {
-                    el.style.backdropFilter = 'none';
-                }
-                if (el.style.filter && el.style.filter.includes('blur')) {
-                    el.style.filter = 'none';
-                }
+                if (style.filter && style.filter.includes('blur')) el.style.filter = 'none';
+                if (style.backdropFilter && style.backdropFilter.includes('blur')) el.style.backdropFilter = 'none';
+                if (el.style.filter && el.style.filter.includes('blur')) el.style.filter = 'none';
             });
             """
             self.driver.execute_script(unblur_js)
@@ -302,9 +278,8 @@ class QuestionPage(BasePage):
         try:
             q_el = self.driver.find_element(By.XPATH, "//*[contains(@class, 'problem') or contains(@class, 'question') or contains(@class, 'container') or contains(@class, 'details') or contains(@class, 'card')]")
             q_el.screenshot(screenshot_path)
-        except Exception as e:
-            try:
-                self.driver.save_screenshot(screenshot_path)
+        except:
+            try: self.driver.save_screenshot(screenshot_path)
             except: pass
 
     def return_to_summary(self):

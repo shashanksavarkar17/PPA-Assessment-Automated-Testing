@@ -4,6 +4,7 @@ from utils.logger import get_logger
 
 log = get_logger(__name__)
 
+# This singleton class keeps track of our exam stats and exports everything into a telemetry file when complete!
 class ReportGenerator:
     _instance = None
     def __new__(cls, *args, **kwargs):
@@ -13,17 +14,21 @@ class ReportGenerator:
         return cls._instance
         
     def initialize(self, email, name, mobile, roll_number, base_url):
+        # Set up general context metadata parameters.
         self.data["meta"] = {"start": time.time(), "user": email, "sections": 0, "questions": 0, "pass": 0, "fail": 0}
         self.add_timeline_event("Initialized telemetry.")
         
     def add_timeline_event(self, evt):
+        # Print the logs to the console and stamp a timestamp on it for telemetry.
         self.data["timeline"].append({"t": datetime.now().strftime("%H:%M:%S"), "e": evt})
         log.info(evt)
         
     def set_scanned_structure(self, data):
+        # Scan totals.
         self.data["meta"].update({"sections": len(data), "questions": sum(data.values())})
         
     def _get_q(self, idx):
+        # Find an existing question in the list, or create a brand new dictionary.
         for q in self.data["questions"]:
             if q["id"] == idx: return q
         q = {"id": idx, "attempts": [], "start": time.time()}
@@ -50,6 +55,7 @@ class ReportGenerator:
         self.data["meta"]["pass" if status == "PASSED" else "fail"] += 1
 
     def build_html_dashboard(self):
+        # Output our telemetry.json log file to the project workspace directory.
         ws = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         try:
             with open(os.path.join(ws, "telemetry.json"), "w") as f:

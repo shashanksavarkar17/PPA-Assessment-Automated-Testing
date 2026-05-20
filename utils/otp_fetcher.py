@@ -4,12 +4,14 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+# Automates a Yopmail browser tab to fetch the dynamic 6-digit OTP code sent for authentication.
 class YopmailOTPFetcher:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 15)
 
     def fetch_latest_otp(self, username="narumodi", timeout=60):
+        # Open Yopmail in a brand-new browser tab to prevent losing our active assessment page context.
         main_win = self.driver.current_window_handle
         self.driver.execute_script("window.open('');")
         self.driver.switch_to.window(self.driver.window_handles[-1])
@@ -17,16 +19,19 @@ class YopmailOTPFetcher:
         try:
             self.driver.get("https://yopmail.com/en/wm")
             time.sleep(2)
+            # Click past cookie popups if they show up.
             for sel in ["//button[@id='accept']", "//button[contains(text(), 'Agree')]", "//button[contains(text(), 'Accept')]"]:
                 try: self.driver.find_element(By.XPATH, sel).click(); break
                 except: pass
             
+            # Input the Yopmail inbox name and search.
             login = self.wait.until(EC.visibility_of_element_located((By.ID, "login")))
             login.clear(); login.send_keys(username + Keys.ENTER)
             
             start = time.time()
             while time.time() - start < timeout:
                 self.driver.switch_to.default_content()
+                # Switch to the inbox frame and click on the newest message!
                 try:
                     self.wait.until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifinbox")))
                     emails = self.driver.find_elements(By.CLASS_NAME, "m")
@@ -34,12 +39,14 @@ class YopmailOTPFetcher:
                 except: pass
                 
                 self.driver.switch_to.default_content()
+                # Switch to the message body frame and search for a 6-digit number.
                 try:
                     self.wait.until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifmail")))
                     match = re.search(r'\b\d{6}\b', self.driver.find_element(By.TAG_NAME, "body").text)
                     if match: return match.group(0)
                 except: pass
                 
+                # Refresh inbox and wait a few seconds before trying again.
                 self.driver.switch_to.default_content()
                 try: self.driver.find_element(By.ID, "refresh").click()
                 except: self.driver.refresh()
@@ -47,4 +54,8 @@ class YopmailOTPFetcher:
                 
             raise TimeoutError("Failed to retrieve OTP from Yopmail.")
         finally:
+            # Always close the Yopmail tab and switch back to the assessment portal!
+            try:
+                self.driver.close()
+            except: pass
             self.driver.switch_to.window(main_win)

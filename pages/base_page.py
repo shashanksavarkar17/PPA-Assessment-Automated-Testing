@@ -1,14 +1,12 @@
 from utils.selenium_helpers import SeleniumHelpers
 
+# This is the base parent class that all our page objects will inherit from.
 class BasePage:
-    """
-    Base class for all Page Objects.
-    Contains common functionalities to interact with any page.
-    """
     def __init__(self, driver):
+        # Store the driver instance and initialize our custom selenium interactions helper.
         self.driver = driver
         self.helpers = SeleniumHelpers(self.driver)
 
     def navigate_to(self, url):
-        """Navigate to the specified URL."""
+        # Quick helper to point our browser to any URL we need.
         self.driver.get(url)
