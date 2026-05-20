@@ -17,13 +17,6 @@ from utils.report_generator import ReportGenerator
 from utils.otp_fetcher import YopmailOTPFetcher
 from utils.logger import get_logger
 
-options = Options()
-
-options.add_argument("--headless")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-
-driver = webdriver.Chrome(options=options)
 
 logger = get_logger("MainRunner")
 

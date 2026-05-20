@@ -16,13 +16,21 @@ class GeminiSolver:
         if not self._api_keys or not self._api_keys[0]:
             raise ValueError("No GEMINI_API_KEY found in config/settings.py")
         
-        self.model_name = 'gemini-2.5-flash-preview-05-20'
+        self.model_name = 'gemini-1.5-flash'
+        
+        # Check if using known leaked/default keys and print warnings
+        for idx, k in enumerate(self._api_keys):
+            if k == "AIzaSyB1VPCVN9F238N_XNcnVkuKCAnDTftSfzE":
+                logger.error(f"WARNING: Key[{idx}] in config/settings.py is the known leaked default key. "
+                             f"This key is blocked by Google and will fail with a 403 Forbidden error. "
+                             f"Please set your own valid GEMINI_API_KEY environment variable!")
+                             
         genai.configure(api_key=self._api_keys[0])
         self.model = genai.GenerativeModel(self.model_name)
         logger.info(f"GeminiSolver initialized (Model: {self.model_name}, Keys: {len(self._api_keys)})")
 
     def _generate_content_with_fallback(self, prompt, req_type="coding"):
-        models = ['gemini-2.5-flash-preview-05-20', 'gemini-2.0-flash', 'gemini-1.5-flash']
+        models = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro']
         
         for model_name in models:
             for key_idx, api_key in enumerate(self._api_keys):
@@ -35,7 +43,10 @@ class GeminiSolver:
                             return result.strip()
                     except Exception as e:
                         err = str(e).lower()
-                        if any(x in err for x in ["429", "quota", "rate", "resource_exhausted"]):
+                        if "leaked" in err or "403" in err:
+                            logger.error(f"CRITICAL API ERROR: Key[{key_idx}] leaked/blocked (403).")
+                            break # Skip other attempts for this key
+                        elif any(x in err for x in ["429", "quota", "rate", "resource_exhausted"]):
                             if attempt == 0:
                                 logger.warning(f"Key[{key_idx}] quota hit on {model_name}. Rotating...")
                             else:
@@ -118,21 +129,60 @@ ANSWER: <exact matching option string from list above, character for character>
                 return "No reasoning (solver quota hit).", None
             
             logger.info(f"MCQ response: {resp}")
+            
+            # Normalize response by removing markdown bold/italic elements
+            clean_resp = resp.replace("**", "").replace("*", "").replace("__", "").replace("_", "").replace("`", "").strip()
+            
             reasoning, answer = "No reasoning.", None
             
-            if "REASONING:" in resp and "ANSWER:" in resp:
-                parts = resp.split("ANSWER:")
-                reasoning = parts[0].replace("REASONING:", "").strip()
-                answer = parts[1].strip()
+            # Use dynamic regular expressions for case-insensitive and resilient key extraction
+            r_match = re.search(r'reasoning\s*:\s*(.*?)(?=answer\s*:|$)', clean_resp, re.IGNORECASE | re.DOTALL)
+            a_match = re.search(r'answer\s*:\s*(.*)', clean_resp, re.IGNORECASE | re.DOTALL)
+            
+            if r_match:
+                reasoning = r_match.group(1).strip()
+            if a_match:
+                answer = a_match.group(1).strip()
             else:
-                lines = [l.strip() for l in resp.split("\n") if l.strip()]
+                # Fallback: Check line by line from bottom
+                lines = [l.strip() for l in clean_resp.split("\n") if l.strip()]
                 for l in reversed(lines):
-                    clean = l.replace("ANSWER:", "").strip()
-                    if clean in options:
-                        answer = clean
+                    clean_line = re.sub(r'^(answer|reasoning)\s*:\s*', '', l, flags=re.IGNORECASE).strip()
+                    if clean_line in options:
+                        answer = clean_line
                         break
                 if not answer and lines:
-                    answer = lines[-1].replace("ANSWER:", "").strip()
+                    answer = re.sub(r'^(answer|reasoning)\s*:\s*', '', lines[-1], flags=re.IGNORECASE).strip()
+            
+            if answer:
+                # Step 1: Exact / Case-insensitive match
+                for opt in options:
+                    if opt.lower() == answer.lower():
+                        return reasoning, opt
+                
+                # Step 2: Containment check
+                for opt in options:
+                    if opt.lower() in answer.lower() or answer.lower() in opt.lower():
+                        return reasoning, opt
+                
+                # Step 3: Strip leading labels (e.g., "1. Option" or "A) Option")
+                clean_ans = re.sub(r'^[a-zA-Z0-9][\.\)\-\s]+', '', answer).strip()
+                for opt in options:
+                    clean_opt = re.sub(r'^[a-zA-Z0-9][\.\)\-\s]+', '', opt).strip()
+                    if clean_opt.lower() == clean_ans.lower() or clean_opt.lower() in clean_ans.lower():
+                        return reasoning, opt
+                
+                # Step 4: Fuzzy sequence matching
+                from difflib import SequenceMatcher
+                best_ratio = 0.0
+                best_opt = None
+                for opt in options:
+                    ratio = SequenceMatcher(None, opt.lower(), answer.lower()).ratio()
+                    if ratio > best_ratio:
+                        best_ratio = ratio
+                        best_opt = opt
+                if best_ratio > 0.6:
+                    return reasoning, best_opt
                     
             return reasoning, answer
         except Exception as e:

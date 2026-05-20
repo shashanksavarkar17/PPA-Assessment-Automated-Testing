@@ -105,8 +105,8 @@
     <script>
         const telemetryData = {
   "metadata": {
-    "start_time": "2026-05-19T15:55:35.551895",
-    "end_time": "2026-05-19T15:57:00.775599",
+    "start_time": "2026-05-20T12:24:49.682140",
+    "end_time": "2026-05-20T12:35:55.065528",
     "email": "ppa@yopmail.com",
     "name": "BOT",
     "mobile": "9999999999",
@@ -115,47 +115,94 @@
     "total_sections": 3,
     "total_questions": 29,
     "passed_count": 0,
-    "failed_count": 0
+    "failed_count": 2
   },
   "timeline": [
     {
-      "timestamp": "15:55:35",
+      "timestamp": "12:24:49",
       "event": "Selenium Web Automation initialized."
     },
     {
-      "timestamp": "15:55:59",
+      "timestamp": "12:25:04",
       "event": "Instructions page validated and accepted."
     },
     {
-      "timestamp": "15:56:01",
+      "timestamp": "12:25:07",
       "event": "Triggered login with Candidate email."
     },
     {
-      "timestamp": "15:56:26",
+      "timestamp": "12:25:34",
       "event": "OTP scraped from Yopmail and validated."
     },
     {
-      "timestamp": "15:56:28",
+      "timestamp": "12:25:35",
       "event": "Candidate detail fields successfully submitted."
     },
     {
-      "timestamp": "15:56:30",
+      "timestamp": "12:25:39",
       "event": "Assessment start confirmed."
     },
     {
-      "timestamp": "15:56:34",
+      "timestamp": "12:25:46",
       "event": "Overall assessment structure scanned and logged."
     },
     {
-      "timestamp": "15:56:34",
+      "timestamp": "12:25:46",
       "event": "Starting Section 1: Section: Section I"
     },
     {
-      "timestamp": "15:57:00",
-      "event": "Fatal execution crash: Message: \nStacktrace:\n\tchromedriver!GetHandleVerifier [0x1207123+10a23]\n\tchromedriver!GetHandleVerifier [0x1207254+10b54]\n\tchromedriver!(No symbol) [0x1021e90]\n\tchromedriver!(No symbol) [0x106b28a]\n\tchromedriver!(No symbol) [0x106b52b]\n\tchromedriver!(No symbol) [0x10ad062]\n\tchromedriver!(No symbol) [0x108d7d4]\n\tchromedriver!(No symbol) [0x10aa936]\n\tchromedriver!(No symbol) [0x108d526]\n\tchromedriver!(No symbol) [0x10608f9]\n\tchromedriver!(No symbol) [0x10616b4]\n\tchromedriver!GetHandleVerifier [0x14a1ac4+2ab3c4]\n\tchromedriver!GetHandleVerifier [0x149d0ed+2a69ed]\n\tchromedriver!GetHandleVerifier [0x14be4f5+2c7df5]\n\tchromedriver!GetHandleVerifier [0x1221128+2aa28]\n\tchromedriver!GetHandleVerifier [0x1228bbd+324bd]\n\tchromedriver!GetHandleVerifier [0x120fb28+19428]\n\tchromedriver!GetHandleVerifier [0x120fcd5+195d5]\n\tchromedriver!GetHandleVerifier [0x11f91cf+2acf]\n\tKERNEL32!BaseThreadInitThunk [0x77065d49+19]\n\tntdll!RtlInitializeExceptionChain [0x7724d83b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x7724d7c1+231]\n"
+      "timestamp": "12:25:53",
+      "event": "Processing Question 1 (CODING) in test context."
+    },
+    {
+      "timestamp": "12:31:07",
+      "event": "Question 1 (CODING) finalized with status: 'FAILED'"
+    },
+    {
+      "timestamp": "12:31:14",
+      "event": "Processing Question 2 (CODING) in test context."
+    },
+    {
+      "timestamp": "12:35:54",
+      "event": "Question 2 (CODING) finalized with status: 'FAILED'"
+    },
+    {
+      "timestamp": "12:35:55",
+      "event": "Fatal execution crash: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\n\tchromedriver!GetHandleVerifier [0x72b593+105d3]\n\tchromedriver!GetHandleVerifier [0x72b6c4+10704]\n\tchromedriver!(No symbol) [0x531cde]\n\tchromedriver!(No symbol) [0x56fb77]\n\tchromedriver!(No symbol) [0x59d636]\n\tchromedriver!(No symbol) [0x598861]\n\tchromedriver!(No symbol) [0x598241]\n\tchromedriver!(No symbol) [0x50502e]\n\tchromedriver!(No symbol) [0x5055ce]\n\tchromedriver!(No symbol) [0x505aad]\n\tchromedriver!GetHandleVerifier [0x9b3014+298054]\n\tchromedriver!GetHandleVerifier [0x9ae603+293643]\n\tchromedriver!GetHandleVerifier [0x9cea05+2b3a45]\n\tchromedriver!GetHandleVerifier [0x7454e8+2a528]\n\tchromedriver!GetHandleVerifier [0x74cd1d+31d5d]\n\tchromedriver!(No symbol) [0x504ba6]\n\tchromedriver!(No symbol) [0x5041e0]\n\tchromedriver!GetHandleVerifier [0xb187af+3fd7ef]\n\tKERNEL32!BaseThreadInitThunk [0x75ee5d49+19]\n\tntdll!RtlInitializeExceptionChain [0x77cdd83b+6b]\n\tntdll!RtlGetAppContainerNamedObjectPath [0x77cdd7c1+231]\n"
     }
   ],
-  "questions": [],
+  "questions": [
+    {
+      "index": 1,
+      "type": "CODING",
+      "text": "[Section: Section I] Coloring a Banner\nDifficulty: HARD | Max Score: 75\nYou have a banner that needs to be painted using a special brush with the following rules:\nThe brush can only paint one type of color in a single stroke.\nIn one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.\n\nYou are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.\n\nInput Format:\nA single string S, consisting of lowercase English letters, representing the banner colors.\n\nOutput Format:\nA single integer representing the minimum number of strokes required to completely paint the banner.\n\nConstraints:\n1 \u2264 s.length \u2264 100\ns consists of lowercase English letters only.\n\n\nExample 1:\nInput:\naaabbb\n\nOutput:\n2\n\nExplanation:\nStroke 1: Paint \"aaa\" first.\nStroke 2: Paint \"bbb\".\n\nThus, 2 strokes are required.\n\n\nExample 2:\nInput:\naba\n\nOutput:\n2\n\nExplanation:\nStroke 1: Paint \"aaa\" first.\nStroke 2: Paint \"b\" at the middle position, overwriting the \"a\" in that spot.\n\nThus, 2 strokes are required.",
+      "language": "C++",
+      "options": [],
+      "reasoning": "N/A",
+      "selected_option": "N/A",
+      "attempts": [],
+      "final_code": "N/A",
+      "status": "FAILED",
+      "error_msg": "Solver returned no code within retry limit.",
+      "start_time": 1779260153.4489708,
+      "duration": 314.2
+    },
+    {
+      "index": 2,
+      "type": "CODING",
+      "text": "[Section: Section I] Coloring a Banner\nDifficulty: HARD | Max Score: 75\nYou have a banner that needs to be painted using a special brush with the following rules:\nThe brush can only paint one type of color in a single stroke.\nIn one stroke, you can start and stop at any position on the banner, and it will overwrite any existing colors in that range.\n\nYou are given a string S, where each character represents a different color on the banner, return the minimum number of strokes required to completely paint the banner.\n\nInput Format:\nA single string S, consisting of lowercase English letters, representing the banner colors.\n\nOutput Format:\nA single integer representing the minimum number of strokes required to completely paint the banner.\n\nConstraints:\n1 \u2264 s.length \u2264 100\ns consists of lowercase English letters only.\n\n\nExample 1:\nInput:\naaabbb\n\nOutput:\n2\n\nExplanation:\nStroke 1: Paint \"aaa\" first.\nStroke 2: Paint \"bbb\".\n\nThus, 2 strokes are required.\n\n\nExample 2:\nInput:\naba\n\nOutput:\n2\n\nExplanation:\nStroke 1: Paint \"aaa\" first.\nStroke 2: Paint \"b\" at the middle position, overwriting the \"a\" in that spot.\n\nThus, 2 strokes are required.",
+      "language": "C++",
+      "options": [],
+      "reasoning": "N/A",
+      "selected_option": "N/A",
+      "attempts": [],
+      "final_code": "N/A",
+      "status": "FAILED",
+      "error_msg": "Solver returned no code within retry limit.",
+      "start_time": 1779260474.6915348,
+      "duration": 280.2
+    }
+  ],
   "scanned_structure": {
     "Section: Section I": 9,
     "Section: Section II": 10,
