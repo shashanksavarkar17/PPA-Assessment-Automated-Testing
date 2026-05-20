@@ -13483,3 +13483,961 @@ Stacktrace:
 	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
 
 
+2026-05-20 22:42:39,834 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 22:42:39,834 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 22:43:15,094 - MainRunner - ERROR - Fatal execution crash: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 52, in run_assessment_flow
+    pages['login'].wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\login_page.py", line 30, in wait_for_page_load
+    raise TimeoutError("Email field not found on login page.")
+TimeoutError: Email field not found on login page.
+
+2026-05-20 22:43:38,621 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 22:43:38,621 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 22:44:13,088 - MainRunner - ERROR - Fatal execution crash: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 52, in run_assessment_flow
+    pages['login'].wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\login_page.py", line 30, in wait_for_page_load
+    raise TimeoutError("Email field not found on login page.")
+TimeoutError: Email field not found on login page.
+
+2026-05-20 22:45:10,599 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 22:45:10,600 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 22:45:42,736 - MainRunner - ERROR - Fatal execution crash: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 52, in run_assessment_flow
+    pages['login'].wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\login_page.py", line 30, in wait_for_page_load
+    raise TimeoutError("Email field not found on login page.")
+TimeoutError: Email field not found on login page.
+
+2026-05-20 22:45:42,821 - MainRunner - INFO - Saved diagnostic screenshot of crash state to: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\screenshots\fatal_crash_error.png
+2026-05-20 22:47:07,698 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 22:47:07,698 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 22:47:46,231 - MainRunner - INFO - Navigating to Section 1: Section: Section I
+2026-05-20 22:47:49,385 - utils.report_generator - INFO - Starting Q1 (CODING)
+2026-05-20 22:47:49,385 - MainRunner - INFO - Solving coding task Q1 via single-pass automated code runner...
+2026-05-20 22:47:49,389 - utils.llm_solver - INFO - Spawning a brand-new tab to automate Duck.ai free solver...
+2026-05-20 22:47:55,756 - utils.llm_solver - ERROR - Failed to submit prompt to Duck.ai: Message: no such element: Unable to locate element: {"method":"tag name","selector":"textarea"}
+  (Session info: chrome=148.0.7778.178); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1ea0]
+	chromedriver!(No symbol) [0xdeb28a]
+	chromedriver!(No symbol) [0xdeb52b]
+	chromedriver!(No symbol) [0xe2d052]
+	chromedriver!(No symbol) [0xe0d7c4]
+	chromedriver!(No symbol) [0xe2a936]
+	chromedriver!(No symbol) [0xe0d516]
+	chromedriver!(No symbol) [0xde08e9]
+	chromedriver!(No symbol) [0xde16a4]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!GetHandleVerifier [0xfa3e68+18ea8]
+	chromedriver!GetHandleVerifier [0xfa4015+19055]
+	chromedriver!GetHandleVerifier [0xf8d65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+2026-05-20 22:47:55,767 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:48:14,412 - utils.report_generator - INFO - Starting Q2 (CODING)
+2026-05-20 22:48:14,412 - MainRunner - INFO - Solving coding task Q2 via single-pass automated code runner...
+2026-05-20 22:48:16,775 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:48:16,775 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:48:32,355 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:48:32,355 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:49:03,519 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:49:05,084 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:49:23,743 - utils.report_generator - INFO - Starting Q3 (CODING)
+2026-05-20 22:49:23,743 - MainRunner - INFO - Solving coding task Q3 via single-pass automated code runner...
+2026-05-20 22:49:24,969 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:49:24,970 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:49:40,502 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:49:40,502 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:50:11,672 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:50:13,222 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:50:31,908 - utils.report_generator - INFO - Starting Q4 (CODING)
+2026-05-20 22:50:31,909 - MainRunner - INFO - Solving coding task Q4 via single-pass automated code runner...
+2026-05-20 22:50:33,109 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:50:33,109 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:50:48,670 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:50:48,670 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:51:19,807 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:51:21,361 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:51:39,981 - utils.report_generator - INFO - Starting Q5 (CODING)
+2026-05-20 22:51:39,982 - MainRunner - INFO - Solving coding task Q5 via single-pass automated code runner...
+2026-05-20 22:51:41,169 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:51:41,169 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:51:56,776 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:51:56,776 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:52:28,062 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:52:29,615 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:52:48,220 - utils.report_generator - INFO - Starting Q6 (CODING)
+2026-05-20 22:52:48,220 - MainRunner - INFO - Solving coding task Q6 via single-pass automated code runner...
+2026-05-20 22:52:49,403 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:52:49,403 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:53:05,060 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:53:05,060 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:53:36,568 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:53:38,130 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:53:56,948 - utils.report_generator - INFO - Starting Q7 (CODING)
+2026-05-20 22:53:56,948 - MainRunner - INFO - Solving coding task Q7 via single-pass automated code runner...
+2026-05-20 22:53:58,268 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:53:58,268 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:54:14,027 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:54:14,027 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:54:45,458 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:54:47,025 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:55:05,702 - utils.report_generator - INFO - Starting Q8 (CODING)
+2026-05-20 22:55:05,702 - MainRunner - INFO - Solving coding task Q8 via single-pass automated code runner...
+2026-05-20 22:55:06,903 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:55:06,903 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:55:22,651 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:55:22,651 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:55:54,249 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:55:55,833 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:56:14,723 - utils.report_generator - INFO - Starting Q9 (CODING)
+2026-05-20 22:56:14,724 - MainRunner - INFO - Solving coding task Q9 via single-pass automated code runner...
+2026-05-20 22:56:16,058 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:56:16,058 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:56:31,717 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:56:31,717 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:57:03,471 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:57:05,049 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:57:27,971 - MainRunner - INFO - Navigating to Section 2: Section: Section II
+2026-05-20 22:57:30,643 - utils.report_generator - INFO - Starting Q10 (CODING)
+2026-05-20 22:57:30,643 - MainRunner - INFO - Solving coding task Q10 via single-pass automated code runner...
+2026-05-20 22:57:31,990 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:57:31,990 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:57:47,788 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:57:47,788 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:58:11,452 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 22:58:11,453 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 22:58:18,987 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:58:20,575 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:58:39,220 - utils.report_generator - INFO - Starting Q11 (CODING)
+2026-05-20 22:58:39,220 - MainRunner - INFO - Solving coding task Q11 via single-pass automated code runner...
+2026-05-20 22:58:40,426 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:58:40,427 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:58:45,466 - MainRunner - ERROR - Fatal execution crash:
+Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 43, in run_assessment_flow
+    pages['login'].wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\login_page.py", line 26, in wait_for_page_load
+    raise TimeoutError("Email field not found on login page.")
+TimeoutError: Email field not found on login page.
+
+2026-05-20 22:58:55,991 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 22:58:55,991 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 22:59:27,409 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 22:59:28,969 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 22:59:47,605 - utils.report_generator - INFO - Starting Q12 (CODING)
+2026-05-20 22:59:47,605 - MainRunner - INFO - Solving coding task Q12 via single-pass automated code runner...
+2026-05-20 22:59:48,763 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 22:59:48,763 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 22:59:59,280 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 22:59:59,280 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 23:00:04,278 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:00:04,278 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:00:16,336 - MainRunner - ERROR - Fatal execution crash:
+Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\instructions_page.py", line 42, in accept_instructions
+    WebDriverWait(self.driver, 30).until(EC.url_changes(start_url))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 112, in until
+    value = method(self._driver)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 159, in _predicate
+    return url != driver.current_url
+                  ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 602, in current_url
+    return self.execute(Command.GET_CURRENT_URL)["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.178); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1ea0]
+	chromedriver!(No symbol) [0xd90dbe]
+	chromedriver!(No symbol) [0xdaf98e]
+	chromedriver!(No symbol) [0xe13cdc]
+	chromedriver!(No symbol) [0xe2a2a9]
+	chromedriver!(No symbol) [0xe0d516]
+	chromedriver!(No symbol) [0xde08e9]
+	chromedriver!(No symbol) [0xde16a4]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!GetHandleVerifier [0xfa3e68+18ea8]
+	chromedriver!GetHandleVerifier [0xfa4015+19055]
+	chromedriver!GetHandleVerifier [0xf8d65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 41, in run_assessment_flow
+    pages['instructions'].accept_instructions()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\instructions_page.py", line 45, in accept_instructions
+    btn = self._find_button(["confirm", "proceed", "continue", "next", "agree", "accept", "start"])
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\base_page.py", line 24, in _find_button
+    for el in self.driver.find_elements(By.XPATH, xpath):
+              ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 899, in find_elements
+    return self.execute(Command.FIND_ELEMENTS, {"using": by, "value": value})["value"] or []
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1cde]
+	chromedriver!(No symbol) [0xddfb77]
+	chromedriver!(No symbol) [0xe0d636]
+	chromedriver!(No symbol) [0xe08861]
+	chromedriver!(No symbol) [0xe08241]
+	chromedriver!(No symbol) [0xd7502e]
+	chromedriver!(No symbol) [0xd755ce]
+	chromedriver!(No symbol) [0xd75aad]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!(No symbol) [0xd74ba6]
+	chromedriver!(No symbol) [0xd741e0]
+	chromedriver!GetHandleVerifier [0x13887af+3fd7ef]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 23:00:35,525 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:00:35,743 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 23:00:35,744 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 23:00:37,053 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:00:55,787 - utils.report_generator - INFO - Starting Q13 (CODING)
+2026-05-20 23:00:55,787 - MainRunner - INFO - Solving coding task Q13 via single-pass automated code runner...
+2026-05-20 23:00:57,069 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:00:57,069 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:01:12,722 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:01:12,722 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:01:44,348 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:01:45,935 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:01:48,328 - MainRunner - INFO - Navigating to Section 1: Section: Section I
+2026-05-20 23:01:51,429 - utils.report_generator - INFO - Starting Q1 (CODING)
+2026-05-20 23:01:51,429 - MainRunner - INFO - Solving coding task Q1 via single-pass automated code runner...
+2026-05-20 23:01:51,435 - utils.llm_solver - INFO - Spawning a brand-new tab to automate Duck.ai free solver...
+2026-05-20 23:01:58,275 - utils.llm_solver - ERROR - Failed to submit prompt to Duck.ai: Message: no such element: Unable to locate element: {"method":"tag name","selector":"textarea"}
+  (Session info: chrome=148.0.7778.178); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1ea0]
+	chromedriver!(No symbol) [0xdeb28a]
+	chromedriver!(No symbol) [0xdeb52b]
+	chromedriver!(No symbol) [0xe2d052]
+	chromedriver!(No symbol) [0xe0d7c4]
+	chromedriver!(No symbol) [0xe2a936]
+	chromedriver!(No symbol) [0xe0d516]
+	chromedriver!(No symbol) [0xde08e9]
+	chromedriver!(No symbol) [0xde16a4]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!GetHandleVerifier [0xfa3e68+18ea8]
+	chromedriver!GetHandleVerifier [0xfa4015+19055]
+	chromedriver!GetHandleVerifier [0xf8d65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+2026-05-20 23:01:58,299 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:02:04,831 - utils.report_generator - INFO - Starting Q14 (CODING)
+2026-05-20 23:02:04,831 - MainRunner - INFO - Solving coding task Q14 via single-pass automated code runner...
+2026-05-20 23:02:06,175 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:02:06,175 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:02:16,681 - utils.report_generator - INFO - Starting Q2 (CODING)
+2026-05-20 23:02:16,681 - MainRunner - INFO - Solving coding task Q2 via single-pass automated code runner...
+2026-05-20 23:02:19,241 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:02:19,242 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:02:22,103 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:02:22,104 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:02:35,490 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:02:35,491 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:02:53,732 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:02:55,320 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:03:07,548 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:03:09,186 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:03:14,161 - utils.report_generator - INFO - Starting Q15 (CODING)
+2026-05-20 23:03:14,161 - MainRunner - INFO - Solving coding task Q15 via single-pass automated code runner...
+2026-05-20 23:03:15,543 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:03:15,544 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:03:27,346 - utils.report_generator - INFO - Starting Q3 (CODING)
+2026-05-20 23:03:27,348 - MainRunner - INFO - Solving coding task Q3 via single-pass automated code runner...
+2026-05-20 23:03:28,758 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:03:28,758 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:03:31,387 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:03:31,387 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:03:44,677 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:03:44,677 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:04:02,921 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:04:04,525 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:04:17,820 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:04:20,059 - utils.llm_solver - INFO - Successfully fetched code via clipboard copy button (2049 chars).
+2026-05-20 23:04:20,592 - pages.question_page - INFO - Starting direct injection script to bypass autocomplete duplicates...
+2026-05-20 23:04:20,608 - pages.question_page - INFO - Successfully loaded solution directly inside CodeMirror API!
+2026-05-20 23:04:20,694 - pages.question_page - INFO - Finished entering code solution successfully.
+2026-05-20 23:04:22,768 - MainRunner - INFO - Code runner completed. Result: True | Output errors: 
+2026-05-20 23:04:23,414 - utils.report_generator - INFO - Starting Q16 (CODING)
+2026-05-20 23:04:23,414 - MainRunner - INFO - Solving coding task Q16 via single-pass automated code runner...
+2026-05-20 23:04:24,752 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:04:24,752 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:04:25,863 - utils.report_generator - INFO - Starting Q4 (CODING)
+2026-05-20 23:04:25,863 - MainRunner - INFO - Solving coding task Q4 via single-pass automated code runner...
+2026-05-20 23:04:31,917 - utils.llm_solver - WARNING - Clipboard paste failed: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.178); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1ea0]
+	chromedriver!(No symbol) [0xd90dbe]
+	chromedriver!(No symbol) [0xdaf98e]
+	chromedriver!(No symbol) [0xe13cdc]
+	chromedriver!(No symbol) [0xe2a2a9]
+	chromedriver!(No symbol) [0xe0d516]
+	chromedriver!(No symbol) [0xde08e9]
+	chromedriver!(No symbol) [0xde16a4]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!GetHandleVerifier [0xfa3e68+18ea8]
+	chromedriver!GetHandleVerifier [0xfa4015+19055]
+	chromedriver!GetHandleVerifier [0xf8d65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+. Falling back to React input dispatcher...
+2026-05-20 23:04:32,042 - utils.llm_solver - ERROR - Failed to submit prompt to Duck.ai: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1cde]
+	chromedriver!(No symbol) [0xddfb77]
+	chromedriver!(No symbol) [0xe0d636]
+	chromedriver!(No symbol) [0xe08861]
+	chromedriver!(No symbol) [0xe08241]
+	chromedriver!(No symbol) [0xd7502e]
+	chromedriver!(No symbol) [0xd755ce]
+	chromedriver!(No symbol) [0xd75aad]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!(No symbol) [0xd74ba6]
+	chromedriver!(No symbol) [0xd741e0]
+	chromedriver!GetHandleVerifier [0x13887af+3fd7ef]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+2026-05-20 23:04:32,049 - MainRunner - ERROR - Fatal execution crash: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\llm_solver.py", line 108, in solve_via_duck_ai
+    self.driver.execute_script("""
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^
+        var ta = arguments[0]; ta.value = arguments[1];
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ta.dispatchEvent(new Event('input', { bubbles: true }));
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, ta, prompt)
+    ^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 578, in execute_script
+    return self.execute(command, {"script": script, "args": converted_args})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1cde]
+	chromedriver!(No symbol) [0xddfb77]
+	chromedriver!(No symbol) [0xe0d636]
+	chromedriver!(No symbol) [0xe08861]
+	chromedriver!(No symbol) [0xe08241]
+	chromedriver!(No symbol) [0xd7502e]
+	chromedriver!(No symbol) [0xd755ce]
+	chromedriver!(No symbol) [0xd75aad]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!(No symbol) [0xd74ba6]
+	chromedriver!(No symbol) [0xd741e0]
+	chromedriver!GetHandleVerifier [0x13887af+3fd7ef]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 94, in run_assessment_flow
+    _solve_coding(pages['question'], solver, report, sec_name, q_text, global_q)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 141, in _solve_coding
+    code = solver.solve_coding(q_text, lang, screenshot_path=None)
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\llm_solver.py", line 290, in solve_coding
+    code = self._gen_content(prompt, "coding", screenshot_path)
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\llm_solver.py", line 195, in _gen_content
+    res = self.solve_via_duck_ai(prompt, screenshot_path, is_coding=(req_type == "coding"))
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\llm_solver.py", line 119, in solve_via_duck_ai
+    self.driver.switch_to.window(orig_handle)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\switch_to.py", line 114, in window
+    self._w3c_window(window_name)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\switch_to.py", line 122, in _w3c_window
+    send_handle(window_name)
+    ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\switch_to.py", line 118, in send_handle
+    self._driver.execute(Command.SWITCH_TO_WINDOW, {"handle": h})
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1cde]
+	chromedriver!(No symbol) [0xddfb77]
+	chromedriver!(No symbol) [0xe0d636]
+	chromedriver!(No symbol) [0xe08861]
+	chromedriver!(No symbol) [0xe08241]
+	chromedriver!(No symbol) [0xd7502e]
+	chromedriver!(No symbol) [0xd755ce]
+	chromedriver!(No symbol) [0xd75aad]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!(No symbol) [0xd74ba6]
+	chromedriver!(No symbol) [0xd741e0]
+	chromedriver!GetHandleVerifier [0x13887af+3fd7ef]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 23:04:40,382 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:04:40,383 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:05:11,551 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:05:13,142 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:05:31,985 - utils.report_generator - INFO - Starting Q17 (CODING)
+2026-05-20 23:05:31,985 - MainRunner - INFO - Solving coding task Q17 via single-pass automated code runner...
+2026-05-20 23:05:33,200 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:05:33,200 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:05:48,911 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:05:48,912 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:06:19,741 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:06:21,265 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:06:40,080 - utils.report_generator - INFO - Starting Q18 (CODING)
+2026-05-20 23:06:40,081 - MainRunner - INFO - Solving coding task Q18 via single-pass automated code runner...
+2026-05-20 23:06:41,376 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:06:41,376 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:06:56,808 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:06:56,808 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:07:27,968 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:07:29,495 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:07:48,365 - utils.report_generator - INFO - Starting Q19 (CODING)
+2026-05-20 23:07:48,365 - MainRunner - INFO - Solving coding task Q19 via single-pass automated code runner...
+2026-05-20 23:07:49,716 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:07:49,716 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:08:05,305 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:08:05,306 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:08:36,379 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:08:37,952 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:08:58,056 - MainRunner - INFO - Navigating to Section 3: Section: Section III
+2026-05-20 23:09:00,126 - utils.report_generator - INFO - Starting Q20 (CODING)
+2026-05-20 23:09:00,127 - MainRunner - INFO - Solving coding task Q20 via single-pass automated code runner...
+2026-05-20 23:09:01,380 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:09:01,380 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:09:16,708 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:09:16,708 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:09:40,567 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 23:09:40,567 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 23:09:47,356 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:09:48,921 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:10:07,758 - utils.report_generator - INFO - Starting Q21 (CODING)
+2026-05-20 23:10:07,758 - MainRunner - INFO - Solving coding task Q21 via single-pass automated code runner...
+2026-05-20 23:10:09,045 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:10:09,045 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:10:11,803 - MainRunner - INFO - Navigating to Section 1: Section: Section I
+2026-05-20 23:10:13,512 - utils.report_generator - INFO - Starting Q1 (MCQ)
+2026-05-20 23:10:15,466 - utils.llm_solver - INFO - Opening new Duck.ai tab...
+2026-05-20 23:10:24,025 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:10:24,027 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:10:24,670 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:10:24,670 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:10:55,732 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:10:55,820 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:10:56,138 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:10:57,293 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:11:11,151 - utils.llm_solver - WARNING - Solver failed. Running offline keyword-matching heuristic...
+2026-05-20 23:11:13,422 - utils.report_generator - INFO - Starting Q2 (MCQ)
+2026-05-20 23:11:16,115 - utils.report_generator - INFO - Starting Q22 (CODING)
+2026-05-20 23:11:16,115 - MainRunner - INFO - Solving coding task Q22 via single-pass automated code runner...
+2026-05-20 23:11:17,374 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:11:17,374 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:11:24,642 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:11:24,643 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:11:32,828 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:11:32,829 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:11:55,716 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:11:56,046 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:12:03,927 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:12:05,469 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:12:11,059 - utils.llm_solver - WARNING - Solver failed. Running offline keyword-matching heuristic...
+2026-05-20 23:12:14,971 - utils.report_generator - INFO - Starting Q3 (CODING)
+2026-05-20 23:12:14,972 - MainRunner - INFO - Solving coding task Q3 via single-pass automated code runner...
+2026-05-20 23:12:17,174 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:12:17,174 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:12:24,229 - utils.report_generator - INFO - Starting Q23 (CODING)
+2026-05-20 23:12:24,230 - MainRunner - INFO - Solving coding task Q23 via single-pass automated code runner...
+2026-05-20 23:12:25,363 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:12:25,363 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:12:32,902 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:12:33,226 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:12:40,787 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:12:40,787 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:12:51,961 - utils.report_generator - INFO - Starting Q4 (CODING)
+2026-05-20 23:12:51,962 - MainRunner - INFO - Solving coding task Q4 via single-pass automated code runner...
+2026-05-20 23:12:54,092 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:12:54,093 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:13:09,680 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:13:10,014 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:13:11,851 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:13:13,419 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:13:28,488 - utils.report_generator - INFO - Starting Q5 (CODING)
+2026-05-20 23:13:28,488 - MainRunner - INFO - Solving coding task Q5 via single-pass automated code runner...
+2026-05-20 23:13:30,660 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:13:30,661 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:13:32,047 - utils.report_generator - INFO - Starting Q24 (CODING)
+2026-05-20 23:13:32,047 - MainRunner - INFO - Solving coding task Q24 via single-pass automated code runner...
+2026-05-20 23:13:38,228 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:13:38,228 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:13:46,207 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:13:46,535 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:13:53,759 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:13:53,760 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:14:05,151 - utils.report_generator - INFO - Starting Q6 (CODING)
+2026-05-20 23:14:05,151 - MainRunner - INFO - Solving coding task Q6 via single-pass automated code runner...
+2026-05-20 23:14:07,204 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:14:07,204 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:14:22,802 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:14:23,141 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:14:24,892 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:14:26,448 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:14:41,863 - utils.report_generator - INFO - Starting Q7 (CODING)
+2026-05-20 23:14:41,865 - MainRunner - INFO - Solving coding task Q7 via single-pass automated code runner...
+2026-05-20 23:14:44,139 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:14:44,140 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:14:45,245 - utils.report_generator - INFO - Starting Q25 (CODING)
+2026-05-20 23:14:45,245 - MainRunner - INFO - Solving coding task Q25 via single-pass automated code runner...
+2026-05-20 23:14:51,493 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:14:51,493 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:15:00,001 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:15:00,310 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:15:06,842 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:15:06,842 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:15:19,061 - utils.report_generator - INFO - Starting Q8 (CODING)
+2026-05-20 23:15:19,062 - MainRunner - INFO - Solving coding task Q8 via single-pass automated code runner...
+2026-05-20 23:15:21,627 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:15:21,628 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:15:37,015 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:15:37,338 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:15:37,437 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:15:38,963 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:15:55,960 - utils.report_generator - INFO - Starting Q9 (CODING)
+2026-05-20 23:15:55,961 - MainRunner - INFO - Solving coding task Q9 via single-pass automated code runner...
+2026-05-20 23:15:57,459 - utils.report_generator - INFO - Starting Q26 (CODING)
+2026-05-20 23:15:57,460 - MainRunner - INFO - Solving coding task Q26 via single-pass automated code runner...
+2026-05-20 23:15:58,467 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:15:58,467 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:15:58,542 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:15:58,542 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:16:13,837 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:16:13,837 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:16:14,019 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:16:14,334 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:16:35,342 - MainRunner - INFO - Navigating to Section 2: Section: Section II
+2026-05-20 23:16:37,102 - utils.report_generator - INFO - Starting Q10 (CODING)
+2026-05-20 23:16:37,102 - MainRunner - INFO - Solving coding task Q10 via single-pass automated code runner...
+2026-05-20 23:16:39,559 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:16:39,559 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:16:44,652 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:16:46,175 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:16:55,109 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:16:55,431 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:17:04,672 - utils.report_generator - INFO - Starting Q27 (CODING)
+2026-05-20 23:17:04,672 - MainRunner - INFO - Solving coding task Q27 via single-pass automated code runner...
+2026-05-20 23:17:05,759 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:17:05,759 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:17:14,182 - utils.report_generator - INFO - Starting Q11 (CODING)
+2026-05-20 23:17:14,183 - MainRunner - INFO - Solving coding task Q11 via single-pass automated code runner...
+2026-05-20 23:17:16,167 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:17:16,167 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:17:21,050 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:17:21,050 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:17:32,329 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:17:32,654 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:17:50,166 - utils.report_generator - INFO - Starting Q12 (CODING)
+2026-05-20 23:17:50,169 - MainRunner - INFO - Solving coding task Q12 via single-pass automated code runner...
+2026-05-20 23:17:52,123 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:17:52,392 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:17:52,392 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:17:53,667 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:18:07,986 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:18:08,320 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:18:12,200 - utils.report_generator - INFO - Starting Q28 (CODING)
+2026-05-20 23:18:12,201 - MainRunner - INFO - Solving coding task Q28 via single-pass automated code runner...
+2026-05-20 23:18:13,579 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:18:13,579 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:18:25,835 - utils.report_generator - INFO - Starting Q13 (CODING)
+2026-05-20 23:18:25,835 - MainRunner - INFO - Solving coding task Q13 via single-pass automated code runner...
+2026-05-20 23:18:27,908 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:18:27,909 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:18:28,902 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:18:28,902 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:18:43,710 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:18:44,034 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:18:59,507 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:19:01,032 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:19:01,607 - utils.report_generator - INFO - Starting Q14 (CODING)
+2026-05-20 23:19:01,607 - MainRunner - INFO - Solving coding task Q14 via single-pass automated code runner...
+2026-05-20 23:19:03,723 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:19:03,723 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:19:19,439 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:19:19,522 - utils.report_generator - INFO - Starting Q29 (CODING)
+2026-05-20 23:19:19,522 - MainRunner - INFO - Solving coding task Q29 via single-pass automated code runner...
+2026-05-20 23:19:19,771 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:19:20,619 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:19:20,619 - utils.llm_solver - INFO - Waiting for solver to begin responding...
+2026-05-20 23:19:35,962 - utils.llm_solver - WARNING - Response took too long to start.
+2026-05-20 23:19:35,963 - utils.llm_solver - INFO - Waiting for solver to finish streaming...
+2026-05-20 23:19:37,831 - utils.report_generator - INFO - Starting Q15 (CODING)
+2026-05-20 23:19:37,831 - MainRunner - INFO - Solving coding task Q15 via single-pass automated code runner...
+2026-05-20 23:19:39,964 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:19:39,964 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:19:55,642 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:19:55,643 - utils.llm_solver - ERROR - Failed to switch back: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1cde]
+	chromedriver!(No symbol) [0xddfb77]
+	chromedriver!(No symbol) [0xe0d636]
+	chromedriver!(No symbol) [0xe08861]
+	chromedriver!(No symbol) [0xe08241]
+	chromedriver!(No symbol) [0xd7502e]
+	chromedriver!(No symbol) [0xd755ce]
+	chromedriver!(No symbol) [0xd75aad]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!(No symbol) [0xd74ba6]
+	chromedriver!(No symbol) [0xd741e0]
+	chromedriver!GetHandleVerifier [0x13887af+3fd7ef]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+2026-05-20 23:19:55,645 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:20:06,687 - utils.llm_solver - INFO - Response streaming finished: 0 chars
+2026-05-20 23:20:08,215 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:20:10,663 - MainRunner - ERROR - Fatal execution crash: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 84, in run_assessment_flow
+    pages['question'].wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 34, in wait_for_page_load
+    self.helpers.wait_for_element((By.XPATH, "//*[contains(@class, 'problem-details') or contains(@class, 'ql-editor') or contains(@class, 'problem')]"))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 19, in wait_for_element
+    return (WebDriverWait(self.driver, timeout) if timeout else self.wait).until(EC.visibility_of_element_located(locator))
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 112, in until
+    value = method(self._driver)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 184, in _predicate
+    return _element_if_visible(driver.find_element(*locator))
+                               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 868, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1cde]
+	chromedriver!(No symbol) [0xddfb77]
+	chromedriver!(No symbol) [0xe0d636]
+	chromedriver!(No symbol) [0xe08861]
+	chromedriver!(No symbol) [0xe08241]
+	chromedriver!(No symbol) [0xd7502e]
+	chromedriver!(No symbol) [0xd755ce]
+	chromedriver!(No symbol) [0xd75aad]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!(No symbol) [0xd74ba6]
+	chromedriver!(No symbol) [0xd741e0]
+	chromedriver!GetHandleVerifier [0x13887af+3fd7ef]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 23:20:27,939 - utils.report_generator - INFO - Saved telemetry.json
+2026-05-20 23:20:27,939 - MainRunner - INFO - Woohoo! Assessment is completely finished. Press Enter to exit.
+2026-05-20 23:20:27,943 - MainRunner - ERROR - Fatal execution crash: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 107, in run_assessment_flow
+    input()
+    ~~~~~^^
+EOFError: EOF when reading a line
+
+2026-05-20 23:20:28,004 - MainRunner - INFO - Saved diagnostic screenshot of crash state to: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\screenshots\fatal_crash_error.png
+2026-05-20 23:25:07,284 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 23:25:07,284 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 23:25:31,923 - MainRunner - INFO - Navigating to Section 1: Section: Section I
+2026-05-20 23:25:36,048 - utils.report_generator - INFO - Starting Q1 (MCQ)
+2026-05-20 23:25:37,607 - utils.llm_solver - INFO - Opening new Duck.ai tab...
+2026-05-20 23:25:45,805 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:25:45,805 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:26:16,564 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:26:16,884 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:26:31,905 - utils.llm_solver - WARNING - Solver failed. Running offline keyword-matching heuristic...
+2026-05-20 23:26:34,166 - utils.report_generator - INFO - Starting Q2 (MCQ)
+2026-05-20 23:26:39,905 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:26:39,908 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:27:11,276 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:27:11,584 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:27:26,596 - utils.llm_solver - WARNING - Solver failed. Running offline keyword-matching heuristic...
+2026-05-20 23:27:26,600 - MainRunner - ERROR - Fatal execution crash: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 92, in run_assessment_flow
+    _solve_mcq(pages['question'], solver, report, sec_name, q_text, global_q)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 124, in _solve_mcq
+    if not ans or not page.select_mcq_option(ans):
+                      ~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 108, in select_mcq_option
+    for el in self.driver.find_elements(By.XPATH, loc):
+              ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 899, in find_elements
+    return self.execute(Command.FIND_ELEMENTS, {"using": by, "value": value})["value"] or []
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.178); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xf9b593+105d3]
+	chromedriver!GetHandleVerifier [0xf9b6c4+10704]
+	chromedriver!(No symbol) [0xda1ea0]
+	chromedriver!(No symbol) [0xd90dbe]
+	chromedriver!(No symbol) [0xdaf98e]
+	chromedriver!(No symbol) [0xe13cdc]
+	chromedriver!(No symbol) [0xe2a2a9]
+	chromedriver!(No symbol) [0xe0d516]
+	chromedriver!(No symbol) [0xde08e9]
+	chromedriver!(No symbol) [0xde16a4]
+	chromedriver!GetHandleVerifier [0x1223014+298054]
+	chromedriver!GetHandleVerifier [0x121e603+293643]
+	chromedriver!GetHandleVerifier [0x123ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0xfb54e8+2a528]
+	chromedriver!GetHandleVerifier [0xfbcd1d+31d5d]
+	chromedriver!GetHandleVerifier [0xfa3e68+18ea8]
+	chromedriver!GetHandleVerifier [0xfa4015+19055]
+	chromedriver!GetHandleVerifier [0xf8d65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 23:29:48,664 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 23:29:48,664 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 23:30:13,080 - MainRunner - INFO - Navigating to Section 1: Section: Section I
+2026-05-20 23:30:14,569 - utils.report_generator - INFO - Starting Q1 (MCQ)
+2026-05-20 23:30:17,147 - utils.llm_solver - INFO - Opening new Duck.ai tab...
+2026-05-20 23:30:30,268 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:30:30,269 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:30:30,811 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:30:32,392 - utils.llm_solver - INFO - Response complete: 19 chars
+2026-05-20 23:30:34,949 - utils.report_generator - INFO - Starting Q2 (MCQ)
+2026-05-20 23:30:40,965 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:30:40,965 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:30:41,490 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:30:43,050 - utils.llm_solver - INFO - Response complete: 19 chars
+2026-05-20 23:30:47,059 - utils.report_generator - INFO - Starting Q3 (CODING)
+2026-05-20 23:30:47,060 - MainRunner - INFO - Solving coding task Q3 via single-pass automated code runner...
+2026-05-20 23:30:50,180 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:30:50,180 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:30:50,701 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:30:53,354 - utils.llm_solver - INFO - Response complete: 19 chars
+2026-05-20 23:30:54,242 - pages.question_page - INFO - Starting direct injection script to bypass autocomplete duplicates...
+2026-05-20 23:30:54,261 - pages.question_page - INFO - Successfully loaded solution directly inside Monaco API!
+2026-05-20 23:30:54,267 - pages.question_page - INFO - Successfully loaded solution directly inside CodeMirror API!
+2026-05-20 23:30:55,046 - pages.question_page - INFO - Pasted complete code solution from system clipboard!
+2026-05-20 23:30:55,567 - pages.question_page - INFO - Finished entering code solution successfully.
+2026-05-20 23:31:00,230 - MainRunner - INFO - Code runner completed. Result: True | Output errors: 
+2026-05-20 23:31:03,908 - utils.report_generator - INFO - Starting Q4 (CODING)
+2026-05-20 23:31:03,908 - MainRunner - INFO - Solving coding task Q4 via single-pass automated code runner...
+2026-05-20 23:31:07,258 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:31:07,258 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:31:25,219 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:31:25,535 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:31:44,036 - utils.report_generator - INFO - Starting Q5 (CODING)
+2026-05-20 23:31:44,036 - MainRunner - INFO - Solving coding task Q5 via single-pass automated code runner...
+2026-05-20 23:31:47,643 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:31:47,643 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:32:02,956 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:32:03,286 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:32:21,769 - utils.report_generator - INFO - Starting Q6 (CODING)
+2026-05-20 23:32:21,769 - MainRunner - INFO - Solving coding task Q6 via single-pass automated code runner...
+2026-05-20 23:32:24,833 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:32:24,833 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:32:25,367 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:32:27,933 - utils.llm_solver - INFO - Response complete: 19 chars
+2026-05-20 23:32:28,776 - pages.question_page - INFO - Starting direct injection script to bypass autocomplete duplicates...
+2026-05-20 23:32:28,794 - pages.question_page - INFO - Successfully loaded solution directly inside Monaco API!
+2026-05-20 23:32:28,801 - pages.question_page - INFO - Successfully loaded solution directly inside CodeMirror API!
+2026-05-20 23:32:29,531 - pages.question_page - INFO - Pasted complete code solution from system clipboard!
+2026-05-20 23:32:30,041 - pages.question_page - INFO - Finished entering code solution successfully.
+2026-05-20 23:32:34,730 - MainRunner - INFO - Code runner completed. Result: True | Output errors: 
+2026-05-20 23:32:38,429 - utils.report_generator - INFO - Starting Q7 (CODING)
+2026-05-20 23:32:38,429 - MainRunner - INFO - Solving coding task Q7 via single-pass automated code runner...
+2026-05-20 23:32:41,971 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:32:41,971 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:32:42,541 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:32:45,751 - utils.llm_solver - INFO - Response complete: 19 chars
+2026-05-20 23:32:46,619 - pages.question_page - INFO - Starting direct injection script to bypass autocomplete duplicates...
+2026-05-20 23:32:46,640 - pages.question_page - INFO - Successfully loaded solution directly inside Monaco API!
+2026-05-20 23:32:46,665 - pages.question_page - INFO - Successfully loaded solution directly inside CodeMirror API!
+2026-05-20 23:32:47,422 - pages.question_page - INFO - Pasted complete code solution from system clipboard!
+2026-05-20 23:32:47,946 - pages.question_page - INFO - Finished entering code solution successfully.
+2026-05-20 23:32:52,601 - MainRunner - INFO - Code runner completed. Result: True | Output errors: 
+2026-05-20 23:32:56,271 - utils.report_generator - INFO - Starting Q8 (CODING)
+2026-05-20 23:32:56,271 - MainRunner - INFO - Solving coding task Q8 via single-pass automated code runner...
+2026-05-20 23:32:59,391 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:32:59,392 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:32:59,933 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:33:02,570 - utils.llm_solver - INFO - Response complete: 19 chars
+2026-05-20 23:33:03,430 - pages.question_page - INFO - Starting direct injection script to bypass autocomplete duplicates...
+2026-05-20 23:33:03,447 - pages.question_page - INFO - Successfully loaded solution directly inside Monaco API!
+2026-05-20 23:33:03,452 - pages.question_page - INFO - Successfully loaded solution directly inside CodeMirror API!
+2026-05-20 23:33:04,191 - pages.question_page - INFO - Pasted complete code solution from system clipboard!
+2026-05-20 23:33:04,706 - pages.question_page - INFO - Finished entering code solution successfully.
+2026-05-20 23:33:09,386 - MainRunner - INFO - Code runner completed. Result: True | Output errors: 
+2026-05-20 23:33:12,893 - utils.report_generator - INFO - Starting Q9 (CODING)
+2026-05-20 23:33:12,894 - MainRunner - INFO - Solving coding task Q9 via single-pass automated code runner...
+2026-05-20 23:33:15,998 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:33:15,998 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:33:16,527 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:33:19,332 - utils.llm_solver - INFO - Response complete: 19 chars
+2026-05-20 23:33:20,198 - pages.question_page - INFO - Starting direct injection script to bypass autocomplete duplicates...
+2026-05-20 23:33:20,207 - pages.question_page - INFO - Successfully loaded solution directly inside Monaco API!
+2026-05-20 23:33:20,218 - pages.question_page - INFO - Successfully loaded solution directly inside CodeMirror API!
+2026-05-20 23:33:20,871 - pages.question_page - INFO - Pasted complete code solution from system clipboard!
+2026-05-20 23:33:21,379 - pages.question_page - INFO - Finished entering code solution successfully.
+2026-05-20 23:33:26,007 - MainRunner - INFO - Code runner completed. Result: True | Output errors: 
+2026-05-20 23:33:38,520 - MainRunner - INFO - Navigating to Section 2: Section: Section II
+2026-05-20 23:33:39,928 - utils.report_generator - INFO - Starting Q10 (CODING)
+2026-05-20 23:33:39,928 - MainRunner - INFO - Solving coding task Q10 via single-pass automated code runner...
+2026-05-20 23:33:43,009 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:33:43,010 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:33:54,995 - MainRunner - INFO - Starting automated assessment flow...
+2026-05-20 23:33:54,996 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 23:34:24,167 - MainRunner - INFO - Navigating to Section 1: Section: Section I
+2026-05-20 23:34:26,354 - utils.report_generator - INFO - Starting Q1 (CODING)
+2026-05-20 23:34:26,355 - MainRunner - INFO - Solving coding task Q1 via single-pass automated code runner...
+2026-05-20 23:34:26,367 - utils.llm_solver - INFO - Opening new Duck.ai tab...
+2026-05-20 23:34:32,424 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:34:32,426 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:34:48,637 - utils.llm_solver - WARNING - Response never started. Returning None.
+2026-05-20 23:34:48,962 - utils.llm_solver - INFO - Checking for resolved fallback responses...
+2026-05-20 23:35:06,528 - utils.report_generator - INFO - Starting Q2 (CODING)
+2026-05-20 23:35:06,528 - MainRunner - INFO - Solving coding task Q2 via single-pass automated code runner...
+2026-05-20 23:35:09,882 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:35:09,882 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:35:18,522 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:35:25,021 - utils.llm_solver - INFO - Response complete: 10 chars
+2026-05-20 23:35:25,906 - pages.question_page - INFO - Starting direct injection script to bypass autocomplete duplicates...
+2026-05-20 23:35:25,932 - pages.question_page - INFO - Successfully loaded solution directly inside Monaco API!
+2026-05-20 23:35:25,940 - pages.question_page - INFO - Successfully loaded solution directly inside CodeMirror API!
+2026-05-20 23:35:26,679 - pages.question_page - INFO - Pasted complete code solution from system clipboard!
+2026-05-20 23:35:27,240 - pages.question_page - INFO - Finished entering code solution successfully.
+2026-05-20 23:35:31,960 - MainRunner - INFO - Code runner completed. Result: True | Output errors: 
+2026-05-20 23:35:35,476 - utils.report_generator - INFO - Starting Q3 (CODING)
+2026-05-20 23:35:35,477 - MainRunner - INFO - Solving coding task Q3 via single-pass automated code runner...
+2026-05-20 23:35:38,621 - utils.llm_solver - INFO - Prompt sent successfully!
+2026-05-20 23:35:38,622 - utils.llm_solver - INFO - Waiting for response to start...
+2026-05-20 23:35:45,404 - utils.llm_solver - INFO - Waiting for response to finish...
+2026-05-20 23:35:52,164 - utils.llm_solver - INFO - Response complete: 10 chars
+2026-05-20 23:35:52,992 - pages.question_page - INFO - Starting direct injection script to bypass autocomplete duplicates...
+2026-05-20 23:35:53,008 - pages.question_page - INFO - Successfully loaded solution directly inside Monaco API!
+2026-05-20 23:35:53,021 - pages.question_page - INFO - Successfully loaded solution directly inside CodeMirror API!
+2026-05-20 23:35:53,633 - pages.question_page - INFO - Pasted complete code solution from system clipboard!
+2026-05-20 23:35:54,143 - pages.question_page - INFO - Finished entering code solution successfully.
+2026-05-20 23:35:58,732 - MainRunner - INFO - Code runner completed. Result: True | Output errors: 
+2026-05-20 23:36:02,226 - utils.report_generator - INFO - Starting Q4 (CODING)
+2026-05-20 23:36:02,226 - MainRunner - INFO - Solving coding task Q4 via single-pass automated code runner...
