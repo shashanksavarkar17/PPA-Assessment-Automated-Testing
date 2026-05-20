@@ -3,7 +3,7 @@ import os
 BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3"
 
 # Default leaked key used as standard placeholder
-DEFAULT_LEAKED_KEY = "AIzaSyB1VPCVN9F238N_XNcnVkuKCAnDTftSfzE"
+DEFAULT_LEAKED_KEY = "AIzaSyDowMkJIRmxf7gpVR1kPE0e_EN_2X2kANc"
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
