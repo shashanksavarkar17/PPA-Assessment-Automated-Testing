@@ -12,12 +12,12 @@ Scanned Sections:
 Questions:
 
 --- Section: Section I - MCQ ---
-- Question 01 | Question: Absolute Positioning | Type/Status: MCQ
+- Question 01 | Question: Blur event in Javascript | Type/Status: MCQ
 - Question 02 | Question: Appending Child Nodes | Type/Status: MCQ
-- Question 03 | Question: Callback Execution Timing | Type/Status: MCQ
+- Question 03 | Question: Avoiding Callback Hell | Type/Status: MCQ
 - Question 04 | Question: Array Transformation | Type/Status: MCQ
 - Question 05 | Question: Accessing Object Properties | Type/Status: MCQ
 
 --- Section: Section II - CODING ---
-- Question 01 | Question: Add Space To String | Type/Status: Coding
-- Question 02 | Question: A+B+C = X? | Type/Status: Coding
+- Question 01 | Question: Adjusted Product of Elements | Type/Status: Coding
+- Question 02 | Question: Alchemist and his Gold | Type/Status: Coding

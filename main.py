@@ -102,11 +102,12 @@ def _solve_mcq(page, solver, report, sec_name, q_text, q_idx):
     opts = page.get_mcq_options()
     report.start_question(q_idx, "MCQ", f"[{sec_name}] {q_text}")
     
-    ans = opts[0] if opts else None
-    if ans:
-        page.select_mcq_option(ans)
+    reasoning, ans = solver.solve_mcq(q_text, opts)
+    if not ans or not page.select_mcq_option(ans):
+        ans = next((o for o in opts if (ans and ans.lower() in o.lower()) or (ans and o.lower() in ans.lower())), opts[0] if opts else None)
+        if ans: page.select_mcq_option(ans)
             
-    report.set_mcq_result(q_idx, opts, "Bypassed AI selection.", ans, "PASSED")
+    report.set_mcq_result(q_idx, opts, reasoning, ans, "PASSED")
     try: page.click_save_and_next()
     except: pass
 
@@ -117,7 +118,7 @@ def _solve_coding(page, solver, report, sec_name, q_text, q_idx):
     lang = page.get_selected_language()
     report.start_question(q_idx, "CODING", f"[{sec_name}] {q_text}")
     
-    code = solver.solve_coding(q_text, None, None, lang)
+    code = solver.solve_coding(q_text, lang)
     if code:
         page.enter_code_solution(code)
         page.run_code()

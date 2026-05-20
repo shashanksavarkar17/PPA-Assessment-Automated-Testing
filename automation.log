@@ -12192,3 +12192,169 @@ Stacktrace:
 2026-05-20 15:40:21,816 - utils.report_generator - INFO - Starting Q7 (CODING)
 2026-05-20 15:40:32,399 - utils.report_generator - INFO - Saved telemetry.json
 2026-05-20 15:40:32,400 - MainRunner - INFO - Assessment complete. Press Enter to exit.
+2026-05-20 15:51:35,350 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 15:51:35,350 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 15:51:55,812 - MainRunner - ERROR - Fatal error: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 59, in run_assessment_flow
+    pages['start'].wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\start_test_page.py", line 9, in wait_for_page_load
+    self.helpers.wait_for_element(self.START_LOC)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 20, in wait_for_element
+    return wait.until(EC.visibility_of_element_located(locator))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 112, in until
+    value = method(self._driver)
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 184, in _predicate
+    return _element_if_visible(driver.find_element(*locator))
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\expected_conditions.py", line 223, in _element_if_visible
+    return element if element.is_displayed() == visibility else False
+                      ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'is_displayed'
+
+2026-05-20 15:53:18,086 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 15:53:18,086 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 15:53:23,037 - MainRunner - ERROR - Fatal error: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 28, in run_assessment_flow
+    driver = get_chrome_driver(headless=False)
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\driver_factory.py", line 17, in get_chrome_driver
+    driver.maximize_window()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 638, in maximize_window
+    self.execute(command, None)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: JavaScript code failed
+from unknown command: 'Runtime.evaluate' wasn't found
+  (Session info: chrome=148.0.7778.168)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x4cb593+105d3]
+	chromedriver!GetHandleVerifier [0x4cb6c4+10704]
+	chromedriver!(No symbol) [0x2d1ea0]
+	chromedriver!(No symbol) [0x2c1722]
+	chromedriver!(No symbol) [0x2c01f6]
+	chromedriver!(No symbol) [0x2c0876]
+	chromedriver!(No symbol) [0x2e4bbe]
+	chromedriver!(No symbol) [0x2da92b]
+	chromedriver!(No symbol) [0x2da83d]
+	chromedriver!(No symbol) [0x2b3ce7]
+	chromedriver!(No symbol) [0x2b1ffe]
+	chromedriver!(No symbol) [0x36e791]
+	chromedriver!(No symbol) [0x33d77c]
+	chromedriver!(No symbol) [0x35a936]
+	chromedriver!(No symbol) [0x33d516]
+	chromedriver!(No symbol) [0x3108e9]
+	chromedriver!(No symbol) [0x3116a4]
+	chromedriver!GetHandleVerifier [0x753014+298054]
+	chromedriver!GetHandleVerifier [0x74e603+293643]
+	chromedriver!GetHandleVerifier [0x76ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0x4e54e8+2a528]
+	chromedriver!GetHandleVerifier [0x4ecd1d+31d5d]
+	chromedriver!GetHandleVerifier [0x4d3e68+18ea8]
+	chromedriver!GetHandleVerifier [0x4d4015+19055]
+	chromedriver!GetHandleVerifier [0x4bd65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 15:53:29,606 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 15:53:29,606 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 15:53:50,181 - MainRunner - INFO - Section 1: Section: Section I - MCQ
+2026-05-20 15:53:53,276 - utils.report_generator - INFO - Starting Q1 (MCQ)
+2026-05-20 15:59:12,511 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 15:59:12,512 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 15:59:53,754 - MainRunner - INFO - Section 1: Section: Section I - MCQ
+2026-05-20 15:59:57,421 - utils.report_generator - INFO - Starting Q1 (MCQ)
+2026-05-20 16:03:07,036 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 16:03:07,036 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 16:03:46,263 - MainRunner - INFO - Section 1: Section: Section I - MCQ
+2026-05-20 16:03:50,542 - utils.report_generator - INFO - Starting Q1 (MCQ)
+2026-05-20 16:05:58,968 - MainRunner - ERROR - Fatal error: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 80, in run_assessment_flow
+    _solve_mcq(pages['question'], solver, report, sec_name, q_text, global_q)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 108, in _solve_mcq
+    if ans: page.select_mcq_option(ans)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 82, in select_mcq_option
+    for el in self.driver.find_elements(By.XPATH, "//*[contains(@class, 'option') or contains(@class, 'choice') or self::label or self::span]"):
+              ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 899, in find_elements
+    return self.execute(Command.FIND_ELEMENTS, {"using": by, "value": value})["value"] or []
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=148.0.7778.168); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x4cb593+105d3]
+	chromedriver!GetHandleVerifier [0x4cb6c4+10704]
+	chromedriver!(No symbol) [0x2d1ea0]
+	chromedriver!(No symbol) [0x2c0dbe]
+	chromedriver!(No symbol) [0x2df98e]
+	chromedriver!(No symbol) [0x343cdc]
+	chromedriver!(No symbol) [0x35a2a9]
+	chromedriver!(No symbol) [0x33d516]
+	chromedriver!(No symbol) [0x3108e9]
+	chromedriver!(No symbol) [0x3116a4]
+	chromedriver!GetHandleVerifier [0x753014+298054]
+	chromedriver!GetHandleVerifier [0x74e603+293643]
+	chromedriver!GetHandleVerifier [0x76ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0x4e54e8+2a528]
+	chromedriver!GetHandleVerifier [0x4ecd1d+31d5d]
+	chromedriver!GetHandleVerifier [0x4d3e68+18ea8]
+	chromedriver!GetHandleVerifier [0x4d4015+19055]
+	chromedriver!GetHandleVerifier [0x4bd65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 16:12:28,556 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 16:12:28,556 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 16:13:44,067 - MainRunner - INFO - Section 1: Section: Section I - MCQ
+2026-05-20 16:13:55,052 - utils.report_generator - INFO - Starting Q1 (MCQ)
+2026-05-20 16:14:10,356 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-flash, key=AIzaSyDo...): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:14:16,832 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-flash, key=AIzaSyDo...): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:14:20,554 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-pro, key=AIzaSyDo...): 404 models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:14:21,972 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-pro, key=AIzaSyDo...): 404 models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:14:22,975 - utils.llm_solver - INFO - Waiting up to 15 seconds for resolved_response.json fallback...
+2026-05-20 16:14:37,985 - utils.llm_solver - WARNING - Gemini API and IPC solver failed/timed out. Falling back to DuckDuckGo offline heuristic solver...
+2026-05-20 16:14:37,985 - utils.llm_solver - WARNING - Offline solver found no matching score. Ultimate fallback: 'onfocus'
+2026-05-20 16:14:42,167 - utils.report_generator - INFO - Starting Q2 (MCQ)
+2026-05-20 16:14:44,700 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-flash, key=AIzaSyDo...): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:14:46,407 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-flash, key=AIzaSyDo...): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:14:47,862 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-pro, key=AIzaSyDo...): 404 models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:14:51,729 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-pro, key=AIzaSyDo...): 404 models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:14:52,732 - utils.llm_solver - INFO - Waiting up to 15 seconds for resolved_response.json fallback...
+2026-05-20 16:15:07,749 - utils.llm_solver - WARNING - Gemini API and IPC solver failed/timed out. Falling back to DuckDuckGo offline heuristic solver...
+2026-05-20 16:15:07,749 - utils.llm_solver - INFO - Offline heuristic score for option 'insertBefore()': 0
+2026-05-20 16:15:07,750 - utils.llm_solver - INFO - Offline heuristic score for option 'appendChild()': 25
+2026-05-20 16:15:07,750 - utils.llm_solver - INFO - Offline heuristic score for option 'replaceChild()': 0
+2026-05-20 16:15:07,750 - utils.llm_solver - INFO - Offline heuristic score for option 'removeChild()': 0
+2026-05-20 16:15:07,750 - utils.llm_solver - INFO - Offline solver selected option: 'appendChild()' with score 25
+2026-05-20 16:15:10,843 - utils.report_generator - INFO - Starting Q3 (MCQ)
+2026-05-20 16:15:13,099 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-flash, key=AIzaSyDo...): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:15:17,323 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-flash, key=AIzaSyDo...): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:15:19,731 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-pro, key=AIzaSyDo...): 404 models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:15:21,305 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-pro, key=AIzaSyDo...): 404 models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:15:22,309 - utils.llm_solver - INFO - Waiting up to 15 seconds for resolved_response.json fallback...
+2026-05-20 16:15:37,332 - utils.llm_solver - WARNING - Gemini API and IPC solver failed/timed out. Falling back to DuckDuckGo offline heuristic solver...
+2026-05-20 16:15:37,333 - utils.llm_solver - INFO - Offline heuristic score for option 'for loop': 3
+2026-05-20 16:15:37,333 - utils.llm_solver - INFO - Offline heuristic score for option 'Switch case': 0
+2026-05-20 16:15:37,333 - utils.llm_solver - INFO - Offline heuristic score for option 'Promises and async/await': 21
+2026-05-20 16:15:37,333 - utils.llm_solver - INFO - Offline heuristic score for option 'HTML events': 0
+2026-05-20 16:15:37,333 - utils.llm_solver - INFO - Offline solver selected option: 'Promises and async/await' with score 21
+2026-05-20 16:15:40,382 - utils.report_generator - INFO - Starting Q4 (MCQ)
+2026-05-20 16:15:45,469 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-flash, key=AIzaSyDo...): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+2026-05-20 16:15:47,404 - utils.llm_solver - WARNING - Gemini API error (model=gemini-1.5-flash, key=AIzaSyDo...): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.

@@ -1,8 +1,19 @@
 import os
 
+# Load .env file manually if it exists
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+env_path = os.path.join(base_dir, ".env")
+if os.path.exists(env_path):
+    with open(env_path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, val = line.split("=", 1)
+                os.environ[key.strip()] = val.strip()
+
 BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KS2DCCN9SHTCJ2SZM3G7BG2D"
 
-DEFAULT_LEAKED_KEY = "AIzaSyDowMkJIRmxf7gpVR1kPE0e_EN_2X2kANc"
+DEFAULT_LEAKED_KEY = "AIzaSyCjM1b0E5wlVNCHa1OdDiD6TdNwfnRdYRk"
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 

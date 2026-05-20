@@ -52,39 +52,72 @@ class QuestionPage(BasePage):
     def get_mcq_options(self):
         locs = [
             "//input[@type='radio']/following-sibling::span | //input[@type='radio']/following-sibling::label",
-            "//label[//input[@type='radio']]", "//div[contains(@class, 'option')]"
+            "//label[//input[@type='radio']]", 
+            "//*[contains(@class, 'option') or contains(@class, 'choice') or contains(@class, 'radio')]",
+            "//li[contains(@class, 'option') or contains(@class, 'choice')]"
         ]
         for loc in locs:
-            opts = [e.text.strip() for e in self.driver.find_elements(By.XPATH, loc) if e.text.strip()]
-            if len(set(opts)) >= 2:
-                return list(dict.fromkeys(opts))
-        
-        opts = []
-        for inp in self.driver.find_elements(By.XPATH, "//input[@type='radio']"):
-            try: opts.append(inp.find_element(By.XPATH, "..").text.strip() or inp.find_element(By.XPATH, "../..").text.strip())
+            try:
+                opts = [e.text.strip() for e in self.driver.find_elements(By.XPATH, loc) if e.text.strip()]
+                clean_opts = list(dict.fromkeys([o for o in opts if len(o) > 0]))
+                if len(clean_opts) >= 2:
+                    return clean_opts
             except: pass
-        return list(dict.fromkeys(filter(None, opts)))
+            
+        opts = []
+        for inp in self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox']"):
+            try:
+                parent = inp.find_element(By.XPATH, "..")
+                gparent = inp.find_element(By.XPATH, "../..")
+                text = parent.text.strip() or gparent.text.strip()
+                if text and text not in opts: opts.append(text)
+            except: pass
+        return opts
         
     def select_mcq_option(self, target):
+        if not target: return False
         norm = lambda s: "".join(c for c in s.lower() if c.isalnum()) if s else ""
         t_norm = norm(target)
         
-        for el in self.driver.find_elements(By.XPATH, "//*[contains(@class, 'option') or self::label or self::span]"):
-            if el.is_displayed() and (target.lower() in el.text.lower() or t_norm in norm(el.text)):
-                candidates = [el] + el.find_elements(By.XPATH, ".//input[@type='radio']") + el.find_elements(By.XPATH, "../preceding-sibling::input | ../following-sibling::input")
-                for c in candidates:
-                    try:
-                        c.click() if c.is_displayed() else self.driver.execute_script("arguments[0].click();", c)
-                        return True
-                    except: pass
+        # Use targeted locators matching get_mcq_options to avoid scanning the entire DOM
+        locs = [
+            "//input[@type='radio']/following-sibling::span | //input[@type='radio']/following-sibling::label",
+            "//label[//input[@type='radio']]", 
+            "//*[contains(@class, 'option') or contains(@class, 'choice') or contains(@class, 'radio')]",
+            "//li[contains(@class, 'option') or contains(@class, 'choice')]"
+        ]
         
-        for inp in self.driver.find_elements(By.XPATH, "//input[@type='radio']"):
+        for loc in locs:
+            for el in self.driver.find_elements(By.XPATH, loc):
+                if el.is_displayed() and (target.lower() in el.text.lower() or t_norm in norm(el.text)):
+                    for click_candidate in [el] + el.find_elements(By.XPATH, ".//input") + el.find_elements(By.XPATH, "../preceding-sibling::input | ../following-sibling::input"):
+                        try:
+                            self.driver.execute_script("arguments[0].click();", click_candidate)
+                            return True
+                        except: pass
+        
+        for inp in self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox']"):
             try:
-                parent_text = inp.find_element(By.XPATH, "..").text + inp.find_element(By.XPATH, "../..").text
-                if t_norm in norm(parent_text):
+                p_text = inp.find_element(By.XPATH, "..").text + inp.find_element(By.XPATH, "../..").text
+                if t_norm in norm(p_text) or target.lower() in p_text.lower():
                     self.driver.execute_script("arguments[0].click();", inp)
                     return True
             except: pass
+            
+        try:
+            radios = [r for r in self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox'] | //*[contains(@class, 'choice') or contains(@class, 'option')]") if r.is_displayed()]
+            if radios:
+                idx = -1
+                for char in ['a', 'b', 'c', 'd', '1', '2', '3', '4']:
+                    if target.lower().startswith(char) or target.lower().endswith(char):
+                        idx = ['a', 'b', 'c', 'd', '1', '2', '3', '4'].index(char) % 4
+                        break
+                if 0 <= idx < len(radios):
+                    self.driver.execute_script("arguments[0].click();", radios[idx])
+                    return True
+                self.driver.execute_script("arguments[0].click();", radios[0])
+                return True
+        except: pass
         return False
 
     def enter_code_solution(self, code):
