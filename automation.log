@@ -13430,3 +13430,56 @@ Stacktrace:
 2026-05-20 17:58:38,514 - utils.llm_solver - INFO - Waiting for Duck.ai response generation to start...
 2026-05-20 17:58:54,300 - utils.llm_solver - WARNING - Duck.ai response generation failed to start in time.
 2026-05-20 17:58:54,303 - utils.llm_solver - INFO - Waiting for Duck.ai response generation to complete and stabilize...
+2026-05-20 17:59:25,421 - utils.llm_solver - INFO - Duck.ai response generation completely finished: 0 chars
+2026-05-20 17:59:26,430 - MainRunner - ERROR - Fatal error: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 82, in run_assessment_flow
+    _solve_coding(pages['question'], solver, report, sec_name, q_text, global_q)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 128, in _solve_coding
+    code = solver.solve_coding(q_text, lang, screenshot_path=None)
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\llm_solver.py", line 335, in solve_coding
+    code = self._gen_content(prompt, "coding", screenshot_path)
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\llm_solver.py", line 232, in _gen_content
+    res = self.solve_via_duck_ai(prompt, screenshot_path, is_coding=(req_type == "coding"))
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\llm_solver.py", line 220, in solve_via_duck_ai
+    self.driver.switch_to.window(orig_handle)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\switch_to.py", line 114, in window
+    self._w3c_window(window_name)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\switch_to.py", line 122, in _w3c_window
+    send_handle(window_name)
+    ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\switch_to.py", line 118, in send_handle
+    self._driver.execute(Command.SWITCH_TO_WINDOW, {"handle": h})
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x41b593+105d3]
+	chromedriver!GetHandleVerifier [0x41b6c4+10704]
+	chromedriver!(No symbol) [0x221cde]
+	chromedriver!(No symbol) [0x25fb77]
+	chromedriver!(No symbol) [0x28d636]
+	chromedriver!(No symbol) [0x288861]
+	chromedriver!(No symbol) [0x288241]
+	chromedriver!(No symbol) [0x1f502e]
+	chromedriver!(No symbol) [0x1f55ce]
+	chromedriver!(No symbol) [0x1f5aad]
+	chromedriver!GetHandleVerifier [0x6a3014+298054]
+	chromedriver!GetHandleVerifier [0x69e603+293643]
+	chromedriver!GetHandleVerifier [0x6bea05+2b3a45]
+	chromedriver!GetHandleVerifier [0x4354e8+2a528]
+	chromedriver!GetHandleVerifier [0x43cd1d+31d5d]
+	chromedriver!(No symbol) [0x1f4ba6]
+	chromedriver!(No symbol) [0x1f41e0]
+	chromedriver!GetHandleVerifier [0x8087af+3fd7ef]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
