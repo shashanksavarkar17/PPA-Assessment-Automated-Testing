@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Let's set up a working directory named /app inside the container.
 WORKDIR /app
 
+# Upgrade pip and wheel to their latest secure versions to fix vulnerabilities (e.g., CVE-2026-24049, CVE-2023-5752, etc.)
+RUN pip install --no-cache-dir --upgrade pip wheel
+
 # Copy the requirements file first to maximize Docker build caching efficiency!
 COPY requirements.txt .
 
