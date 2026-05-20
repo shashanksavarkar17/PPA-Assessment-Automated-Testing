@@ -1,0 +1,37 @@
+# Exclude Git files
+.git/
+.gitignore
+
+# Exclude local Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Exclude compiled Python cache files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.pytest_cache/
+
+# Exclude secrets and environments
+.env
+*.env
+secrets.json
+
+# Exclude automation logs and test reports
+automation.log
+telemetry.json
+assessment_summary.html
+assessment_summary.txt
+
+# Exclude screen captures and screenshots
+screenshots/
+failures/
+
+# Exclude editor and OS specific folders
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

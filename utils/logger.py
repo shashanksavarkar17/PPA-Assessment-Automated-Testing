@@ -6,7 +6,8 @@ class ConsoleFmt(logging.Formatter):
     def format(self, r):
         m = r.getMessage()
         # Truncate messages with multiple lines or very long text so our terminal stays clean!
-        m = f"{m.split('\n')[0][:157]}..." if len(m) > 160 or '\n' in m else m
+        if len(m) > 160 or '\n' in m:
+            m = f"{m.splitlines()[0][:157]}..."
         # Green checkmark for success, blue info dot, yellow warning, and red X for errors.
         p = f"\033[92m✔" if r.levelno == 20 and any(k in m.lower() for k in ["success", "complete", "done", "passed"]) else (f"\033[94mℹ" if r.levelno == 20 else (f"\033[93m⚠" if r.levelno == 30 else f"\033[91m✖"))
         return f"{p}\033[0m \033[1m[{r.name.split('.')[-1][:12]}]\033[0m {m}"

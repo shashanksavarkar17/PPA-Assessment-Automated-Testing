@@ -27,8 +27,10 @@ def run_assessment_flow():
     
     driver = None
     try:
-        # Fire up our custom Chrome driver instance.
-        driver = get_chrome_driver(headless=False)
+        # Fire up our custom Chrome driver instance (checking if we told it to run headlessly).
+        import os
+        run_headless = os.environ.get("HEADLESS", "false").lower() == "true"
+        driver = get_chrome_driver(headless=run_headless)
         
         pages = {
             'instructions': InstructionsPage(driver),
