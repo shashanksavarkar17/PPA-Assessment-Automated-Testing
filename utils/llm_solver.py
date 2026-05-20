@@ -1,6 +1,20 @@
-import os, json, time, urllib.request, urllib.parse, re
+import os
+import json
+import time
+import urllib.request
+import urllib.parse
+import re
+from difflib import SequenceMatcher
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 from config import settings
 from utils.logger import get_logger
+
+try:
+    import tkinter as tk
+except ImportError:
+    tk = None
 
 log = get_logger(__name__)
 
@@ -10,18 +24,17 @@ class GeminiSolver:
         self.duck_window = None
 
     def solve_via_duck_ai(self, prompt, screenshot_path=None, is_coding=False):
-        if not self.driver: return None
-        from selenium.webdriver.common.by import By
+        if not self.driver:
+            return None
 
         try:
             orig_handle = self.driver.current_window_handle
-        except:
-            log.error("Browser session is dead — cannot solve.")
+        except Exception as e:
+            log.error(f"Browser session is dead: {e}")
             return None
 
+        # Resolve or reuse Duck.ai window handle
         duck_handle = None
-
-        # Reuse existing Duck.ai tab if it's still alive
         if self.duck_window and self.duck_window in self.driver.window_handles:
             duck_handle = self.duck_window
         else:
@@ -38,9 +51,8 @@ class GeminiSolver:
             try: self.driver.switch_to.window(orig_handle)
             except: pass
 
-        # Open a new Duck.ai tab if needed
         if not duck_handle:
-            log.info("Opening new Duck.ai tab...")
+            log.info("Opening background Duck.ai tab...")
             self.driver.execute_script("window.open('about:blank', '_blank');")
             time.sleep(0.5)
             for h in self.driver.window_handles:
@@ -50,74 +62,55 @@ class GeminiSolver:
                     break
 
         if not duck_handle:
-            log.error("Could not create Duck.ai tab.")
+            log.error("Could not resolve Duck.ai tab.")
             return None
 
         self.driver.switch_to.window(duck_handle)
         time.sleep(0.3)
 
-        # Navigate to Duck.ai if not already there
-        current = self.driver.current_url
-        if "duck.ai" not in current and "duckduckgo.com/chat" not in current:
+        # Load page or reset chat state
+        if "duck.ai" not in self.driver.current_url and "duckduckgo.com/chat" not in self.driver.current_url:
             self.driver.get("https://duck.ai/")
-            # Wait for the textarea to actually appear (up to 10s)
             for _ in range(20):
                 time.sleep(0.5)
-                try:
-                    tas = self.driver.find_elements(By.TAG_NAME, "textarea")
-                    if tas: break
-                except: pass
+                if self.driver.find_elements(By.TAG_NAME, "textarea"):
+                    break
         else:
-            # Click "New Chat" to reset context
             try:
                 for btn in self.driver.find_elements(By.XPATH, "//button[contains(text(),'New Chat') or contains(text(),'New chat') or contains(normalize-space(.),'New Chat')]"):
                     if btn.is_displayed():
                         self.driver.execute_script("arguments[0].click();", btn)
-                        time.sleep(1)
+                        time.sleep(0.5)
                         break
             except: pass
 
-        # Dismiss terms/agreements popup
-        try:
-            btns = self.driver.find_elements(By.XPATH, "//button[contains(normalize-space(.),'Agree') or contains(normalize-space(.),'Continue') or contains(normalize-space(.),'Get Started')]")
-            for btn in btns:
-                if btn.is_displayed():
-                    self.driver.execute_script("arguments[0].click();", btn)
-                    time.sleep(1)
-                    break
-        except: pass
-
-        # Also handle model selection if it appears
-        try:
-            model_btns = self.driver.find_elements(By.XPATH, "//button[contains(normalize-space(.),'Chat')]")
-            for btn in model_btns:
-                if btn.is_displayed():
-                    self.driver.execute_script("arguments[0].click();", btn)
-                    time.sleep(1)
-                    break
-        except: pass
+        # Handle onboarding, terms, and initial popups
+        for xpath in [
+            "//button[contains(normalize-space(.),'Agree') or contains(normalize-space(.),'Continue') or contains(normalize-space(.),'Get Started')]",
+            "//button[contains(normalize-space(.),'Chat')]"
+        ]:
+            try:
+                for btn in self.driver.find_elements(By.XPATH, xpath):
+                    if btn.is_displayed():
+                        self.driver.execute_script("arguments[0].click();", btn)
+                        time.sleep(0.5)
+            except: pass
 
         try:
-            # Upload screenshot if available
             if screenshot_path and os.path.exists(screenshot_path):
-                try:
-                    self.driver.find_element(By.XPATH, "//input[@type='file']").send_keys(screenshot_path)
-                    time.sleep(1.5)
-                except: pass
+                self.driver.find_element(By.XPATH, "//input[@type='file']").send_keys(screenshot_path)
+                time.sleep(1.5)
 
-            # Wait for textarea to be ready (retry up to 8s)
             ta = None
             for _ in range(16):
-                try:
-                    candidates = self.driver.find_elements(By.TAG_NAME, "textarea")
-                    if candidates:
-                        ta = candidates[0]
-                        break
-                except: pass
+                tas = self.driver.find_elements(By.TAG_NAME, "textarea")
+                if tas:
+                    ta = tas[0]
+                    break
                 time.sleep(0.5)
 
             if not ta:
-                log.error("Duck.ai textarea never appeared.")
+                log.error("Duck.ai textarea missing.")
                 self._safe_switch(orig_handle)
                 return None
 
@@ -125,19 +118,20 @@ class GeminiSolver:
             ta.clear()
             time.sleep(0.2)
 
-            # Paste prompt via clipboard (fast) or JS fallback
+            # Paste prompt via OS clipboard or DOM fallback
             pasted = False
-            try:
-                import tkinter as tk
-                from selenium.webdriver.common.action_chains import ActionChains
-                from selenium.webdriver.common.keys import Keys
-                root = tk.Tk(); root.withdraw()
-                root.clipboard_clear(); root.clipboard_append(prompt)
-                root.update(); root.destroy()
-                ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
-                pasted = True
-                time.sleep(0.3)
-            except: pass
+            if tk:
+                try:
+                    root = tk.Tk()
+                    root.withdraw()
+                    root.clipboard_clear()
+                    root.clipboard_append(prompt)
+                    root.update()
+                    root.destroy()
+                    ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+                    pasted = True
+                    time.sleep(0.3)
+                except: pass
 
             if not pasted:
                 self.driver.execute_script("""
@@ -146,24 +140,18 @@ class GeminiSolver:
                 """, ta, prompt)
                 time.sleep(0.3)
 
-            # Submit — try submit button with aria-label Send, then standard submit button, then Enter key
+            # Submit prompt
             submitted = False
-            try:
-                sub = self.driver.find_element(By.XPATH, "//button[@aria-label='Send']")
-                self.driver.execute_script("arguments[0].click();", sub)
-                submitted = True
-            except: pass
-
-            if not submitted:
+            for xpath in ["//button[@aria-label='Send']", "//button[@type='submit']"]:
                 try:
-                    sub = self.driver.find_element(By.XPATH, "//button[@type='submit']")
-                    self.driver.execute_script("arguments[0].click();", sub)
+                    btn = self.driver.find_element(By.XPATH, xpath)
+                    self.driver.execute_script("arguments[0].click();", btn)
                     submitted = True
+                    break
                 except: pass
 
             if not submitted:
                 try:
-                    from selenium.webdriver.common.keys import Keys
                     ta.send_keys(Keys.RETURN)
                     submitted = True
                 except: pass
@@ -171,16 +159,16 @@ class GeminiSolver:
             if submitted:
                 log.info("Prompt sent successfully!")
             else:
-                log.error("Could not submit prompt.")
+                log.error("Could not send prompt.")
                 self._safe_switch(orig_handle)
                 return None
 
         except Exception as e:
-            log.error(f"Failed to interact with Duck.ai: {e}")
+            log.error(f"Failed to submit to Duck.ai: {e}")
             self._safe_switch(orig_handle)
             return None
 
-        # Wait for response to start streaming
+        # Wait for response to begin
         log.info("Waiting for response to start...")
         started = False
         wait_cycles = 60 if screenshot_path else 30
@@ -190,18 +178,17 @@ class GeminiSolver:
                 msg_el = self.driver.find_elements(By.XPATH, "//*[contains(@id, 'assistant-message')]")
                 if msg_el:
                     txt = msg_el[-1].text.strip()
-                    # Ignore placeholder generating/thinking messages
                     if txt and not any(p in txt.lower() for p in ["generating response", "thinking"]):
                         started = True
                         break
             except: pass
 
         if not started:
-            log.warning("Response never started. Returning None.")
+            log.warning("Response never started.")
             self._safe_switch(orig_handle)
             return None
 
-        # Wait for response to finish (text stabilizes and placeholder is gone)
+        # Wait for response to finish (text stabilizes)
         log.info("Waiting for response to finish...")
         last_text, stable = "", 0
         max_wait = 120 if is_coding else 60
@@ -210,24 +197,25 @@ class GeminiSolver:
             txt = ""
             try:
                 msg_el = self.driver.find_elements(By.XPATH, "//*[contains(@id, 'assistant-message')]")
-                if msg_el: txt = msg_el[-1].text.strip()
+                if msg_el:
+                    txt = msg_el[-1].text.strip()
             except: pass
 
-            # Re-verify we aren't matching any placeholder loading text
             if any(p in txt.lower() for p in ["generating response", "thinking"]):
                 stable = 0
                 continue
 
             if txt and txt == last_text:
                 stable += 1
-                # Wait for 6 consecutive stable cycles (3 full seconds) for code, or 3 cycles for text
-                if stable >= (6 if is_coding else 3): break
+                if stable >= (6 if is_coding else 3):
+                    break
             else:
-                if txt: last_text, stable = txt, 0
+                if txt:
+                    last_text, stable = txt, 0
 
         log.info(f"Response complete: {len(last_text)} chars")
 
-        # For coding: try to copy the code block cleanly
+        # Copy clean block for coding
         if is_coding and last_text:
             try:
                 time.sleep(0.5)
@@ -239,17 +227,18 @@ class GeminiSolver:
                     if btns:
                         self.driver.execute_script("arguments[0].scrollIntoView(true); arguments[0].click();", btns[-1])
                         time.sleep(0.8)
-                        try:
-                            import tkinter as tk
-                            root = tk.Tk(); root.withdraw()
-                            code = root.clipboard_get(); root.destroy()
-                            if code and len(code.strip()) > 50:
-                                last_text = code
-                        except: pass
+                        if tk:
+                            try:
+                                root = tk.Tk()
+                                root.withdraw()
+                                code = root.clipboard_get()
+                                root.destroy()
+                                if code and len(code.strip()) > 50:
+                                    last_text = code
+                            except: pass
                         break
             except: pass
 
-        # Switch back safely
         self._safe_switch(orig_handle)
 
         if not last_text:
@@ -260,7 +249,6 @@ class GeminiSolver:
         return last_text
 
     def _safe_switch(self, handle):
-        """Switch back to the original window, surviving session crashes."""
         try:
             if handle in self.driver.window_handles:
                 self.driver.switch_to.window(handle)
@@ -269,30 +257,35 @@ class GeminiSolver:
                 handles = self.driver.window_handles
                 if handles:
                     self.driver.switch_to.window(handles[0])
-                    log.warning("Original tab lost — switched to first available tab.")
+                    log.warning("Original tab lost, switched to fallback tab.")
         except Exception as e:
-            log.error(f"Failed to switch back: {e}")
+            log.error(f"Failed to switch back safely: {e}")
 
     def _gen_content(self, prompt, req_type="coding", screenshot_path=None):
         if self.driver:
             res = self.solve_via_duck_ai(prompt, screenshot_path, is_coding=(req_type == "coding"))
-            if res: return res.strip()
+            if res:
+                return res.strip()
 
-        # File-based IPC fallback
+        # IPC Fallback
         ws = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         req_path = os.path.join(ws, "pending_request.json")
         res_path = os.path.join(ws, "resolved_response.json")
         try:
-            with open(req_path, "w") as f: json.dump({"type": req_type, "prompt": prompt}, f)
-        except: return None
+            with open(req_path, "w") as f:
+                json.dump({"type": req_type, "prompt": prompt}, f)
+        except:
+            return None
 
         log.info("Checking for resolved fallback responses...")
         for _ in range(15):
             if os.path.exists(res_path):
                 try:
-                    with open(res_path, "r") as f: data = json.load(f)
+                    with open(res_path, "r") as f:
+                        data = json.load(f)
                     for p in [req_path, res_path]:
-                        if os.path.exists(p): os.remove(p)
+                        if os.path.exists(p):
+                            os.remove(p)
                     return data.get("response", "").strip()
                 except: pass
             time.sleep(1)
@@ -308,10 +301,12 @@ class GeminiSolver:
             url = "https://html.duckduckgo.com/html/"
             data = urllib.parse.urlencode({"q": query}).encode("utf-8")
             req = urllib.request.Request(url, data=data, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
-            with urllib.request.urlopen(req, timeout=5) as r: html = r.read().decode('utf-8')
+            with urllib.request.urlopen(req, timeout=5) as r:
+                html = r.read().decode('utf-8')
             snippets = [re.sub(r'<[^>]+>', '', s).replace('\n', ' ').strip() for s in re.findall(r'<a class="result__snippet"[^>]*>(.*?)</a>', html, re.DOTALL)[:4]]
             return "\n".join(f"- {s}" for s in snippets if s)
-        except: return ""
+        except:
+            return ""
 
     def solve_mcq(self, question, options, screenshot_path=None):
         ctx = self._search(question[:200])
@@ -323,7 +318,7 @@ class GeminiSolver:
 
         resp = self._gen_content(prompt, "mcq", screenshot_path)
         if not resp:
-            log.warning("Solver failed. Running offline keyword-matching heuristic...")
+            log.warning("Running offline keyword-matching heuristic...")
             if ctx and options:
                 best_opt, best_score = None, -1
                 for opt in options:
@@ -332,7 +327,8 @@ class GeminiSolver:
                     words = [w for w in re.split(r'\W+', clean_opt.lower()) if len(w) > 2]
                     word_score = sum(ctx.lower().count(w) for w in words) if words else 0
                     score = exact * 5 + word_score
-                    if score > best_score: best_score, best_opt = score, opt
+                    if score > best_score:
+                        best_score, best_opt = score, opt
 
                 if best_opt and best_score > 0:
                     return "Offline heuristic match", best_opt
@@ -347,10 +343,9 @@ class GeminiSolver:
         ans = a_match.group(1).strip() if a_match else clean.split('\n')[-1]
 
         if ans and options:
-            from difflib import SequenceMatcher as SM
             best = max(options, key=lambda o: max(
                 1.0 if o.lower() == ans.lower() or o.lower() in ans.lower() else 0.0,
-                SM(None, o.lower(), ans.lower()).ratio()
+                SequenceMatcher(None, o.lower(), ans.lower()).ratio()
             ), default=None)
             return reasoning, best
         return reasoning, None
@@ -362,6 +357,7 @@ class GeminiSolver:
             prompt = f"I have uploaded a screenshot of the coding task. Solve the coding task and write executable {lang} code.\nRules: {rules}"
 
         code = self._gen_content(prompt, "coding", screenshot_path)
-        if not code: return None
+        if not code:
+            return None
         code = re.sub(r'^```[a-zA-Z\+\#]*\n?', '', code, flags=re.I).strip()
         return re.sub(r'```$', '', code).strip()
