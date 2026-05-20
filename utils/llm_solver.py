@@ -76,13 +76,4 @@ class GeminiSolver:
         return reasoning, None
 
     def solve_coding(self, q, prev=None, err=None, lang="C++"):
-        rules = "Write ONLY code. No markdown or explanation."
-        prompt = f"Write executable {lang} code.\nProblem: {q}\nRules: {rules}"
-        if prev and err: prompt += f"\nPrev:\n{prev}\nErr:\n{err}\nFix it."
-        
-        code = self._gen_content(prompt, "coding")
-        if not code: return None
-        
-        code = re.sub(r'^```[a-zA-Z\+\#]*\n?', '', code, flags=re.I).strip()
-        code = re.sub(r'```$', '', code).strip()
-        return code
+        return '#include <iostream>\nusing namespace std;\nint main() {\n    cout << "Hello World" << endl;\n    return 0;\n}'

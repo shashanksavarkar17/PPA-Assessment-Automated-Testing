@@ -119,32 +119,22 @@ def _solve_coding(page, solver, report, sec_name, q_text, q_idx):
     lang = page.get_selected_language()
     report.start_question(q_idx, "CODING", f"[{sec_name}] {q_text}")
     
-    code, err, passed = None, None, False
-    for attempt in range(4):
-        code = solver.solve_coding(q_text, code, err, lang)
-        if not code: continue
-        
+    code = solver.solve_coding(q_text, None, None, lang)
+    if code:
         page.enter_code_solution(code)
         page.run_code()
         passed, err = page.get_run_result()
         
         ss = None
         if not passed:
-            try: ss = page.helpers.take_screenshot(f"fail_Q{q_idx}_{attempt}")
+            try: ss = page.helpers.take_screenshot(f"fail_Q{q_idx}_0")
             except: pass
             
-        report.add_coding_attempt(q_idx, attempt+1, code, err if not passed else None, ss)
-        if passed: break
-        time.sleep(3)
-        
-    status = "FAILED"
-    if code:
-        try:
-            page.submit_code()
-            sub_pass, err = page.get_code_result()
-            status = "PASSED" if sub_pass else ("PARTIAL_SUCCESS" if passed else "FAILED")
-        except Exception as e:
-            err = str(e)
+        report.add_coding_attempt(q_idx, 1, code, err if not passed else None, ss)
+        status = "PASSED" if passed else "FAILED"
+    else:
+        status = "FAILED"
+        err = "No code generated"
             
     report.set_coding_final(q_idx, code or "N/A", status, lang, err or "N/A")
     try: page.click_save_and_next()
