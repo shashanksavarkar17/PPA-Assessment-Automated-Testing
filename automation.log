@@ -12044,3 +12044,151 @@ Stacktrace:
 	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
 
 
+2026-05-20 15:35:57,434 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 15:35:57,434 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 15:36:28,728 - MainRunner - INFO - Section 1: Section: Section I
+2026-05-20 15:36:33,922 - utils.report_generator - INFO - Starting Q1 (CODING)
+2026-05-20 15:36:44,375 - utils.report_generator - INFO - Starting Q2 (CODING)
+2026-05-20 15:36:46,544 - MainRunner - ERROR - Fatal error: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 82, in run_assessment_flow
+    _solve_coding(pages['question'], solver, report, sec_name, q_text, global_q)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 124, in _solve_coding
+    passed, err = page.get_run_result()
+                  ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\question_page.py", line 157, in get_run_result
+    for el in self.driver.find_elements(By.XPATH, loc):
+              ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 899, in find_elements
+    return self.execute(Command.FIND_ELEMENTS, {"using": by, "value": value})["value"] or []
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x4cb593+105d3]
+	chromedriver!GetHandleVerifier [0x4cb6c4+10704]
+	chromedriver!(No symbol) [0x2d1cde]
+	chromedriver!(No symbol) [0x30fb77]
+	chromedriver!(No symbol) [0x33d636]
+	chromedriver!(No symbol) [0x338861]
+	chromedriver!(No symbol) [0x338241]
+	chromedriver!(No symbol) [0x2a502e]
+	chromedriver!(No symbol) [0x2a55ce]
+	chromedriver!(No symbol) [0x2a5aad]
+	chromedriver!GetHandleVerifier [0x753014+298054]
+	chromedriver!GetHandleVerifier [0x74e603+293643]
+	chromedriver!GetHandleVerifier [0x76ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0x4e54e8+2a528]
+	chromedriver!GetHandleVerifier [0x4ecd1d+31d5d]
+	chromedriver!(No symbol) [0x2a4ba6]
+	chromedriver!(No symbol) [0x2a41e0]
+	chromedriver!GetHandleVerifier [0x8b87af+3fd7ef]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 15:38:13,554 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 15:38:13,554 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 15:38:17,445 - MainRunner - ERROR - Fatal error: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 28, in run_assessment_flow
+    driver = get_chrome_driver(headless=False)
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\driver_factory.py", line 16, in get_chrome_driver
+    driver.set_window_size(1920, 1080)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 980, in set_window_size
+    self.set_window_rect(width=int(width), height=int(height))
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 1055, in set_window_rect
+    return self.execute(Command.SET_WINDOW_RECT, {"x": x, "y": y, "width": width, "height": height})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\webdriver.py", line 468, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: failed to change window state to 'normal', current state is 'maximized'
+  (Session info: chrome=148.0.7778.168)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x4cb593+105d3]
+	chromedriver!GetHandleVerifier [0x4cb6c4+10704]
+	chromedriver!(No symbol) [0x2d1ea0]
+	chromedriver!(No symbol) [0x2b4df0]
+	chromedriver!(No symbol) [0x2b2849]
+	chromedriver!(No symbol) [0x2b469d]
+	chromedriver!(No symbol) [0x36e4e2]
+	chromedriver!(No symbol) [0x33d77c]
+	chromedriver!(No symbol) [0x35a936]
+	chromedriver!(No symbol) [0x33d516]
+	chromedriver!(No symbol) [0x3108e9]
+	chromedriver!(No symbol) [0x3116a4]
+	chromedriver!GetHandleVerifier [0x753014+298054]
+	chromedriver!GetHandleVerifier [0x74e603+293643]
+	chromedriver!GetHandleVerifier [0x76ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0x4e54e8+2a528]
+	chromedriver!GetHandleVerifier [0x4ecd1d+31d5d]
+	chromedriver!GetHandleVerifier [0x4d3e68+18ea8]
+	chromedriver!GetHandleVerifier [0x4d4015+19055]
+	chromedriver!GetHandleVerifier [0x4bd65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 15:38:25,019 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 15:38:25,020 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 15:38:56,438 - MainRunner - ERROR - Fatal error: Traceback (most recent call last):
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\main.py", line 43, in run_assessment_flow
+    pages['instructions'].wait_for_page_load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\pages\instructions_page.py", line 11, in wait_for_page_load
+    self.helpers.wait_for_element(self.HEAD_LOC)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\utils\selenium_helpers.py", line 20, in wait_for_element
+    return wait.until(EC.visibility_of_element_located(locator))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shashank Savarkar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x4cb593+105d3]
+	chromedriver!GetHandleVerifier [0x4cb6c4+10704]
+	chromedriver!(No symbol) [0x2d1ea0]
+	chromedriver!(No symbol) [0x31b28a]
+	chromedriver!(No symbol) [0x31b52b]
+	chromedriver!(No symbol) [0x35d052]
+	chromedriver!(No symbol) [0x33d7c4]
+	chromedriver!(No symbol) [0x35a936]
+	chromedriver!(No symbol) [0x33d516]
+	chromedriver!(No symbol) [0x3108e9]
+	chromedriver!(No symbol) [0x3116a4]
+	chromedriver!GetHandleVerifier [0x753014+298054]
+	chromedriver!GetHandleVerifier [0x74e603+293643]
+	chromedriver!GetHandleVerifier [0x76ea05+2b3a45]
+	chromedriver!GetHandleVerifier [0x4e54e8+2a528]
+	chromedriver!GetHandleVerifier [0x4ecd1d+31d5d]
+	chromedriver!GetHandleVerifier [0x4d3e68+18ea8]
+	chromedriver!GetHandleVerifier [0x4d4015+19055]
+	chromedriver!GetHandleVerifier [0x4bd65f+269f]
+	KERNEL32!BaseThreadInitThunk [0x760d5d49+19]
+	ntdll!RtlInitializeExceptionChain [0x77bed83b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77bed7c1+231]
+
+
+2026-05-20 15:39:07,437 - MainRunner - INFO - Starting assessment flow...
+2026-05-20 15:39:07,437 - utils.report_generator - INFO - Initialized telemetry.
+2026-05-20 15:39:35,368 - MainRunner - INFO - Section 1: Section: Section I - MCQ
+2026-05-20 15:39:38,475 - utils.report_generator - INFO - Starting Q1 (MCQ)
+2026-05-20 15:39:45,984 - utils.report_generator - INFO - Starting Q2 (MCQ)
+2026-05-20 15:39:50,707 - utils.report_generator - INFO - Starting Q3 (MCQ)
+2026-05-20 15:39:53,560 - utils.report_generator - INFO - Starting Q4 (MCQ)
+2026-05-20 15:39:56,332 - utils.report_generator - INFO - Starting Q5 (MCQ)
+2026-05-20 15:40:07,911 - MainRunner - INFO - Section 2: Section: Section II - CODING
+2026-05-20 15:40:13,055 - utils.report_generator - INFO - Starting Q6 (CODING)
+2026-05-20 15:40:21,816 - utils.report_generator - INFO - Starting Q7 (CODING)
+2026-05-20 15:40:32,399 - utils.report_generator - INFO - Saved telemetry.json
+2026-05-20 15:40:32,400 - MainRunner - INFO - Assessment complete. Press Enter to exit.

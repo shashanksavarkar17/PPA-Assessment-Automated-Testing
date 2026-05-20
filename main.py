@@ -102,13 +102,11 @@ def _solve_mcq(page, solver, report, sec_name, q_text, q_idx):
     opts = page.get_mcq_options()
     report.start_question(q_idx, "MCQ", f"[{sec_name}] {q_text}")
     
-    reasoning, ans = solver.solve_mcq(q_text, opts)
-    if not ans or not page.select_mcq_option(ans):
-        # Fallback to fuzzy match or first option
-        ans = next((o for o in opts if (ans and ans.lower() in o.lower()) or (ans and o.lower() in ans.lower())), opts[0] if opts else None)
-        if ans: page.select_mcq_option(ans)
+    ans = opts[0] if opts else None
+    if ans:
+        page.select_mcq_option(ans)
             
-    report.set_mcq_result(q_idx, opts, reasoning, ans, "PASSED")
+    report.set_mcq_result(q_idx, opts, "Bypassed AI selection.", ans, "PASSED")
     try: page.click_save_and_next()
     except: pass
 
