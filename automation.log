@@ -11550,3 +11550,116 @@ Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMEN
 2026-05-20 12:54:01,188 - utils.llm_solver - WARNING - All LLM attempts exhausted. Activating local IPC bridge.
 2026-05-20 12:54:01,197 - utils.llm_solver - INFO - Waiting up to 120s for manual input in 'resolved_response.json'...
 2026-05-20 12:56:01,241 - MainRunner - INFO - Closing browser session...
+2026-05-20 13:02:06,330 - MainRunner - INFO - Initializing Selenium Web Automation...
+2026-05-20 13:02:06,331 - utils.report_generator - INFO - Telemetry Timeline Event: Selenium Web Automation initialized.
+2026-05-20 13:02:06,331 - utils.report_generator - INFO - ReportGenerator telemetry initialized.
+2026-05-20 13:02:15,825 - utils.llm_solver - INFO - GeminiSolver initialized (Model: gemini-1.5-flash, Keys: 1)
+2026-05-20 13:02:15,826 - MainRunner - INFO - Navigating to assessment page: https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3
+2026-05-20 13:02:24,988 - pages.instructions_page - INFO - Waiting for Instructions page to load...
+2026-05-20 13:02:28,144 - utils.selenium_helpers - INFO - Retrieved text 'Programming Pathshala
+Live
+Ends in :
+00H 00M 00S
+ASSESSMENT TRIAL 1
+(MEDIUM)
+Duration
+90 Minutes
+Questions
+29
+START : 17 May 2026, 3:00 PM IST
+END : 28 May 2026, 3:15 PM IST
+GENERAL INSTRUCTIONS
+It‘s mandatory to disable all the browser extensions and enabled Add-ons, or open the assessment in incognito mode.
+If you are solving a coding problem, you will either be required to choose a programming language from the options that have been enabled by the administrator or choose your preferred programming language in case no options have been enabled by the administrator. Note: In case you‘re solving coding problems: All inputs are from STDIN and output to STDOUT.
+The operating system on your computer is one of the 3 mentioned below :
+Windows 7 and above
+Linux distributions
+Mac OS X 10.6 and above
+You are opening the assessment in the latest versions of one of the browsers mentioned below :
+Chrome/ Chromium
+Mozilla Firefox
+Microsoft Edge
+Apple Safari
+Color Index for Coding Questions :
+Successful submission (All test cases passed)
+Wrong answer (No test cases passed)
+Partially Correct (Some test cases passed, marks awarded proportionally)
+Unsolved
+Color Index for MCQ Questions :
+Attempted Questions
+Not Attempted Questions
+For MCQ Questions:
+Important: Click ‘Submit’ to save your answer
+Submitted answers can be changed by changing the answer selection and pressing submit again
+Unsubmitted selections will not be saved
+Your final selection is the only one that counts
+Partial Marking: For multiple correct answer MCQs (marked with "Partial Marking" tag), marks are awarded for each correct option selected
+Negative Marking: If a section has negative marking enabled (indicated at section level and on individual questions), a percentage of marks will be deducted for each wrong answer
+ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA
+I hereby declare that I have not impersonated, or allowed myself to be impersonated by any person for the purposes of this assignment. All work submitted in this assignment will be my own work and does not involve plagiarism or teamwork.
+Confirm and Proceed' from ('xpath', "//*[contains(normalize-space(.), 'ASSESSMENT INSTRUCTIONS BY PROGRAMMING PATHSHALA')]")
+2026-05-20 13:02:28,145 - pages.instructions_page - INFO - Heading validated successfully.
+2026-05-20 13:02:28,166 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[@role='checkbox']")
+2026-05-20 13:02:28,786 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[@role='checkbox']")
+2026-05-20 13:02:28,935 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Confirm and Proceed')]")
+2026-05-20 13:02:28,936 - pages.instructions_page - INFO - Instructions accepted.
+2026-05-20 13:02:28,937 - utils.report_generator - INFO - Telemetry Timeline Event: Instructions page validated and accepted.
+2026-05-20 13:02:28,937 - pages.login_page - INFO - Waiting for Login page...
+2026-05-20 13:02:37,067 - utils.selenium_helpers - INFO - Entered text into element: ('name', 'email')
+2026-05-20 13:02:37,187 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(text(), 'Send OTP')]")
+2026-05-20 13:02:37,188 - pages.login_page - INFO - Entered email and clicked Send OTP for: ppa@yopmail.com
+2026-05-20 13:02:37,188 - utils.report_generator - INFO - Telemetry Timeline Event: Triggered login with Candidate email.
+2026-05-20 13:02:37,188 - YopmailOTPFetcher - INFO - Opening secondary tab to fetch OTP for mailbox 'ppa'...
+2026-05-20 13:03:36,954 - YopmailOTPFetcher - INFO - Checking Yopmail inbox for dynamic OTP email...
+2026-05-20 13:03:37,235 - YopmailOTPFetcher - INFO - Selected the latest email in the inbox list.
+2026-05-20 13:03:37,348 - YopmailOTPFetcher - INFO - Successfully located OTP: 155884
+2026-05-20 13:03:37,378 - pages.login_page - INFO - Attempting to enter OTP automatically...
+2026-05-20 13:03:38,469 - pages.login_page - INFO - Detected a single OTP input box. Entering full code...
+2026-05-20 13:03:38,642 - pages.login_page - INFO - Clicked Verify button.
+2026-05-20 13:03:38,643 - pages.login_page - INFO - Waiting for successful authentication...
+2026-05-20 13:03:39,695 - pages.login_page - INFO - OTP authentication detected as SUCCESSFUL! Continuing automation...
+2026-05-20 13:03:39,696 - utils.report_generator - INFO - Telemetry Timeline Event: OTP scraped from Yopmail and validated.
+2026-05-20 13:03:39,697 - pages.candidate_details_page - INFO - Waiting for Candidate Details page...
+2026-05-20 13:03:39,725 - pages.candidate_details_page - INFO - Filling candidate details...
+2026-05-20 13:03:40,148 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Name')]/following::input[1]")
+2026-05-20 13:03:40,524 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Mobile Number')]/following::input[1]")
+2026-05-20 13:03:40,892 - utils.selenium_helpers - INFO - Entered text into element: ('xpath', "//label[starts-with(normalize-space(.), 'Roll Number')]/following::input[1]")
+2026-05-20 13:03:40,910 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-20 13:03:41,614 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Proceed')]")
+2026-05-20 13:03:41,616 - pages.candidate_details_page - INFO - Clicked Proceed on Candidate Details page.
+2026-05-20 13:03:41,617 - utils.report_generator - INFO - Telemetry Timeline Event: Candidate detail fields successfully submitted.
+2026-05-20 13:03:41,617 - pages.start_test_page - INFO - Waiting for Start Test page...
+2026-05-20 13:03:44,740 - utils.selenium_helpers - INFO - Scrolled to element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-20 13:03:45,344 - utils.selenium_helpers - INFO - Clicked element: ('xpath', "//button[contains(normalize-space(.), 'Start Test')]")
+2026-05-20 13:03:45,345 - pages.start_test_page - INFO - Clicked Start Test button.
+2026-05-20 13:03:45,345 - utils.report_generator - INFO - Telemetry Timeline Event: Assessment start confirmed.
+2026-05-20 13:03:45,346 - pages.summary_page - INFO - Waiting for Summary page to load...
+2026-05-20 13:03:52,053 - pages.summary_page - INFO - Scanning Overall Summary Page...
+2026-05-20 13:03:54,190 - pages.summary_page - INFO - Downloadable summary TXT created: C:\Users\Shashank Savarkar\OneDrive\Documents\SY ECE\4th Sem\PPA INTERNSHIP\Selenium\TestCase1\assessment_summary.txt
+2026-05-20 13:03:54,194 - utils.report_generator - INFO - Telemetry scanned structure set. Total questions: 29
+2026-05-20 13:03:54,195 - utils.report_generator - INFO - Telemetry Timeline Event: Overall assessment structure scanned and logged.
+2026-05-20 13:03:54,195 - MainRunner - INFO - === Starting Section 1: Section: Section I (9 questions) ===
+2026-05-20 13:03:54,196 - utils.report_generator - INFO - Telemetry Timeline Event: Starting Section 1: Section: Section I
+2026-05-20 13:03:54,196 - pages.summary_page - INFO - Attempting to start section 1 dynamically...
+2026-05-20 13:03:54,874 - pages.summary_page - INFO - Successfully started section 1.
+2026-05-20 13:03:56,875 - MainRunner - INFO - Processing Section 1 Question 1/9 (Global Q1)
+2026-05-20 13:03:56,876 - pages.question_page - INFO - Waiting for Question page to load...
+2026-05-20 13:03:58,966 - pages.question_page - INFO - Detected Coding question workspace.
+2026-05-20 13:03:58,967 - pages.question_page - INFO - Extracting question text...
+2026-05-20 13:03:59,029 - pages.question_page - INFO - Question text extracted successfully via: ('xpath', "//div[contains(@class, 'problem-details')]")
+2026-05-20 13:03:59,030 - MainRunner - INFO - Resolving Coding workspace question...
+2026-05-20 13:04:01,068 - pages.question_page - INFO - Extracting question text...
+2026-05-20 13:04:01,154 - pages.question_page - INFO - Question text extracted successfully via: ('xpath', "//div[contains(@class, 'problem-details')]")
+2026-05-20 13:04:01,155 - pages.question_page - INFO - Scanning for selected coding language...
+2026-05-20 13:04:01,248 - pages.question_page - INFO - Language auto-detected via element text: C++
+2026-05-20 13:04:01,249 - MainRunner - INFO - Auto-detected Editor Language: C++
+2026-05-20 13:04:01,249 - utils.report_generator - INFO - Telemetry Timeline Event: Processing Question 1 (CODING) in test context.
+2026-05-20 13:04:01,249 - MainRunner - INFO - Self-healing loop: Attempt 1/6
+2026-05-20 13:04:09,765 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-1.5-flash. Rotating...
+2026-05-20 13:04:24,827 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-2.0-flash. Rotating...
+2026-05-20 13:04:36,356 - utils.llm_solver - WARNING - Key[0] quota hit on gemini-1.5-pro. Rotating...
+2026-05-20 13:04:42,930 - utils.llm_solver - WARNING - All LLM attempts exhausted. Activating local IPC bridge.
+2026-05-20 13:04:42,932 - utils.llm_solver - INFO - Waiting up to 120s for manual input in 'resolved_response.json'...
+2026-05-20 13:05:40,701 - MainRunner - INFO - Closing browser session...
+2026-05-20 13:06:04,527 - utils.llm_solver - INFO - GeminiSolver initialized (Model: gemini-1.5-flash, Keys: 1)
+2026-05-20 13:06:04,528 - TestLogger - INFO - System successfully validated!

@@ -2,12 +2,10 @@ import os
 
 BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3"
 
-# Default leaked key used as standard placeholder
 DEFAULT_LEAKED_KEY = "AIzaSyDowMkJIRmxf7gpVR1kPE0e_EN_2X2kANc"
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
-# Rotate keys safely
 GEMINI_API_KEYS = []
 raw_keys = [
     os.environ.get("GEMINI_API_KEY", ""),
@@ -18,7 +16,6 @@ for k in raw_keys:
     if k_strip and k_strip not in GEMINI_API_KEYS:
         GEMINI_API_KEYS.append(k_strip)
 
-# Fallback to default placeholder if absolutely no key provided, but we will warn the solver
 if not GEMINI_API_KEYS:
     GEMINI_API_KEY = DEFAULT_LEAKED_KEY
     GEMINI_API_KEYS = [DEFAULT_LEAKED_KEY]

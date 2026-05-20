@@ -18,7 +18,6 @@ class GeminiSolver:
         
         self.model_name = 'gemini-1.5-flash'
         
-        # Check if using known leaked/default keys and print warnings
         for idx, k in enumerate(self._api_keys):
             if k == "AIzaSyB1VPCVN9F238N_XNcnVkuKCAnDTftSfzE":
                 logger.error(f"WARNING: Key[{idx}] in config/settings.py is the known leaked default key. "
@@ -45,7 +44,7 @@ class GeminiSolver:
                         err = str(e).lower()
                         if "leaked" in err or "403" in err:
                             logger.error(f"CRITICAL API ERROR: Key[{key_idx}] leaked/blocked (403).")
-                            break # Skip other attempts for this key
+                            break
                         elif any(x in err for x in ["429", "quota", "rate", "resource_exhausted"]):
                             if attempt == 0:
                                 logger.warning(f"Key[{key_idx}] quota hit on {model_name}. Rotating...")
@@ -85,7 +84,7 @@ class GeminiSolver:
         return None
 
     def _search_web(self, query):
-        logger.info(f"Searching Web (DuckDuckGo): {query}")
+        logger.info(f"Searching Web: {query}")
         try:
             headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Safari/537.36'}
             url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote_plus(query)}"
@@ -116,7 +115,7 @@ Options:
             prompt += f"{i+1}. {opt}\n"
             
         if search_ctx:
-            prompt += f"\nReference context found from web search:\n{search_ctx}\n"
+            prompt += f"\nReference context:\n{search_ctx}\n"
 
         prompt += """
 Strictly output in this exact format:
@@ -130,12 +129,10 @@ ANSWER: <exact matching option string from list above, character for character>
             
             logger.info(f"MCQ response: {resp}")
             
-            # Normalize response by removing markdown bold/italic elements
             clean_resp = resp.replace("**", "").replace("*", "").replace("__", "").replace("_", "").replace("`", "").strip()
             
             reasoning, answer = "No reasoning.", None
             
-            # Use dynamic regular expressions for case-insensitive and resilient key extraction
             r_match = re.search(r'reasoning\s*:\s*(.*?)(?=answer\s*:|$)', clean_resp, re.IGNORECASE | re.DOTALL)
             a_match = re.search(r'answer\s*:\s*(.*)', clean_resp, re.IGNORECASE | re.DOTALL)
             
@@ -144,7 +141,6 @@ ANSWER: <exact matching option string from list above, character for character>
             if a_match:
                 answer = a_match.group(1).strip()
             else:
-                # Fallback: Check line by line from bottom
                 lines = [l.strip() for l in clean_resp.split("\n") if l.strip()]
                 for l in reversed(lines):
                     clean_line = re.sub(r'^(answer|reasoning)\s*:\s*', '', l, flags=re.IGNORECASE).strip()
@@ -155,24 +151,20 @@ ANSWER: <exact matching option string from list above, character for character>
                     answer = re.sub(r'^(answer|reasoning)\s*:\s*', '', lines[-1], flags=re.IGNORECASE).strip()
             
             if answer:
-                # Step 1: Exact / Case-insensitive match
                 for opt in options:
                     if opt.lower() == answer.lower():
                         return reasoning, opt
                 
-                # Step 2: Containment check
                 for opt in options:
                     if opt.lower() in answer.lower() or answer.lower() in opt.lower():
                         return reasoning, opt
                 
-                # Step 3: Strip leading labels (e.g., "1. Option" or "A) Option")
                 clean_ans = re.sub(r'^[a-zA-Z0-9][\.\)\-\s]+', '', answer).strip()
                 for opt in options:
                     clean_opt = re.sub(r'^[a-zA-Z0-9][\.\)\-\s]+', '', opt).strip()
                     if clean_opt.lower() == clean_ans.lower() or clean_opt.lower() in clean_ans.lower():
                         return reasoning, opt
                 
-                # Step 4: Fuzzy sequence matching
                 from difflib import SequenceMatcher
                 best_ratio = 0.0
                 best_opt = None

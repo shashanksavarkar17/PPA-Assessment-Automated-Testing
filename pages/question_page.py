@@ -38,10 +38,7 @@ class QuestionPage(BasePage):
         return "CODING"
             
     def get_question_text(self):
-        """
-        Extracts the question or problem statement text using a highly resilient,
-        multi-tiered fallback selector list.
-        """
+        """Extracts question text using fallback selectors."""
         logger.info("Extracting question text...")
         fallback_selectors = [
             (By.XPATH, "//div[contains(@class, 'problem-details')]"),
@@ -56,20 +53,18 @@ class QuestionPage(BasePage):
             (By.XPATH, "//div[contains(@class, 'question-body')]")
         ]
         
-        # Step 1: Attempt to find any active/visible element from our selector list
         for loc in fallback_selectors:
             try:
                 elements = self.driver.find_elements(*loc)
                 for elem in elements:
                     if elem.is_displayed():
                         text = elem.text.strip()
-                        if text and len(text) > 30: # Ensure it has real content, not just a label
+                        if text and len(text) > 30:
                             logger.info(f"Question text extracted successfully via: {loc}")
                             return text
             except Exception:
                 pass
                 
-        # Step 2: Wider scan for any div or article containing common problem text classes
         try:
             elements = self.driver.find_elements(By.XPATH, "//*[contains(@class, 'problem') or contains(@class, 'question') or contains(@class, 'desc')]")
             for elem in elements:
@@ -81,7 +76,6 @@ class QuestionPage(BasePage):
         except Exception:
             pass
 
-        # Step 3: Global fallback (get base page text)
         logger.warning("Could not isolate question text using structural classes. Falling back to primary locator.")
         try:
             return self.helpers.get_text(self.QUESTION_TEXT_LOCATOR)
@@ -197,7 +191,6 @@ class QuestionPage(BasePage):
     def select_mcq_option(self, target_option_text):
         logger.info(f"Selecting option: {target_option_text}")
         
-        # 1. Broadly scan all possible labels and visible elements that could contain the option text in a quote-immune manner
         locators = [
             (By.XPATH, "//label"),
             (By.XPATH, "//span"),
@@ -207,10 +200,8 @@ class QuestionPage(BasePage):
             (By.XPATH, "//*[contains(@class, 'option') or contains(@class, 'choice')]")
         ]
         
-        # Helper to normalize strings for comparison (removes spaces, formatting, quotes)
         def normalize(s):
-            if not s: return ""
-            return "".join(c for c in s.lower() if c.isalnum())
+            return "".join(c for c in s.lower() if c.isalnum()) if s else ""
             
         target_norm = normalize(target_option_text)
         
@@ -220,20 +211,16 @@ class QuestionPage(BasePage):
                 for elem in elements:
                     if elem.is_displayed():
                         text = elem.text.strip()
-                        if not text: continue
+                        if not text:
+                            continue
                         
-                        # Match: Option text equals target or normalized containment
                         elem_norm = normalize(text)
                         if (target_option_text.lower() in text.lower() or 
                             text.lower() in target_option_text.lower() or 
                             target_norm in elem_norm or 
                             elem_norm in target_norm):
                             
-                            logger.info(f"Matched option element with text: '{text}' using locator: {loc}")
-                            
-                            # Standard click fallback hierarchy:
-                            # 1. Click option container/label directly
-                            # 2. Find any radio input inside/parent/sibling and click it
+                            logger.info(f"Matched option text: '{text}'")
                             click_candidates = [elem]
                             
                             try:
@@ -247,17 +234,15 @@ class QuestionPage(BasePage):
                                 click_candidates.extend(sibling_inputs)
                             except Exception:
                                 pass
-
+ 
                             for candidate in click_candidates:
                                 try:
                                     if candidate.is_displayed():
                                         candidate.click()
-                                        logger.info("Successfully clicked matched option element using standard click.")
                                         return True
                                 except Exception:
                                     try:
                                         self.driver.execute_script("arguments[0].click();", candidate)
-                                        logger.info("Successfully clicked matched option element using JS click.")
                                         return True
                                     except Exception:
                                         pass
@@ -366,12 +351,12 @@ class QuestionPage(BasePage):
                 logger.info("Injected via Clipboard.")
             else:
                 actions.send_keys(code).perform()
-                logger.info("Injected via physical keystroke emulator.")
+                logger.info("Injected via emulator.")
                 
             time.sleep(1)
             
         except Exception as e:
-            logger.error(f"Injections failed: {e}")
+            logger.error(f"Injection failed: {e}")
             raise e
             
     def click_save_and_next(self):
@@ -391,31 +376,28 @@ class QuestionPage(BasePage):
                 for elem in elements:
                     if elem.is_displayed() and elem.is_enabled():
                         text = elem.text.strip() or elem.get_attribute("value") or ""
-                        logger.info(f"Found Save/Next/Submit button candidate: '{text}' using locator: {loc}")
+                        logger.info(f"Found transition button: '{text}'")
                         self.driver.execute_script("arguments[0].scrollIntoView(true);", elem)
                         time.sleep(0.5)
                         try:
                             elem.click()
                         except Exception:
                             self.driver.execute_script("arguments[0].click();", elem)
-                        logger.info("Successfully clicked the transition button.")
                         time.sleep(2)
                         return True
             except Exception:
                 pass
                 
-        # Critical Fallback: Try returning to summary dashboard if no Next button exists on the page
-        logger.warning("All standard transition buttons failed. Triggering Return to Summary dashboard fallback...")
         try:
             if self.return_to_summary():
-                logger.info("Successfully returned to summary dashboard as Save & Next transition fallback.")
+                logger.info("Returned to summary dashboard as fallback.")
                 return True
         except Exception as e:
-            logger.error(f"Return to summary dashboard fallback failed: {e}")
-
+            logger.error(f"Dashboard fallback failed: {e}")
+ 
         self.helpers.take_screenshot("click_save_and_next_failed")
         raise Exception("Save/Submit/Next button not found, and Dashboard fallback failed.")
-
+ 
     def submit_code(self):
         submit_btn_locators = [
             (By.XPATH, "//button[contains(normalize-space(.), 'Submit')]"),
@@ -430,26 +412,21 @@ class QuestionPage(BasePage):
                 elements = self.driver.find_elements(*loc)
                 for elem in elements:
                     if elem.is_displayed() and elem.is_enabled():
-                        logger.info(f"Found Code Submit button candidate: {loc}")
                         self.driver.execute_script("arguments[0].scrollIntoView(true);", elem)
                         time.sleep(0.5)
                         try:
                             elem.click()
                         except Exception:
                             self.driver.execute_script("arguments[0].click();", elem)
-                        logger.info("Clicked Code Submit button successfully.")
+                        logger.info("Clicked Code Submit button.")
                         return
             except Exception:
                 pass
                 
-        logger.error("Failed to find or click Code Submit button using resilient locators.")
-        # Try a direct JS fallback click on standard button if exists
         try:
             elem = self.driver.find_element(By.XPATH, "//button[contains(normalize-space(.), 'Submit')]")
             self.driver.execute_script("arguments[0].click();", elem)
-            logger.info("Direct JS click on raw Submit button succeeded.")
         except Exception as e:
-            logger.error(f"Ultimate raw JS click fallback on Submit failed: {e}")
             raise e
             
     def run_code(self):
