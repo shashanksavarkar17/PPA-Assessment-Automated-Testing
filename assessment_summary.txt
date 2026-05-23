@@ -2,47 +2,23 @@ Assessment Summary
 ==================
 
 Overview:
-Total Sections: 3
-Total Questions: 29
+Total Sections: 2
+Total Questions: 8
 
 Scanned Sections:
-- Section: Section I: 9 questions
-- Section: Section II: 10 questions
-- Section: Section III: 10 questions
+- Section: Coding Questions: 4 questions
+- Section: MCQ Questions: 4 questions
 
 Questions:
 
---- Section: Section I ---
-- Question 01 | Question: Coloring a Banner | Type/Status: Coding
-- Question 02 | Question: Chhota Bheem and the Magical Letter Scroll | Type/Status: Coding
-- Question 03 | Question: Customer Satisfaction Analysis | Type/Status: Coding
-- Question 04 | Question: Absolute CSS Units | Type/Status: MCQ
-- Question 05 | Question: A+B? | Type/Status: Coding
-- Question 06 | Question: ABC of Alice | Type/Status: Coding
-- Question 07 | Question: abstract_class_constructor_polymorphism_java | Type/Status: MCQ
-- Question 08 | Question: Count Numbers with Distinct Digits | Type/Status: Coding
-- Question 09 | Question: Count Numbers with At Least One Repeated Digit | Type/Status: Coding
+--- Section: Coding Questions ---
+- Question 01 | Question: Bad Pair of Students | Type/Status: Unsolved
+- Question 02 | Question: A+B? | Type/Status: Unsolved
+- Question 03 | Question: ABC of Alice | Type/Status: Unsolved
+- Question 04 | Question: Breakup Story | Type/Status: Unsolved
 
---- Section: Section II ---
-- Question 01 | Question: Artifact Reconstruction | Type/Status: Coding
-- Question 02 | Question: Big and Small | Type/Status: Coding
-- Question 03 | Question: Abbreviation Tag | Type/Status: MCQ
-- Question 04 | Question: Base Two | Type/Status: Coding
-- Question 05 | Question: Accessing URL Information | Type/Status: MCQ
-- Question 06 | Question: Adding Elements to Array | Type/Status: MCQ
-- Question 07 | Question: 10⁸ Operations Rule | Type/Status: MCQ
-- Question 08 | Question: Attackk! | Type/Status: Coding
-- Question 09 | Question: 2d_array_rows_and_columns_length | Type/Status: MCQ
-- Question 10 | Question: 2d_array_diagonal_sum_java | Type/Status: MCQ
-
---- Section: Section III ---
-- Question 01 | Question: Index of Insertion | Type/Status: Coding
-- Question 02 | Question: Index of Extra Element | Type/Status: Coding
-- Question 03 | Question: Horrid Henry | Type/Status: Coding
-- Question 04 | Question: Anoop's Jumping Boots! | Type/Status: Coding
-- Question 05 | Question: Anoop and the Special Boxes | Type/Status: Coding
-- Question 06 | Question: Anoop's Haunted Boxes | Type/Status: Coding
-- Question 07 | Question: Anoop's Bday | Type/Status: Coding
-- Question 08 | Question: Fuel Query for Starfleet Missions | Type/Status: Coding
-- Question 09 | Question: GCD of MAX and MIN | Type/Status: Coding
-- Question 10 | Question: Hexadecimal to decimal | Type/Status: Coding
+--- Section: MCQ Questions ---
+- Question 01 | Question: Returning Value from main | Type/Status: Unsolved
+- Question 02 | Question: Accessing URL Information | Type/Status: Unsolved
+- Question 03 | Question: 10⁸ Operations Rule | Type/Status: Unsolved
+- Question 04 | Question: Leaderboard Game | Type/Status: Unsolved

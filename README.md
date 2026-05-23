@@ -75,7 +75,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Configure Settings
-Configure your user details, Gemini API Key, and target URLs in `config/settings.py`.
+Configure your user details, NVIDIA API Key, and target URLs in `config/settings.py`.
 
 ### 3. Run the Automation
 Start the automation runner:

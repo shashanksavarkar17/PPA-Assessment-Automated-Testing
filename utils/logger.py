@@ -1,5 +1,4 @@
 import logging, sys, os
-from config import settings
 
 # This custom formatter styles our console output with neat icons and colors.
 class ConsoleFmt(logging.Formatter):
@@ -26,10 +25,8 @@ def get_logger(name="Runner"):
         try: sys.stdout.reconfigure(encoding='utf-8', errors='replace')
         except: pass
         
-        # Stream logs straight to standard output and simultaneously save raw text logs to automation.log.
+        # Stream logs straight to standard output.
         ch = logging.StreamHandler(sys.stdout)
         ch.setFormatter(ConsoleFmt())
-        fh = logging.FileHandler(settings.LOG_FILE, encoding='utf-8')
-        fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-        log.addHandler(ch); log.addHandler(fh)
+        log.addHandler(ch)
     return log
