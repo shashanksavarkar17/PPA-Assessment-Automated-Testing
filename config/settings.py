@@ -14,16 +14,12 @@ if os.path.exists(env_path):
                 os.environ[k.strip()] = v.strip()
 
 # This is our target test assessment portal URL.
-BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KRTKRPQK997GQWC0FYG8SJT3"
+BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KSAM1KYPSH8N2BNJ7JKFW8DC"
 
-# We have a fallback API key just in case the environment is missing one.
-DEFAULT_KEY = "AIzaSyCjM1b0E5wlVNCHa1OdDiD6TdNwfnRdYRk"
-
-# Let's collect any available Gemini API keys from the environment to handle fallback switching.
-GEMINI_API_KEYS = [k.strip() for k in [os.environ.get("GEMINI_API_KEY", ""), os.environ.get("GEMINI_API_KEY_FALLBACK", "")] if k.strip()]
-if not GEMINI_API_KEYS:
-    GEMINI_API_KEYS = [DEFAULT_KEY]
-GEMINI_API_KEY = GEMINI_API_KEYS[0]
+# Let's collect any available NVIDIA API keys and endpoints from the environment.
+NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "").strip()
+NVIDIA_NIM_MODEL = os.environ.get("NVIDIA_NIM_MODEL", "meta/llama-3.1-70b-instruct").strip()
+NVIDIA_NIM_BASE_URL = os.environ.get("NVIDIA_NIM_BASE_URL", "https://integrate.api.nvidia.com/v1").strip()
 
 # Standard credentials we use to register and login as a candidate.
 TEST_USER = {
@@ -37,7 +33,6 @@ TEST_USER = {
 EXPLICIT_WAIT = 25
 OTP_WAIT_TIMEOUT = 120
 
-# Setup paths for logs and screen captures, making sure the directory exists!
-LOG_FILE = os.path.join(BASE_DIR, "automation.log")
+# Setup paths for screen captures, making sure the directory exists!
 SCREENSHOTS_DIR = os.path.join(BASE_DIR, "screenshots")
 os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
