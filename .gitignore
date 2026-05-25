@@ -28,16 +28,24 @@ secrets.json
 credentials.json
 
 # --- Automation Logs & Execution Reports ---
+reports/
 automation.log
 *.log
 assessment_summary.html
 assessment_summary.txt
+generated_answers.html
+generated_answers.txt
+scanned_questions.html
+scanned_question.html
+telemetry.json
+telemetry_report.html
 pending_request.json
 
 # --- Selenium / Test Artifacts ---
 screenshots/
 failures/
 test-results/
+
 
 # --- IDEs / Editors Configuration ---
 .vscode/

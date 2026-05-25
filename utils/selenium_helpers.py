@@ -60,3 +60,10 @@ class SeleniumHelpers:
 
     def wait_for_url_change(self, old_url, timeout=settings.EXPLICIT_WAIT):
         WebDriverWait(self.driver, timeout).until(EC.url_changes(old_url))
+
+    def is_element_present(self, locator):
+        try:
+            elements = self.driver.find_elements(*locator)
+            return any(el.is_displayed() for el in elements)
+        except:
+            return False

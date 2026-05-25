@@ -185,18 +185,17 @@ def run_scan():
         html_content += "    </main>\n</body>\n</html>\n"
         
         # Write to files
-        for filename in ["scanned_questions.html", "reports/scanned_questions.html"]:
-            filepath = os.path.join(settings.BASE_DIR, filename)
-            for _ in range(5):
-                try:
-                    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-                    with open(filepath, "w", encoding="utf-8") as f:
-                        f.write(html_content)
-                    log.info(f"Successfully wrote scanned questions HTML to: {filepath}")
-                    break
-                except Exception as e:
-                    log.warning(f"Error writing to {filepath}: {e}")
-                    time.sleep(0.5)
+        filepath = os.path.join(settings.REPORTS_DIR, "scanned_questions.html")
+        for _ in range(5):
+            try:
+                os.makedirs(os.path.dirname(filepath), exist_ok=True)
+                with open(filepath, "w", encoding="utf-8") as f:
+                    f.write(html_content)
+                log.info(f"Successfully wrote scanned questions HTML to: {filepath}")
+                break
+            except Exception as e:
+                log.warning(f"Error writing to {filepath}: {e}")
+                time.sleep(0.5)
                     
         log.info("SCAN COMPLETED SUCCESSFULLY!")
         

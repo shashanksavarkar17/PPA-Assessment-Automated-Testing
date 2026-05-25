@@ -45,7 +45,7 @@ class SummaryPage(BasePage):
                             problem_name = tds[1]
                             
                             # Identify any status except success / solved (exact match) / passed
-                            is_passed = any(x in status for x in ["success", "passed"]) or (status == "solved")
+                            is_passed = False
                             if not is_passed:
                                 btn_elements = r.find_elements(By.XPATH, ".//button | .//a")
                                 for btn in btn_elements:
@@ -84,9 +84,9 @@ class SummaryPage(BasePage):
             sec_counts = {k: len(v) for k, v in data.items()}
             tot_q = sum(sec_counts.values())
             
-            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            txt_path = os.path.join(base_dir, "assessment_summary.txt")
-            html_path = os.path.join(base_dir, "assessment_summary.html")
+            from config import settings
+            txt_path = os.path.join(settings.REPORTS_DIR, "assessment_summary.txt")
+            html_path = os.path.join(settings.REPORTS_DIR, "assessment_summary.html")
             
             # Write a simple text file summarizing everything we scanned.
             with open(txt_path, "w", encoding="utf-8") as f:
@@ -116,6 +116,7 @@ class SummaryPage(BasePage):
 
     def submit_assessment(self):
         try:
+            submit_clicked = False
             for el in self.driver.find_elements(By.XPATH, "//button | //a"):
                 if el.is_displayed() and el.is_enabled():
                     text = el.text.lower()
@@ -124,9 +125,31 @@ class SummaryPage(BasePage):
                         time.sleep(0.5)
                         self.driver.execute_script("arguments[0].click();", el)
                         log.info("Clicked the final 'Submit Assessment' button.")
-                        return True
-            log.warning("Could not find the final 'Submit Assessment' button.")
-            return False
+                        submit_clicked = True
+                        break
+            
+            if not submit_clicked:
+                log.warning("Could not find the final 'Submit Assessment' button.")
+                return False
+                
+            # Wait for the confirmation popup to appear
+            log.info("Waiting for the confirmation popup/modal to appear...")
+            time.sleep(2.0)
+            
+            # Look for the confirmation/end test button in the popup
+            for priority_term in ["end test", "end", "confirm", "submit", "yes", "finish"]:
+                for el in self.driver.find_elements(By.XPATH, "//button | //a | //input[@type='button']"):
+                    if el.is_displayed() and el.is_enabled():
+                        text = el.text.strip().lower()
+                        if priority_term in text:
+                            self.driver.execute_script("arguments[0].scrollIntoView(true);", el)
+                            time.sleep(0.5)
+                            self.driver.execute_script("arguments[0].click();", el)
+                            log.info(f"Clicked the popup confirmation button: '{el.text}'")
+                            return True
+                            
+            log.warning("Could not find popup confirmation button (e.g. 'end test').")
+            return True
         except Exception as e:
             log.error(f"Failed to submit assessment: {e}")
             return False
