@@ -10,7 +10,7 @@ log = get_logger(__name__)
 class NvidiaNimSolver:
     def __init__(self, driver=None):
         self.driver = driver
-        # Collect loaded API keys list
+        # Retrieve configured API keys from settings.
         self.api_keys = getattr(settings, "NVIDIA_API_KEYS", [])
         self.current_key_index = 0
         self.client = None
@@ -24,7 +24,6 @@ class NvidiaNimSolver:
             return False
         
         api_key = self.api_keys[self.current_key_index]
-        log.info(f"Initializing NvidiaNimSolver client with key index {self.current_key_index} (model: {self.model_name})...")
         self.client = OpenAI(
             base_url=settings.NVIDIA_NIM_BASE_URL,
             api_key=api_key,
@@ -37,7 +36,7 @@ class NvidiaNimSolver:
         Solve MCQ type questions by making an API call to NVIDIA NIM to find the correct answer.
         Supports self-healing fallback key rotation on API exceptions.
         """
-        log.info("MCQ type question encountered: generating correct option via NVIDIA NIM API...")
+        log.info("Requesting MCQ option resolution from NVIDIA NIM API...")
         if not options:
             return "No options available", None
             
@@ -83,7 +82,6 @@ class NvidiaNimSolver:
                             break
                             
                 if best_match:
-                    log.info(f"NVIDIA NIM selected correct option: {best_match}")
                     return f"NVIDIA NIM Reasoning: Verified correctness of option.", best_match
                 else:
                     log.warning(f"Could not cleanly match API response '{selected_option}' with any option. Selecting first option.")
@@ -102,8 +100,6 @@ class NvidiaNimSolver:
         Solve coding type questions by making an API call to write an optimized C++ solution.
         Enriches the prompt with scanned constraints and examples, and supports key rotation.
         """
-        log.info("Coding type question encountered: generating C++ solution via NVIDIA NIM API...")
-        
         max_attempts = len(self.api_keys) if self.api_keys else 1
         for attempt in range(max_attempts):
             if not self.client:
@@ -112,7 +108,7 @@ class NvidiaNimSolver:
             
             try:
                 prompt = (
-                    "You are a competitive programming world champion. Write a complete, valid C++ program that solves the following question.\n\n"
+                    "Generate a complete, optimized, and fully valid C++ solution for the given problem, ensuring correctness, efficient complexity, proper edge-case handling, and outputting only the final compilable program without explanations or extra text.\n\n"
                     f"### QUESTION STATEMENT:\n{question}\n\n"
                 )
                 if constraints:
@@ -146,7 +142,6 @@ class NvidiaNimSolver:
                 code = re.sub(r'^```[a-zA-Z\+\#]*\n?', '', code, flags=re.I).strip()
                 code = re.sub(r'```$', '', code).strip()
                 
-                log.info("Successfully fetched optimized C++ solution from NVIDIA NIM API.")
                 return code
             except Exception as e:
                 log.error(f"NVIDIA NIM API call failed with key index {self.current_key_index}: {e}")
@@ -157,7 +152,7 @@ class NvidiaNimSolver:
         return self._get_fallback_code(lang)
 
     def _get_fallback_code(self, lang):
-        # High quality C++ boilerplate fallback
+        # Fallback boilerplate template for C++ execution.
         return (
             "#include <iostream>\n"
             "using namespace std;\n"

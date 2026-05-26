@@ -3,22 +3,22 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
-# This sets up our custom Chrome instance and injects an overlay to block proctoring/tab-switch detection!
+# Initialize the Chrome WebDriver instance with anti-proctoring configurations.
 def get_chrome_driver(headless=False):
     opts = Options()
     if headless: opts.add_argument("--headless")
-    # Feed Chrome standard argument flags to make the browser start maximized and bypass permission dialogs.
-    for arg in ["--start-maximized", "--disable-notifications", "--disable-infobars", "--no-sandbox", "--disable-dev-shm-usage"]:
+    # Configure command-line options to maximize performance and suppress UI dialogs.
+    for arg in ["--start-maximized", "--disable-notifications", "--disable-infobars", "--no-sandbox", "--disable-dev-shm-usage", "--remote-debugging-port=9222"]:
         opts.add_argument(arg)
 
-    # Let's try downloading ChromeDriverManager first. If that fails, fallback to local system path.
+    # Attempt to initialize Chrome WebDriver via DriverManager, with a local system fallback.
     try: driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
     except: driver = webdriver.Chrome(options=opts)
     
     driver.set_window_size(1920, 1080)
     driver.maximize_window()
 
-    # This JS bypass prevents the page from knowing if we switched tabs, unfocused, copied text, or went out of fullscreen!
+    # JavaScript payload to override event listeners and document properties to prevent focus/visibility detection.
     bypass_js = """
     window.close=()=>{}; const def=Object.defineProperty;
     ['fullscreenElement','webkitFullscreenElement','mozFullScreenElement','msFullscreenElement'].forEach(p=>def(document,p,{get:()=>document.documentElement,configurable:true}));
@@ -31,7 +31,7 @@ def get_chrome_driver(headless=False):
     document.addEventListener=function(t,l,o){if(!block.includes(t))return odA.apply(this,arguments)};
     window.onblur=document.onblur=window.onfocus=document.onfocus=window.oncopy=document.oncut=window.onpaste=document.oncontextmenu=null;
     """
-    # Evaluate this script automatically every time a new document loads!
+    # Register the bypass script to execute upon the creation of every new document.
     try: driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {'source': bypass_js})
     except: pass
     

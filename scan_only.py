@@ -37,7 +37,7 @@ def navigate_sidebar(driver, clean_sec_name, q_index_in_section):
     
     def try_click_q():
         try:
-            # Find elements that exactly match "Q1", "Q2", etc.
+            # Locate elements matching target question identifier.
             q_elements = driver.find_elements(By.XPATH, f"//*[text()='{q_label}' or normalize-space()='{q_label}']")
             for el in q_elements:
                 if el.is_displayed() and el.tag_name not in ['script', 'style']:
@@ -48,18 +48,18 @@ def navigate_sidebar(driver, clean_sec_name, q_index_in_section):
 
     if try_click_q(): return True
     
-    # If not clicked, section is likely collapsed. Try expanding it.
+    # If element is not clickable, attempt section header expansion.
     log.info(f"Could not see {q_label}, trying to expand section {clean_sec_name}...")
     try:
         sec_elements = driver.find_elements(By.XPATH, f"//*[contains(translate(normalize-space(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), '{clean_sec_name.upper()}')]")
         for el in sec_elements:
             if el.is_displayed() and el.tag_name not in ['script', 'style']:
                 driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'}); arguments[0].click();", el)
-                time.sleep(1) # Wait for expansion animation
+                time.sleep(1) # Pause briefly for expansion transitions.
                 break
     except: pass
     
-    # Try clicking the question again after expanding
+    # Retry click interaction following expansion.
     return try_click_q()
 
 def run_scan():
@@ -76,7 +76,7 @@ def run_scan():
             'question': QuestionPage(driver)
         }
         
-        # 1. Login flow
+        # Phase 1: Authentication and profile entry.
         pages['instructions'].navigate_to(settings.BASE_URL)
         pages['instructions'].wait_for_page_load()
         pages['instructions'].accept_instructions()
@@ -95,7 +95,7 @@ def run_scan():
         pages['start'].wait_for_page_load()
         pages['start'].click_start_test()
         
-        # 2. Get section counts
+        # Phase 2: Retrieve test structural details.
         pages['summary'].wait_for_page_load()
         section_data = pages['summary'].scan_sections_and_questions()
         log.info(f"Test structure scanned: {section_data}")
@@ -103,10 +103,10 @@ def run_scan():
         scanned_questions = []
         global_q = 1
         
-        # 3. Traverse and scan each question
+        # Phase 3: Traversal and item scanning.
         sections_list = list(section_data.items())
         
-        # Start first section to enter the test view where sidebar is present
+        # Initiate first section to load sidebar control elements.
         if sections_list:
             pages['summary'].start_section(1)
             time.sleep(2.0)
@@ -115,7 +115,7 @@ def run_scan():
             clean_sec_name = sec_name.replace("Section:", "").strip()
             log.info(f"Scanning Section {sec_idx + 1}: {clean_sec_name}")
             
-            # If not the first section, use sidebar to navigate to its first question
+            # Utilize sidebar navigation for subsequent sections.
             if sec_idx > 0:
                 navigate_sidebar(driver, clean_sec_name, 1)
                 time.sleep(1.0)
@@ -125,7 +125,7 @@ def run_scan():
                 pages['question'].wait_for_page_load()
                 time.sleep(0.5)
                 
-                # Resiliently wait for text to update using local helper
+                # Wait for question description to update.
                 wait_for_question_text_to_change(pages['question'], prev_text)
                 
                 q_type = pages['question'].get_question_type()
@@ -147,14 +147,14 @@ def run_scan():
                 
                 log.info(f"Scanned {q_info['id']} in {clean_sec_name} | Type: {q_type}")
                 
-                # Navigate to next question via sidebar
+                # Move to subsequent question item using sidebar.
                 if q_idx < q_count:
                     navigate_sidebar(driver, clean_sec_name, q_idx + 1)
                 
                 global_q += 1
                 time.sleep(0.5)
             
-        # 4. Generate clean 0-CSS HTML file
+        # Phase 4: Compile report file.
         sections = {}
         for q in scanned_questions:
             sec = q.get("section", "General")
@@ -184,7 +184,7 @@ def run_scan():
             
         html_content += "    </main>\n</body>\n</html>\n"
         
-        # Write to files
+        # Persist report output to filesystem.
         filepath = os.path.join(settings.REPORTS_DIR, "scanned_questions.html")
         for _ in range(5):
             try:

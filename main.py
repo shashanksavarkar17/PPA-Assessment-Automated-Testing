@@ -10,9 +10,9 @@ from config import settings
 from pages.candidate_details_page import CandidateDetailsPage
 from pages.instructions_page import InstructionsPage
 from pages.login_page import LoginPage
-from pages.question_page import QuestionPage
 from pages.start_test_page import StartTestPage
 from pages.summary_page import SummaryPage
+from pages.question_page import QuestionPage
 from utils.driver_factory import get_chrome_driver
 from utils.llm_solver import NvidiaNimSolver
 from utils.report_generator import ReportGenerator
@@ -21,14 +21,14 @@ from utils.logger import get_logger
 
 log = get_logger("MainRunner")
 
-# The main coordinator function that drives the entire automated flow end-to-end.
+# Main execution coordinator driving the end-to-end automated workflow.
 def run_assessment_flow():
     log.info("Starting automated assessment flow...")
     report = ReportGenerator()
     report.initialize(**settings.TEST_USER, base_url=settings.BASE_URL)
     driver = None
     try:
-        # Check if headless mode is active, then launch custom Chrome.
+        # Configure headless mode flag and launch custom Chrome instance.
         run_headless = os.environ.get("HEADLESS", "false").lower() == "true"
         driver = get_chrome_driver(headless=run_headless)
         
@@ -41,103 +41,128 @@ def run_assessment_flow():
         failed_questions = []
         solved_in_this_run = []
         
-        # 1. Accept instructions page.
+        # Phase 1: Consent and instruction acknowledgment.
         pages['instructions'].navigate_to(settings.BASE_URL)
         pages['instructions'].wait_for_page_load()
         pages['instructions'].accept_instructions()
         
-        # 2. Login & fetch OTP via Yopmail tab.
+        # Phase 2: Candidate login and verification via OTP retrieval.
         pages['login'].wait_for_page_load()
         pages['login'].login_with_email(settings.TEST_USER['email'])
         otp = YopmailOTPFetcher(driver).fetch_latest_otp(settings.TEST_USER['email'].split('@')[0])
         pages['login'].enter_otp_and_verify(otp)
         
-        # 3. Enter Registration Details & Launch.
+        # Phase 3: Registration data entry and test initiation.
         pages['details'].wait_for_page_load()
         pages['details'].fill_details_and_proceed(settings.TEST_USER['name'], settings.TEST_USER['mobile'], settings.TEST_USER['roll_number'])
         pages['start'].wait_for_page_load()
         pages['start'].click_start_test()
         
-        # 4. Scan the dashboard structure and solve sections.
+        # Phase 4: Structural examination and curriculum solving.
         pages['summary'].wait_for_page_load()
         section_data = pages['summary'].scan_sections_and_questions()
         report.set_scanned_structure(section_data)
         
-        for sec_idx, (sec_name, q_count) in enumerate(section_data.items(), 1):
-            log.info(f"Checking Section {sec_idx}: {sec_name} for unsolved questions...")
-            started = pages['summary'].start_first_unsolved_in_section(sec_name)
+        # Solve all sections sequentially
+        if section_data:
+            sections_to_solve = list(section_data.keys())
+        else:
+            sections_to_solve = ["Section 1", "Section 2"]
+            
+        log.info(f"Detected sections to solve: {sections_to_solve}")
+        
+        for s_idx, section_name in enumerate(sections_to_solve, 1):
+            log.info(f"\n==========================================")
+            log.info(f"   STARTING SECTION: {section_name} ({s_idx} / {len(sections_to_solve)})")
+            log.info(f"==========================================\n")
+            
+            # Start the current section to transition to the editor/question view
+            pages['summary'].wait_for_page_load()
+            
+            started = False
+            if section_data:
+                started = pages['summary'].start_first_unsolved_in_section(section_name)
+            
             if not started:
-                log.info(f"All questions in section '{sec_name}' are already fully solved. Skipping section!")
+                # Fallback to start_section index if name-based start fails or was not available
+                log.warning(f"Could not start section via name '{section_name}'. Trying index-based start...")
+                started = pages['summary'].start_section(s_idx)
+                
+            if not started:
+                log.warning(f"Failed to transition into section '{section_name}'. Skipping...")
                 continue
+                
+            log.info("Transition started. Waiting for question page statement to render...")
+            try:
+                pages['question'].helpers.wait_for_element(
+                    (By.XPATH, "//*[contains(@class, 'problem') or contains(@class, 'question') or contains(@class, 'editor')]"),
+                    timeout=12
+                )
+                log.info("Question page statement rendered successfully!")
+            except Exception as wait_err:
+                log.warning(f"Timeout waiting for question page statement: {wait_err}")
             time.sleep(1.0)
             
-            section_finished = False
-            is_mcq_sec = "mcq" in sec_name.lower()
-            
-            # Reset unsolved tracking specifically for this section to prevent duplicate index collisions
             solved_in_this_run = []
             failed_questions = []
             
-            if is_mcq_sec:
-                log.info("Executing sequential MCQ solver loop...")
-                mcq_idx = 1
-                previous_q_text = None
-                
-                while not section_finished:
+            # Streamlined linear MCQ section handler (bypasses sidebar navigation completely)
+            if "multiple choice" in section_name.lower() or "mcq" in section_name.lower():
+                log.info(f"Detected MCQ section: '{section_name}'. Starting streamlined linear MCQ solving pipeline...")
+                q_idx = 1
+                while True:
                     pages['question'].wait_for_page_load()
-                    time.sleep(0.5)
+                    q_type = pages['question'].get_question_type()
                     
-                    # Extract current MCQ text
-                    q_text = pages['question'].get_question_text()
-                    
-                    # Detect duplicate loop if stuck on final question
-                    if previous_q_text and q_text == previous_q_text:
-                        log.info("Detected duplicate question text. We have completed all questions in this MCQ section!")
-                        section_finished = True
+                    if q_type != 'MCQ':
+                        log.info("Reached non-MCQ viewport or completed MCQ section. Returning to summary...")
                         break
                         
-                    previous_q_text = q_text
+                    q_text = pages['question'].get_question_text()
+                    log.info(f"Solving MCQ {q_idx} on screen...")
                     
-                    log.info(f"Solving MCQ question: {q_text[:60]}...")
-                    success = _solve_mcq(pages['question'], solver, report, sec_name, q_text, f"MCQ {mcq_idx}")
-                    solved_in_this_run.append(f"MCQ_{mcq_idx}")
-                    mcq_idx += 1
+                    success = _solve_mcq(pages['question'], solver, report, section_name, q_text, q_idx)
                     
-                    time.sleep(1.0)
-                    # Check if we returned to summary dashboard
-                    if pages['summary'].helpers.is_element_present((By.XPATH, "//button[contains(text(), 'Solve') or contains(text(), 'Review')]")):
-                        log.info("Returned to summary page dashboard. MCQ Section complete!")
-                        section_finished = True
+                    # Check if next button is disabled (this was the last question)
+                    if pages['question'].is_next_button_disabled():
+                        log.info("Reached the last MCQ question (Next button is disabled). Gracefully finishing MCQ section solving loop...")
                         break
+                        
+                    if not success:
+                        log.warning(f"MCQ {q_idx} failed to resolve. Clicking Next to skip...")
+                        try: pages['question'].click_save_and_next()
+                        except: pass
+                        
+                    q_idx += 1
+                    time.sleep(1.5)
             else:
-                while not section_finished:
+                # Standard sidebar-driven question traversal for coding sections
+                while True:
                     pages['question'].wait_for_page_load()
-                    time.sleep(0.5)
                     
-                    # 1. Open the sidebar to check statuses
+                    # Switch to correct section sidebar elements (e.g. accordion/tab)
+                    pages['question'].switch_sidebar_section(section_name)
+                    
+                    # Open sidebar control panel to inspect active questions list.
                     pages['question'].open_sidebar()
-                    time.sleep(0.5)
+                    time.sleep(0.2)
                     
-                    # 2. Scan sidebar for questions and statuses
+                    # Scan sidebar structural elements.
                     sidebar_questions = pages['question'].get_sidebar_questions()
                     
-                    # 3. Find all unsolved questions in this section, excluding failed ones
-                    unsolved = [q for q in sidebar_questions if q['index'] not in solved_in_this_run and q['index'] not in failed_questions]
+                    # Filter all unsolved questions in this section.
+                    unsolved = [q for q in sidebar_questions if not q['is_solved'] and q['index'] not in failed_questions and q['index'] not in solved_in_this_run]
                     
                     if unsolved:
                         next_q = unsolved[0]
-                        log.info(f"Next unsolved question found in sidebar: Q{next_q['index']} ({next_q['name']})")
+                        log.info(f"Transitioning to Question {next_q['index']} ({next_q['type']})")
                         
                         try:
                             driver.execute_script("arguments[0].click();", next_q['element'])
-                            time.sleep(1.0)
                         except:
                             try: next_q['element'].click()
                             except: pass
-                            time.sleep(1.0)
-                        
-                        pages['question'].close_sidebar()
-                        time.sleep(0.5)
+                        time.sleep(0.6)
                         
                         pages['question'].wait_for_page_load()
                         q_type = pages['question'].get_question_type()
@@ -145,33 +170,34 @@ def run_assessment_flow():
                         
                         success = False
                         if q_type == 'MCQ':
-                            success = _solve_mcq(pages['question'], solver, report, sec_name, q_text, next_q['index'])
+                            success = _solve_mcq(pages['question'], solver, report, section_name, q_text, next_q['index'])
                         else:
-                            success = _solve_coding(pages['question'], solver, report, sec_name, q_text, next_q['index'])
+                            success = _solve_coding(pages['question'], solver, report, section_name, q_text, next_q['index'])
                             
                         if not success:
-                            log.warning(f"Q{next_q['index']} failed to resolve. Adding to failed list.")
+                            log.warning(f"Question {next_q['index']} failed to resolve. Flagging to prevent retry loop.")
                             failed_questions.append(next_q['index'])
                         else:
                             solved_in_this_run.append(next_q['index'])
                     else:
-                        log.info(f"All questions in section '{sec_name}' are successfully solved and submitted!")
-                        section_finished = True
-                    
-            # Return to summary dashboard at the end of the section
+                        log.info(f"All scanned questions in section '{section_name}' successfully processed.")
+                        break
+                        
+                    time.sleep(0.5)
+                
+            # Navigate back to overall summary dashboard to prepare for the next section.
             pages['question'].open_sidebar()
-            time.sleep(0.5)
+            time.sleep(0.3)
             if not pages['question'].click_overall_summary():
-                log.info("Overall Summary button not clickable. Falling back to dashboard click...")
                 if not pages['question'].return_to_summary():
                     try: driver.back()
                     except: pass
-            time.sleep(1.0)
+            time.sleep(1.5)
             pages['summary'].wait_for_page_load()
 
         report.build_html_dashboard()
         
-        # Check if all questions are successfully attempted and validated (no failures)
+        # Final completion validation checking fail threshold.
         if report.data["meta"]["fail"] == 0 and report.data["meta"]["pass"] > 0:
             log.info("All questions successfully attempted and validated! Submitting final assessment...")
             pages['summary'].submit_assessment()
@@ -181,7 +207,7 @@ def run_assessment_flow():
             log.warning("Some questions were not fully validated or remain unsolved. Leaving assessment open for manual review.")
             report.add_timeline_event("Assessment left open for manual review due to failed/unsolved questions.")
             
-        # Re-save report with final timeline stamps
+        # Persist consolidated execution telemetry.
         report.build_html_dashboard()
 
         log.info("Assessment is completely finished. Press Enter to exit.")
@@ -262,20 +288,30 @@ def _solve_mcq(page, solver, report, sec_name, q_text, q_idx):
     report.start_question(q_idx, "MCQ", f"[{sec_name}] {q_text}")
     
     reasoning, ans = solver.solve_mcq(q_text, opts)
+    success = False
     if ans:
-        page.select_mcq_option(ans)
-    report.set_mcq_result(q_idx, opts, reasoning, ans, "PASSED")
+        success = page.select_mcq_option(ans)
+        if success:
+            log.info(f"Selected MCQ Option: '{ans}'")
+            try:
+                page.submit_mcq_answer()
+                time.sleep(0.5)
+            except Exception as e:
+                log.warning(f"Error submitting MCQ answer: {e}")
+        else:
+            log.warning(f"Failed to click MCQ Option: '{ans}'")
+            
+    report.set_mcq_result(q_idx, opts, reasoning, ans, "PASSED" if success else "FAILED")
     try: page.click_save_and_next()
     except: pass
-    return True
+    return success
 
 def _solve_coding(page, solver, report, sec_name, q_text, q_idx):
-    # Enforce C++ dropdown selection
+    # Set C++ as the active compiler language.
     page.ensure_cpp_language()
-    time.sleep(0.5)
+    time.sleep(0.3)
     
-    # 1. STEP 1 & 2: Parse question constraints & example testcases
-    log.info("STEP 1: Extracting constraints and examples...")
+    # Step 1: Parse requirements and test cases.
     example_input, example_output = page.get_example_input_output()
     
     constraints = "None specified"
@@ -292,8 +328,8 @@ def _solve_coding(page, solver, report, sec_name, q_text, q_idx):
         example_output=example_output
     )
     
-    # 2. STEP 3: Request optimized competitive C++ solution
-    log.info("STEP 2: Generating optimized C++ competitive programming code...")
+    # Step 2: Request optimized competitive solution.
+    log.info("Requesting C++ solution from NVIDIA NIM API...")
     code = solver.solve_coding(
         question=q_text,
         lang="C++",
@@ -306,77 +342,69 @@ def _solve_coding(page, solver, report, sec_name, q_text, q_idx):
         report.set_coding_final(q_idx, "N/A", "FAILED", "Failed to generate C++ code solution.")
         return False
         
-    # 3. STEP 4: Inject code solution into editor
-    log.info("STEP 3: Injecting generated C++ solution...")
+    # Step 3: Inject solution payload into the active editor instance.
+    log.info("Injecting generated C++ solution into editor...")
     page.enter_code_solution(code)
     time.sleep(0.5)
     
-    # 4. STEP 5: Enable custom input and paste parsed example input
+    # Handle manual execution mode if enabled in settings
+    if getattr(settings, "MANUAL_MODE", False):
+        log.info("MANUAL MODE active: Code has been injected successfully!")
+        print("\n" + "="*80)
+        print(">>> MANUAL INTERACTION REQUIRED <<<")
+        print(f"Code has been successfully injected for Question {q_idx}.")
+        print("Please review the injected code, select custom input (if needed),")
+        print("and click 'Run' or 'Submit' in the browser window manually.")
+        print("Once you are ready, press [Enter] in this terminal to proceed to the next question...")
+        print("="*80 + "\n")
+        input("Press [Enter] to continue...")
+        
+        # Mark as passed manually in report and solutions log
+        report.set_coding_final(q_idx, code, "PASSED", "Manually verified and submitted by user.")
+        solved_questions.append({
+            "q_idx": q_idx,
+            "sec_name": sec_name,
+            "q_text": q_text,
+            "lang": "C++",
+            "code": code
+        })
+        write_generated_answers()
+        
+        try:
+            page.click_save_and_next()
+        except Exception as e:
+            log.warning(f"Error navigating to next question: {e}")
+        return True
+    
+    # Step 4: Configure custom input data.
     verdict_trace = ""
     passed = False
     if example_input:
-        log.info("STEP 4: Setting custom input with parsed example input...")
         page.enable_custom_input()
         page.set_custom_input_value(example_input)
         
-        # 5. STEP 6: Run Code to validate custom outputs
-        log.info("STEP 5: Running custom input validation...")
-        # Capture current stale/old console output to prevent instant validation returns
+        # Step 5: Execute program with custom inputs.
+        log.info("Executing compilability and runtime testcase checks...")
+        # Record legacy output to prevent premature validation returns.
         _, old_actual = page.get_run_outputs()
         
         page.run_code()
-        time.sleep(1.0)
+        time.sleep(0.8)
         
-        # Wait for validation completion, comparing against old stale actual
-        page.get_code_result(old_actual) 
-        
-        # Extract console results
-        expected_on_page, actual_on_page = page.get_run_outputs()
-        console_errs = page.get_console_errors()
-        
-        # Clean and normalize strings
-        normalize = lambda s: "\n".join([line.strip() for line in s.strip().splitlines() if line.strip()]).strip()
-        norm_actual = normalize(actual_on_page)
-        norm_expected = normalize(example_output)
-        
-        # Clean leading punctuation from expected output
-        clean_expected = re.sub(r'^[:\s\-\=\>]+', '', norm_expected).strip()
-        
-        log.info(f"Custom Input Execution - Your Output: {repr(norm_actual)}")
-        log.info(f"Custom Input Execution - Expected Output: {repr(clean_expected)}")
-        
-        if console_errs:
-            passed = False
-            verdict_trace = f"Execution Error / Compile Error:\n{console_errs}"
-            log.warning("Validation failed: compilation or runtime errors encountered on console.")
-        elif clean_expected and clean_expected.lower() in norm_actual.lower():
-            passed = True
-            verdict_trace = f"Validation PASSED (Substring matching)!\nExpected Output: {repr(clean_expected)}\nYour Output: {repr(norm_actual)}"
-            log.info("Validation passed! Expected output is found within the execution terminal console.")
-        else:
-            # Fallback checking integers list in case of subtle spacing
-            act_ints = re.findall(r'-?\d+', norm_actual)
-            exp_ints = re.findall(r'-?\d+', clean_expected)
-            if exp_ints and all(x in act_ints for x in exp_ints):
-                passed = True
-                verdict_trace = f"Validation PASSED (Integer matching)!\nExpected Output: {repr(clean_expected)}\nYour Output: {repr(norm_actual)}"
-                log.info("Validation passed! Expected integers sequence is found within the execution console.")
-            else:
-                passed = False
-                verdict_trace = f"Validation FAILED: Output mismatch!\nExpected Output:\n{example_output}\n\nYour Output:\n{actual_on_page}"
-                log.warning("Validation failed: Output mismatch between console output and parsed expected output.")
+        # Wait for output refresh and validate the result.
+        passed, verdict_trace = page.get_code_result(old_actual) 
     else:
-        log.warning("No example inputs parsed from the question statement. Bypassing custom run validation and executing direct Run...")
         page.run_code()
-        time.sleep(1.0)
+        time.sleep(0.8)
         passed, verdict_trace = page.get_code_result()
         
-    # 6. STEP 8: Final submission
+    # Step 6: Submit validated solution payload.
     if passed:
-        log.info("Validation successful! Clicking Submit to finalize question...")
+        log.info("Submission confirmed: Registering answer.")
         try:
             page.submit_code()
-            time.sleep(1.5)
+            log.info("Code submitted successfully. Sleeping 8 seconds for evaluation to complete...")
+            time.sleep(8.0)
         except Exception as e:
             log.warning(f"Error clicking Submit: {e}")
             
@@ -390,11 +418,13 @@ def _solve_coding(page, solver, report, sec_name, q_text, q_idx):
         })
         write_generated_answers()
         
-        try: page.click_save_and_next()
+        try:
+            page.click_save_and_next()
+            time.sleep(1.0)
         except: pass
         return True
     else:
-        log.warning("Validation unsuccessful. Skipping submission to next question.")
+        log.warning("Validation unsuccessful. Skipping submission.")
         report.set_coding_final(q_idx, code, "FAILED", verdict_trace)
         try: page.click_save_and_next()
         except: pass

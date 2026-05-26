@@ -6,7 +6,7 @@ from utils.logger import get_logger
 
 log = get_logger(__name__)
 
-# This singleton class keeps track of our exam stats and exports everything into scanned_questions.html when complete!
+# Singleton class for monitoring assessment telemetry and exporting results to HTML format.
 class ReportGenerator:
     _instance = None
     def __new__(cls, *args, **kwargs):
@@ -335,7 +335,7 @@ class ReportGenerator:
             log.error(f"Error compiling scanned_questions.html: {e}")
 
     def build_html_dashboard(self):
-        # Build both reports at final finish
+        # Compile both analytical reports upon execution completion.
         self.save_scanned_questions_html()
         from config import settings
         try:

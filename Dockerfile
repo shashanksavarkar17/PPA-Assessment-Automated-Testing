@@ -5,7 +5,7 @@ FROM python:3.10-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Install system dependencies and Google Chrome stable
+# Install system dependencies and Google Chrome stable, then purge build-only tools
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get update && apt-get install -y \
     google-chrome-stable \
     --no-install-recommends \
+    && apt-get purge -y --auto-remove wget gnupg unzip curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory in the container

@@ -3,34 +3,34 @@ from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from config import settings
 
-# This page handles credentials input, sending OTP, typing the received code, and verifying.
+# Page Object representing the user login and OTP verification interface.
 class LoginPage(BasePage):
     def wait_for_page_load(self):
-        # Wait until the email text field appears so we can start logging in.
+        # Wait for the email input element to become visible, indicating page load.
         self.helpers.wait_for_element((By.NAME, "email"))
         
     def login_with_email(self, email):
-        # Type the candidate email and hit the "Send OTP" button to trigger Yopmail delivery.
+        # Submit candidate email to trigger authentication OTP generation.
         self.helpers.enter_text((By.NAME, "email"), email)
         self.helpers.click_element((By.XPATH, "//button[contains(text(), 'Send OTP')]"))
         
     def enter_otp_and_verify(self, otp_code):
-        # Give the DOM a quick moment to render the OTP boxes.
+        # Allow the DOM a short duration to render the OTP input interface.
         time.sleep(1)
-        # Find all active, visible inputs on the screen that aren't the email field or buttons.
+        # Identify all visible, non-email input fields for entering the OTP.
         inputs = [i for i in self.driver.find_elements(By.XPATH, "//input") if i.is_displayed() and i.is_enabled() and i.get_attribute("name") != "email" and i.get_attribute("type") not in ["button", "submit", "hidden", "checkbox", "radio"]]
         
-        # Fill each input box with a single character of the OTP, or dump the whole code in the first box as a fallback.
+        # Distribute OTP characters across the corresponding input fields.
         if len(inputs) >= len(otp_code):
             for i, char in enumerate(otp_code): inputs[i].send_keys(char)
         elif inputs:
             inputs[0].send_keys(otp_code)
             
-        # Click the first visible verify button we can find.
+        # Identify and submit the verification button.
         for btn in self.driver.find_elements(By.XPATH, "//button[contains(normalize-space(.), 'Verify') or contains(normalize-space(.), 'Submit')]"):
             if btn.is_displayed():
                 btn.click()
                 break
                 
-        # Wait up to our configured timeout for the OTP validation to succeed and reveal the Proceed button.
+        # Wait for verification completion and target transition button rendering.
         self.helpers.wait_for_element((By.XPATH, "//button[contains(normalize-space(.), 'Proceed')]"), timeout=settings.OTP_WAIT_TIMEOUT)

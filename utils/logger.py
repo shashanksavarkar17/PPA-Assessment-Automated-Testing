@@ -1,13 +1,13 @@
 import logging, sys, os
 
-# This custom formatter styles our console output with neat icons and colors.
+# Custom log formatter for standardized terminal outputs with status indicators and formatting.
 class ConsoleFmt(logging.Formatter):
     def format(self, r):
         m = r.getMessage()
-        # Truncate messages with multiple lines or very long text so our terminal stays clean!
+        # Truncate multi-line or long messages to maintain clean console output.
         if r.levelno < logging.ERROR and (len(m) > 160 or '\n' in m):
             m = f"{m.splitlines()[0][:157]}..."
-        # Green checkmark for success, blue info dot, yellow warning, and red X for errors.
+        # Maps log levels and keywords to distinct symbols and ANSI colors.
         p = f"\033[92m✔" if r.levelno == 20 and any(k in m.lower() for k in ["success", "complete", "done", "passed"]) else (f"\033[94mℹ" if r.levelno == 20 else (f"\033[93m⚠" if r.levelno == 30 else f"\033[91m✖"))
         return f"{p}\033[0m \033[1m[{r.name.split('.')[-1][:12]}]\033[0m {m}"
 
@@ -15,17 +15,17 @@ def get_logger(name="Runner"):
     log = logging.getLogger(name)
     if not log.handlers:
         log.setLevel(logging.INFO)
-        # Enable full ANSI escape codes in Windows Command Prompt/PowerShell.
+        # Enable ANSI escape sequences on Windows console environments.
         if sys.platform == "win32":
             try:
                 import ctypes
                 ctypes.windll.kernel32.SetConsoleMode(ctypes.windll.kernel32.GetStdHandle(-11), 7)
             except: pass
-        # Reconfigure sys.stdout to prevent unicode emoji print crashes.
+        # Reconfigure standard output encoding to prevent encoding exception crashes.
         try: sys.stdout.reconfigure(encoding='utf-8', errors='replace')
         except: pass
         
-        # Stream logs straight to standard output.
+        # Direct log streams to standard output.
         ch = logging.StreamHandler(sys.stdout)
         ch.setFormatter(ConsoleFmt())
         log.addHandler(ch)

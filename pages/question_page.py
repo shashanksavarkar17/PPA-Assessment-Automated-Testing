@@ -6,10 +6,35 @@ from utils.logger import get_logger
 
 log = get_logger(__name__)
 
-# Highly minimized and robust QuestionPage handling MCQs and coding injections.
+# Page Object class representing standard question panels for MCQ and coding problem types.
 class QuestionPage(BasePage):
+    def dismiss_reset_popup(self):
+        try:
+            alert = self.driver.switch_to.alert
+            alert_text = alert.text
+            alert.accept()
+            log.info(f"Dismissed system alert popup: '{alert_text}'")
+            time.sleep(0.3)
+            return True
+        except: pass
+        
+        try:
+            for el in self.driver.find_elements(By.XPATH, "//button | //a | //div[@role='button']"):
+                try:
+                    if el.is_displayed() and el.is_enabled():
+                        text = (el.text or el.get_attribute("value") or "").lower()
+                        if any(x in text for x in ["yes", "confirm", "reset", "ok", "change", "continue"]):
+                            if not any(x in text for x in ["test", "assessment", "all", "final", "finish", "end"]):
+                                self.driver.execute_script("arguments[0].click();", el)
+                                log.info(f"Proactively dismissed code reset/confirmation popup by clicking: '{el.text.strip()}'")
+                                time.sleep(0.3)
+                                return True
+                except: pass
+        except: pass
+        return False
+
     def wait_for_page_load(self):
-        # Dismiss any proctoring/tab-switch block warnings if they appear.
+        # Terminate any proactive proctoring notifications or dialogs.
         for _ in range(3):
             try:
                 for btn in self.driver.find_elements(By.XPATH, "//button[contains(text(), 'Return')]"):
@@ -17,14 +42,17 @@ class QuestionPage(BasePage):
                         self.driver.execute_script("arguments[0].click();", btn)
                         time.sleep(0.5)
             except: pass
+        self.dismiss_reset_popup()
         self.helpers.wait_for_element((By.XPATH, "//*[contains(@class, 'problem') or contains(@class, 'question') or contains(@class, 'editor')]"))
         
     def get_question_type(self):
-        # Return MCQ if radio buttons are found, otherwise CODING.
-        return "MCQ" if self.driver.find_elements(By.XPATH, "//input[@type='radio']") else "CODING"
+        # Determine question category by scanning for standard option input components.
+        if self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox'] | //*[contains(@class, 'option') or contains(@class, 'choice')]"):
+            return "MCQ"
+        return "CODING"
             
     def get_question_text(self):
-        # Extract problem text from standard container elements.
+        # Retrieve visible problem statement content.
         for sel in ["//*[contains(@class, 'problem') or contains(@class, 'question') or contains(@class, 'ql-editor')]", "body"]:
             elements = self.driver.find_elements(By.XPATH, sel)
             if elements and elements[0].text.strip():
@@ -32,7 +60,7 @@ class QuestionPage(BasePage):
         return "Unknown Question"
         
     def get_selected_language(self):
-        # Identify the selected language dropdown option.
+        # Extract currently designated compiler language.
         try:
             for sel in ["select", "[class*='lang']", "[id*='lang']"]:
                 el = self.driver.find_element(By.CSS_SELECTOR, sel)
@@ -66,6 +94,7 @@ class QuestionPage(BasePage):
                             s.select_by_visible_text(opt.text)
                             log.info(f"Selected language option '{opt.text}' via dropdown Select.")
                             time.sleep(0.5)
+                            self.dismiss_reset_popup()
                             return True
             except: pass
             
@@ -86,6 +115,7 @@ class QuestionPage(BasePage):
                                         self.driver.execute_script("arguments[0].click();", item)
                                         log.info(f"Selected language option '{item.text}' from custom dropdown item list.")
                                         time.sleep(0.5)
+                                        self.dismiss_reset_popup()
                                         return True
                             except: pass
             except: pass
@@ -109,12 +139,12 @@ class QuestionPage(BasePage):
                         continue
                     
                     if "input" in text.lower() and "output" in text.lower():
-                        # Try parsing standard CP pattern: "Input: ... Output: ..."
+                        # Parse competitive programming test pattern template.
                         match = re.search(r'(?:input|sample input|example input):?\s*\n?(.*?)\s*\n?(?:output|sample output|example output):?\s*\n?(.*)', text, re.IGNORECASE | re.DOTALL)
                         if match:
                             inp = match.group(1).strip()
                             out = match.group(2).strip()
-                            # Clean label prefixes inside match
+                            # Remove label prefixes from match boundaries.
                             inp = re.sub(r'^(?:input|sample input|example input):?\s*', '', inp, flags=re.I).strip()
                             out = re.sub(r'^(?:output|sample output|example output):?\s*', '', out, flags=re.I).strip()
                             log.info(f"Parsed example from <pre> tag. Input: {repr(inp)}, Output: {repr(out)}")
@@ -122,7 +152,7 @@ class QuestionPage(BasePage):
             except Exception as e:
                 log.warning(f"Error checking pre tag: {e}")
                 
-        # Method 2: Fallback to scanning page content text directly via regex
+        # Fallback analysis using generic regular expression parsing on page text.
         try:
             full_text = self.get_question_text()
             match = re.search(r'(?:input|sample input|example input):?\s*\n?(.*?)\n?(?:output|sample output|example output):?\s*\n?(.*?)(?:\n\n|\n[A-Z]|\Z)', full_text, re.IGNORECASE | re.DOTALL)
@@ -143,40 +173,38 @@ class QuestionPage(BasePage):
         """
         log.info("Attempting to locate and enable 'Custom Input' checkbox/toggle...")
         
-        # 1. Search for standard checkbox input elements with 'custom' in their attributes
-        for inp in self.driver.find_elements(By.XPATH, "//input[@type='checkbox']"):
+        # 1. Search for explicit input checkboxes targeting custom input/test
+        checkboxes_xpath = "//input[@type='checkbox'][contains(translate(@id, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom') or contains(translate(@class, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom') or contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom') or contains(translate(@value, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom') or contains(translate(@id, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'input') or contains(translate(@class, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'input') or contains(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'input') or contains(translate(@value, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'input')]"
+        for inp in self.driver.find_elements(By.XPATH, checkboxes_xpath):
             try:
-                for attr in ["id", "class", "name", "value"]:
-                    val = (inp.get_attribute(attr) or "").lower()
-                    if "custom" in val or "input" in val:
-                        if inp.is_displayed():
-                            if not inp.is_selected():
-                                self.driver.execute_script("arguments[0].click();", inp)
-                                log.info("Enabled custom input checkbox via direct element click.")
-                                time.sleep(0.5)
-                            return True
+                if inp.is_displayed():
+                    if not inp.is_selected():
+                        self.driver.execute_script("arguments[0].click();", inp)
+                        log.info("Enabled custom input checkbox via direct element click.")
+                        time.sleep(0.3)
+                    return True
             except: pass
             
-        # 2. Search for label elements containing text 'custom input'
-        for label in self.driver.find_elements(By.XPATH, "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom input') or contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom test')]"):
+        # 2. Scan label text content for custom input/test tags.
+        labels_xpath = "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom input') or contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom test')]"
+        for label in self.driver.find_elements(By.XPATH, labels_xpath):
             try:
                 if label.is_displayed():
                     self.driver.execute_script("arguments[0].click();", label)
                     log.info("Clicked label containing 'Custom Input' text.")
-                    time.sleep(0.5)
+                    time.sleep(0.3)
                     return True
             except: pass
             
-        # 3. Search for any buttons or checkboxes with labels containing 'custom'
-        for el in self.driver.find_elements(By.XPATH, "//button | //a | //input"):
+        # 3. Scan button/input elements containing "custom"
+        buttons_xpath = "//*[self::button or self::a or self::input][contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom') or contains(translate(@value, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom') or contains(translate(@placeholder, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'custom')]"
+        for el in self.driver.find_elements(By.XPATH, buttons_xpath):
             try:
                 if el.is_displayed():
-                    text = (el.text or el.get_attribute("value") or "").lower()
-                    if "custom" in text:
-                        self.driver.execute_script("arguments[0].click();", el)
-                        log.info(f"Clicked button/element '{text}' to enable custom input.")
-                        time.sleep(0.5)
-                        return True
+                    self.driver.execute_script("arguments[0].click();", el)
+                    log.info("Clicked element to enable custom input.")
+                    time.sleep(0.3)
+                    return True
             except: pass
             
         log.warning("Could not find any obvious element to enable custom input.")
@@ -188,7 +216,7 @@ class QuestionPage(BasePage):
         """
         log.info(f"Setting custom input value: {repr(input_text)}")
         
-        # Locate target textareas
+        # Locate target input fields.
         candidates = []
         for ta in self.driver.find_elements(By.XPATH, "//textarea"):
             try:
@@ -220,7 +248,7 @@ class QuestionPage(BasePage):
                     return True
                 except: pass
                 
-        # Fallback check for contenteditable elements
+        # Fallback evaluation of rich-text contenteditable boundaries.
         for ce in self.driver.find_elements(By.XPATH, "//*[@contenteditable='true']"):
             try:
                 if ce.is_displayed():
@@ -232,31 +260,122 @@ class QuestionPage(BasePage):
         log.warning("Could not find any visible custom input textarea/input element.")
         return False
         
-    def get_mcq_options(self):
-        # Extract all text options adjacent to radio button choice selectors.
-        opts = []
-        for inp in self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox']"):
+    def _find_option_elements(self):
+        inputs = self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox']")
+        if inputs:
+            clickables = []
+            for inp in inputs:
+                added = False
+                for xpath in ["./following-sibling::label", "./preceding-sibling::label", "..", "."]:
+                    try:
+                        el = inp.find_element(By.XPATH, xpath)
+                        if el and el.is_displayed() and el not in clickables:
+                            # Verify the element has text or contains the input
+                            clickables.append(el)
+                            added = True
+                            break
+                    except: pass
+                if not added:
+                    clickables.append(inp)
+            return clickables
+            
+        lis = self.driver.find_elements(By.XPATH, "//li[contains(@class, 'option') or contains(@class, 'choice') or contains(@class, 'radio-label')]")
+        if lis:
+            return lis
+            
+        candidates = []
+        for el in self.driver.find_elements(By.XPATH, "//li | //div[contains(@class, 'option') or contains(@class, 'choice') or contains(@class, 'item') or @role='radio']"):
             try:
-                text = inp.find_element(By.XPATH, "..").text.strip() or inp.find_element(By.XPATH, "../..").text.strip()
-                if text and text not in opts: opts.append(text)
+                if el.is_displayed():
+                    text = el.text.strip()
+                    if text and len(text) < 150 and not any(h in text.lower() for h in ["question", "section", "instructions", "summary"]):
+                        candidates.append(el)
             except: pass
-        return opts if len(opts) >= 2 else ["A", "B", "C", "D"]
+        return candidates
+
+    def get_mcq_options(self):
+        elements = self._find_option_elements()
+        opts = []
+        for el in elements:
+            try:
+                text = el.text.strip()
+                if not text:
+                    text = el.find_element(By.XPATH, "..").text.strip() or el.find_element(By.XPATH, "../..").text.strip()
+                if text and text not in opts:
+                    opts.append(text)
+            except: pass
+            
+        cleaned_opts = []
+        for opt in opts:
+            cleaned = re.sub(r'^[A-D]\.\s*|^[a-d]\)\s*', '', opt).strip()
+            if cleaned and cleaned not in cleaned_opts:
+                cleaned_opts.append(cleaned)
+                
+        if len(cleaned_opts) >= 2:
+            return cleaned_opts
+        return ["A", "B", "C", "D"]
         
     def select_mcq_option(self, target):
         if not target: return False
+        elements = self._find_option_elements()
         norm = lambda s: "".join(c for c in s.lower() if c.isalnum())
-        for el in self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox'] | //label | //li"):
+        target_norm = norm(target)
+        
+        def try_click_element(el):
+            candidates = [el]
+            for xpath in ["..", "../label", "./following-sibling::label", "./preceding-sibling::label", "./ancestor::label", "../.."]:
+                try:
+                    c = el.find_element(By.XPATH, xpath)
+                    if c and c not in candidates:
+                        candidates.append(c)
+                except: pass
+            
+            for c in candidates:
+                try:
+                    if c.is_displayed():
+                        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", c)
+                        time.sleep(0.1)
+                        self.driver.execute_script("arguments[0].click();", c)
+                        log.info(f"Clicked candidate element: <{c.tag_name} class='{c.get_attribute('class')}'>")
+                        time.sleep(0.3)
+                        return True
+                except: pass
+            return False
+
+        # 1. Text-based direct matching
+        for el in elements:
             try:
-                if el.is_displayed() and (target.lower() in el.text.lower() or norm(target) in norm(el.text)):
-                    self.driver.execute_script("arguments[0].click();", el)
-                    return True
+                if el.is_displayed():
+                    text = el.text.strip()
+                    if not text:
+                        text = el.find_element(By.XPATH, "..").text.strip() or el.find_element(By.XPATH, "../..").text.strip()
+                    
+                    if target.lower() in text.lower() or target_norm in norm(text) or norm(text) in target_norm:
+                        if try_click_element(el):
+                            return True
             except: pass
-        try:
-            inputs = self.driver.find_elements(By.XPATH, "//input[@type='radio'] | //input[@type='checkbox']")
-            if inputs:
-                self.driver.execute_script("arguments[0].click();", inputs[0])
+            
+        # 2. Index-based matching
+        opts = self.get_mcq_options()
+        match_idx = -1
+        for idx, opt in enumerate(opts):
+            if target.lower() in opt.lower() or norm(opt) in target_norm or target_norm in norm(opt):
+                match_idx = idx
+                break
+                
+        if match_idx == -1 and len(target) == 1 and target.upper() in ["A", "B", "C", "D"]:
+            match_idx = ["A", "B", "C", "D"].index(target.upper())
+            
+        if match_idx != -1 and match_idx < len(elements):
+            target_el = elements[match_idx]
+            if try_click_element(target_el):
                 return True
-        except: pass
+            
+        # 3. Fallback to click first visible option element
+        if elements:
+            if try_click_element(elements[0]):
+                return True
+            
         return False
 
     def enter_code_solution(self, code):
@@ -290,40 +409,54 @@ class QuestionPage(BasePage):
             log.warning(f"Injection exception: {e}")
 
     def _click_button(self, labels):
-        conds = " or ".join([f"contains(translate(normalize-space(.), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{s}')" for s in labels])
-        for el in self.driver.find_elements(By.XPATH, f"//button[{conds}] | //a[{conds}] | //input[{conds}]"):
+        # Build an optimized XPath to find only buttons, links, or inputs containing any target label
+        conditions = " or ".join([f"contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{label.lower()}')" for label in labels])
+        val_conditions = " or ".join([f"contains(translate(@value, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{label.lower()}')" for label in labels])
+        xpath_query = f"//button[{conditions}] | //a[{conditions}] | //input[{val_conditions}]"
+        
+        elements = self.driver.find_elements(By.XPATH, xpath_query)
+        for el in elements:
             try:
                 if el.is_displayed() and el.is_enabled():
                     text = (el.text or el.get_attribute("value") or "").lower()
-                    if any(x in text for x in ["test", "assessment", "all", "final", "finish", "end"]):
-                        continue
-                    self.driver.execute_script("arguments[0].scrollIntoView(true);", el)
-                    time.sleep(0.3)
-                    self.driver.execute_script("arguments[0].click();", el)
-                    return True
+                    if not any(x in text for x in ["test", "assessment", "all", "final", "finish", "end"]):
+                        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", el)
+                        time.sleep(0.1)
+                        self.driver.execute_script("arguments[0].click();", el)
+                        return True
             except: pass
         return False
              
+    def is_next_button_disabled(self):
+        try:
+            xpath = "//button | //a"
+            for el in self.driver.find_elements(By.XPATH, xpath):
+                try:
+                    if el.is_displayed():
+                        text = el.text.lower()
+                        if "next" in text:
+                            disabled = el.get_attribute("disabled")
+                            aria_disabled = el.get_attribute("aria-disabled")
+                            classes = (el.get_attribute("class") or "").lower()
+                            if disabled == "true" or aria_disabled == "true" or "disabled" in classes or not el.is_enabled():
+                                return True
+                except: pass
+            return False
+        except:
+            return False
+
     def click_save_and_next(self):
-        if not self._click_button(['save', 'next']):
-            self.return_to_summary()
+        return self._click_button(['save', 'next', 'submit'])
    
     def clear_outputs_on_page(self):
         pass
 
+    def submit_mcq_answer(self):
+        return self._click_button(["submit", "save", "lock"])
+        
     def submit_code(self):
         self.clear_outputs_on_page()
-        for el in self.driver.find_elements(By.XPATH, "//button | //a | //input"):
-            try:
-                if el.is_displayed() and el.is_enabled():
-                    text = (el.text or el.get_attribute("value") or "").lower()
-                    if "submit" in text and not any(x in text for x in ["test", "assessment", "all", "final", "finish", "end"]):
-                        self.driver.execute_script("arguments[0].scrollIntoView(true);", el)
-                        time.sleep(0.3)
-                        self.driver.execute_script("arguments[0].click();", el)
-                        return True
-            except: pass
-        self._click_button(['submit'])
+        return self._click_button(['submit'])
              
     def run_code(self):
         self.clear_outputs_on_page()
@@ -351,7 +484,8 @@ class QuestionPage(BasePage):
             return False
         
         def find_output_for_label(keywords):
-            xpath_query = "//*[starts-with(name(), 'h') or name()='div' or name()='span' or name()='p' or name()='label' or name()='strong']"
+            conditions = " and ".join([f"contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{k}')" for k in keywords])
+            xpath_query = f"//*[starts-with(name(), 'h') or name()='div' or name()='span' or name()='p' or name()='label' or name()='strong'][{conditions}]"
             for el in self.driver.find_elements(By.XPATH, xpath_query):
                 try:
                     if el.is_displayed():
@@ -381,7 +515,7 @@ class QuestionPage(BasePage):
             
         if not actual_text:
             # Fallback to output keyword excluding expected
-            xpath_query = "//*[starts-with(name(), 'h') or name()='div' or name()='span' or name()='p' or name()='label' or name()='strong']"
+            xpath_query = "//*[starts-with(name(), 'h') or name()='div' or name()='span' or name()='p' or name()='label' or name()='strong'][contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'output') and not(contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'expected'))]"
             for el in self.driver.find_elements(By.XPATH, xpath_query):
                 try:
                     if el.is_displayed():
@@ -430,7 +564,7 @@ class QuestionPage(BasePage):
         return ""
 
     def get_code_result(self, old_actual=None):
-        # 1. Wait for processing to complete
+        # Wait for processing state to complete.
         from selenium.webdriver.support.ui import WebDriverWait
         from selenium.webdriver.support import expected_conditions as EC
         
@@ -440,11 +574,11 @@ class QuestionPage(BasePage):
             WebDriverWait(self.driver, 20).until(
                 EC.invisibility_of_element_located(processing_loc)
             )
-            time.sleep(1) # Render wait
+            time.sleep(1) # Block for UI rendering stability.
         except:
             log.warning("Timeout waiting for processing to finish.")
             
-        # 2. Wait until the actual output is loaded and has changed from old stale output
+        # Wait until output refresh completes.
         start_time = time.time()
         while time.time() - start_time < 8:
             expected, actual = self.get_run_outputs()
@@ -455,13 +589,15 @@ class QuestionPage(BasePage):
                 break
             time.sleep(0.5)
 
-        # 3. Check for specific failure/error flags on screen
+        # Analyze page elements for compiler or runtime error codes.
         error_flags = [
             "wrong answer", "time limit exceeded", "time limit exceed", "tle", 
             "runtime error", "rte", "compilation error", "failed", "partially correct"
         ]
         try:
-            elements = self.driver.find_elements(By.XPATH, "//*[self::div or self::span or self::p or self::h3 or self::h4 or self::h5 or self::strong]")
+            # Build an optimized XPath to query only elements that actually contain the error flags
+            xpath_conditions = " or ".join([f"contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{flag}')" for flag in error_flags])
+            elements = self.driver.find_elements(By.XPATH, f"//*[self::div or self::span or self::p or self::strong or self::h3 or self::h4 or self::h5][{xpath_conditions}]")
             found_errors = []
             for el in elements:
                 try:
@@ -480,7 +616,7 @@ class QuestionPage(BasePage):
         except Exception as e:
             log.warning(f"Error checking error flags: {e}")
         
-        # 4. Extract expected vs actual outputs
+        # Extract and compare expected versus actual program outputs.
         try:
             expected, actual = self.get_run_outputs()
             if expected or actual:
@@ -488,7 +624,7 @@ class QuestionPage(BasePage):
                 log.info(f"Extracted Your Output: {repr(actual)}")
                 
 
-                # Extract all integers (including negative numbers)
+                # Identify integer groups from text.
                 exp_ints = re.findall(r'-?\d+', expected)
                 act_ints = re.findall(r'-?\d+', actual)
                 
@@ -501,12 +637,12 @@ class QuestionPage(BasePage):
         except Exception as e:
             log.warning(f"Error executing output validation check: {e}")
             
-        # 5. Fallback check for compiler or execution errors
+        # Retrieve fallback compilation diagnostic messages.
         console_err = self.get_console_errors()
         if console_err:
             return False, console_err
             
-        # 6. Fallback to general DOM search for fail/error text
+        # Perform a generic DOM inquiry for failed validation logs.
         failed_loc = (By.XPATH, "//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'fail') or contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'error')]")
         try:
             failed_elements = self.driver.find_elements(*failed_loc)
@@ -529,11 +665,13 @@ class QuestionPage(BasePage):
 
     def is_sidebar_open(self):
         try:
-            for xpath in ["//*[contains(text(), 'Overall Summary')]", "//*[contains(text(), 'CODING QUESTIONS')]", "//*[contains(text(), 'MCQ QUESTIONS')]"]:
-                elements = self.driver.find_elements(By.XPATH, xpath)
-                for el in elements:
-                    if el.is_displayed():
+            for xpath in ["//*[contains(text(), 'Overall Summary')]", "//*[contains(text(), 'Summary')]", "//*[contains(text(), 'QUESTIONS')]"]:
+                for el in self.driver.find_elements(By.XPATH, xpath):
+                    if el.is_displayed() and el.rect['x'] > (self.driver.execute_script("return window.innerWidth;") * 0.5):
                         return True
+            for el in self.driver.find_elements(By.XPATH, "//div[contains(@class, 'sidebar') or contains(@class, 'drawer')]//*[contains(text(), 'Q')]"):
+                if el.is_displayed() and el.rect['x'] > (self.driver.execute_script("return window.innerWidth;") * 0.5):
+                    return True
         except: pass
         return False
 
@@ -622,7 +760,8 @@ class QuestionPage(BasePage):
         for el in items:
             try:
                 if el.is_displayed():
-                    text = el.text.strip()
+                    raw_text = el.text.strip()
+                    text = " ".join([line.strip() for line in raw_text.splitlines() if line.strip()])
                     match = re.search(r'\b(?:Q|Question\s*)?(\d+)\b', text, re.IGNORECASE)
                     if match:
                         q_idx = int(match.group(1))
@@ -632,7 +771,7 @@ class QuestionPage(BasePage):
                         is_solved = False
                         html = el.get_attribute("outerHTML") or ""
                         
-                        badge_els = el.find_elements(By.XPATH, ".//*[contains(@class, 'badge') or contains(@class, 'status') or contains(@class, 'circle') or contains(text(), 'Q')]")
+                        badge_els = el.find_elements(By.XPATH, ".//*[contains(@class, 'badge') or contains(@class, 'status') or contains(@class, 'circle')]")
                         if not badge_els:
                             badge_els = [el]
                             
@@ -642,23 +781,19 @@ class QuestionPage(BasePage):
                                 nums = [int(s) for s in re.findall(r'\d+', bg_color)]
                                 if len(nums) >= 3:
                                     r, g, b = nums[0], nums[1], nums[2]
-                                    if g > r * 1.2 and g > b * 1.2 and g > 80:
+                                    if g > r * 1.4 and g > b * 1.4 and g > 110:
                                         is_solved = True
                                         break
                                         
                             classes = (badge.get_attribute("class") or "").lower()
-                            if any(x in classes for x in ["success", "passed", "solved", "green", "bg-emerald", "bg-teal"]):
-                                if "partial" not in classes and "warning" not in classes:
+                            if any(x in classes for x in ["success", "passed", "solved", "badge-success", "q-solved"]):
+                                if not any(x in classes for x in ["partial", "warning", "unsolved", "failed"]):
                                     is_solved = True
                                     break
                                 
-                        is_html_solved = False
-                        if "success" in html.lower() or ("solved" in html.lower() and "partially" not in html.lower() and "partial" not in html.lower()):
-                            if "wrong" not in html.lower() and "fail" not in html.lower():
-                                is_html_solved = True
-                                
-                        if not is_solved and ("green" in html.lower() or is_html_solved):
-                            is_solved = True
+                        if not is_solved:
+                            if any(marker in html.lower() for marker in ["status-success", "q-solved", "badge-success", "solved-badge", "class=\"solved\""]):
+                                is_solved = True
                             
                         q_type = "CODING"
                         try:
@@ -684,3 +819,58 @@ class QuestionPage(BasePage):
         for q in questions:
             log.info(f" - Q{q['index']}: {q['name'][:30]} | Type: {q['type']} | Solved: {q['is_solved']}")
         return questions
+
+    def switch_sidebar_section(self, section_name):
+        """
+        Locate and click the sidebar section header/accordion to switch to the target section.
+        """
+        self.open_sidebar()
+        time.sleep(0.3)
+        
+        # Clean section name to target parts
+        clean_name = section_name.replace("Section:", "").strip()
+        log.info(f"Attempting to switch sidebar section to: '{clean_name}'")
+        
+        # Build candidates to search for
+        keywords = [clean_name]
+        if "-" in clean_name:
+            keywords.extend([k.strip() for k in clean_name.split("-")])
+        
+        # Search for sidebar container
+        sidebar_el = None
+        for sel in ["//*[contains(@class, 'sidebar') or contains(@class, 'drawer') or contains(@class, 'panel')]", "//div[contains(@class, 'right')]"]:
+            elements = self.driver.find_elements(By.XPATH, sel)
+            for el in elements:
+                try:
+                    if el.is_displayed() and el.rect['x'] > (self.driver.execute_script("return window.innerWidth;") * 0.5):
+                        sidebar_el = el
+                        break
+                except: pass
+            if sidebar_el: break
+            
+        container = sidebar_el if sidebar_el else self.driver
+        
+        for kw in keywords:
+            if not kw or len(kw) < 3: continue
+            log.info(f"Searching sidebar for section element containing: '{kw}'")
+            xpath = f".//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{kw.lower()}')]"
+            elements = container.find_elements(By.XPATH, xpath)
+            for el in elements:
+                try:
+                    if el.is_displayed():
+                        tag = el.tag_name.lower()
+                        if tag in ["div", "span", "button", "h3", "h4", "h5", "a"]:
+                            log.info(f"Found candidate section element in sidebar: <{tag}> '{el.text[:30]}'. Clicking...")
+                            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", el)
+                            time.sleep(0.2)
+                            try:
+                                el.click()
+                                log.info("Natively clicked sidebar section element.")
+                            except:
+                                self.driver.execute_script("arguments[0].click();", el)
+                                log.info("Clicked sidebar section element via JS.")
+                            time.sleep(0.5)
+                            return True
+                except: pass
+        log.warning(f"Could not find or switch to sidebar section: '{clean_name}'")
+        return False
