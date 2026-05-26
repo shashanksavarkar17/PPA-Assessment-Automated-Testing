@@ -43,8 +43,11 @@ def run_assessment_flow():
         
         # Phase 1: Consent and instruction acknowledgment.
         pages['instructions'].navigate_to(settings.BASE_URL)
-        pages['instructions'].wait_for_page_load()
-        pages['instructions'].accept_instructions()
+        try:
+            pages['instructions'].wait_for_page_load()
+            pages['instructions'].accept_instructions()
+        except Exception as inst_err:
+            log.info(f"Skipping instruction page acceptance (already accepted or summary loaded directly): {inst_err}")
         
         # Phase 2: Candidate login and verification via OTP retrieval.
         pages['login'].wait_for_page_load()
@@ -76,114 +79,96 @@ def run_assessment_flow():
             log.info(f"   STARTING SECTION: {section_name} ({s_idx} / {len(sections_to_solve)})")
             log.info(f"==========================================\n")
             
-            # Start the current section to transition to the editor/question view
-            pages['summary'].wait_for_page_load()
-            
-            started = False
-            if section_data:
-                started = pages['summary'].start_first_unsolved_in_section(section_name)
-            
-            if not started:
-                # Fallback to start_section index if name-based start fails or was not available
-                log.warning(f"Could not start section via name '{section_name}'. Trying index-based start...")
-                started = pages['summary'].start_section(s_idx)
-                
-            if not started:
-                log.warning(f"Failed to transition into section '{section_name}'. Skipping...")
-                continue
-                
-            log.info("Transition started. Waiting for question page statement to render...")
-            try:
-                pages['question'].helpers.wait_for_element(
-                    (By.XPATH, "//*[contains(@class, 'problem') or contains(@class, 'question') or contains(@class, 'editor')]"),
-                    timeout=12
-                )
-                log.info("Question page statement rendered successfully!")
-            except Exception as wait_err:
-                log.warning(f"Timeout waiting for question page statement: {wait_err}")
-            time.sleep(1.0)
-            
-            solved_in_this_run = []
+            # Standard summary-driven question traversal for all sections (both coding and MCQ)
             failed_questions = []
+            solved_questions_in_section = []
             
-            # Standard sidebar-driven question traversal for all sections (both coding and MCQ)
             while True:
-                pages['question'].wait_for_page_load()
+                pages['summary'].wait_for_page_load()
                 
-                # Switch to correct section sidebar accordion/tab
-                pages['question'].switch_sidebar_section(section_name)
-                
-                # Open sidebar control panel to inspect active questions list.
-                pages['question'].open_sidebar()
-                time.sleep(0.2)
-                
-                # Scan sidebar structural elements.
-                sidebar_questions = pages['question'].get_sidebar_questions()
-                
-                # Filter all unsolved questions in this section (Solved=False status detection)
-                unsolved = [q for q in sidebar_questions if not q['is_solved'] and q['index'] not in failed_questions and q['index'] not in solved_in_this_run]
-                
-                if unsolved:
-                    next_q = unsolved[0]
-                    log.info(f"Transitioning to Question {next_q['index']} ({next_q['type']})")
+                # Check and open the first unsolved question in the current section on the summary page
+                exclude_list = failed_questions + solved_questions_in_section
+                started = pages['summary'].start_first_unsolved_in_section(section_name, exclude_names=exclude_list)
+                if not started:
+                    # Fallback to start_section index if name-based start fails and we haven't started anything yet
+                    if not exclude_list:
+                        log.warning(f"Could not start section via name '{section_name}'. Trying index-based start...")
+                        started = pages['summary'].start_section(s_idx)
                     
-                    try:
-                        driver.execute_script("arguments[0].click();", next_q['element'])
-                    except:
-                        try: next_q['element'].click()
-                        except: pass
-                    time.sleep(0.6)
-                    
-                    # Ensure sidebar is closed before attempting the question
-                    if pages['question'].is_sidebar_open():
-                        log.info("Sidebar remains open. Explicitly closing sidebar to prevent overlay obstruction...")
-                        pages['question'].close_sidebar()
-                    else:
-                        log.info("Sidebar is already closed.")
-                    time.sleep(0.4)
-                    
-                    pages['question'].wait_for_page_load()
-                    q_type = pages['question'].get_question_type()
-                    q_text = pages['question'].get_question_text()
-                    
-                    success = False
-                    if q_type == 'MCQ':
-                        success = _solve_mcq(pages['question'], solver, report, section_name, q_text, next_q['index'])
-                    else:
-                        success = _solve_coding(pages['question'], solver, report, section_name, q_text, next_q['index'])
-                        
-                    if not success:
-                        log.warning(f"Question {next_q['index']} failed to resolve. Flagging to prevent retry loop.")
-                        failed_questions.append(next_q['index'])
-                    else:
-                        solved_in_this_run.append(next_q['index'])
-                else:
-                    log.info(f"All scanned questions in section '{section_name}' successfully processed.")
+                if not started:
+                    log.info(f"All questions in section '{section_name}' successfully processed according to summary page.")
                     break
                     
-                time.sleep(0.5)
+                log.info("Transition started. Waiting for question page statement to render...")
+                try:
+                    pages['question'].helpers.wait_for_element(
+                        (By.XPATH, "//*[contains(@class, 'problem') or contains(@class, 'question') or contains(@class, 'editor')]"),
+                        timeout=12
+                    )
+                    log.info("Question page statement rendered successfully!")
+                except Exception as wait_err:
+                    log.warning(f"Timeout waiting for question page statement: {wait_err}")
+                time.sleep(1.0)
                 
-            # Navigate back to overall summary dashboard to prepare for the next section.
-            pages['question'].open_sidebar()
-            time.sleep(0.3)
-            if not pages['question'].click_overall_summary():
-                if not pages['question'].return_to_summary():
-                    try: driver.back()
-                    except: pass
-            time.sleep(1.5)
-            pages['summary'].wait_for_page_load()
+                pages['question'].wait_for_page_load()
+                
+                # Ensure sidebar is closed before attempting the question to prevent overlays
+                if pages['question'].is_sidebar_open():
+                    pages['question'].close_sidebar()
+                time.sleep(0.4)
+                
+                q_type = pages['question'].get_question_type()
+                q_text = pages['question'].get_question_text()
+                
+                # Derive active question title
+                active_q_title = "Question"
+                try:
+                    active_q_title = pages['question'].helpers.wait_for_element(
+                        (By.XPATH, "//h1 | //h2 | //h3 | //div[contains(@class, 'title') or contains(@class, 'name')]"),
+                        timeout=3
+                    ).text.strip()
+                except:
+                    if q_text:
+                        active_q_title = q_text.splitlines()[0][:50]
+                
+                log.info(f"Transitioned to Question: '{active_q_title}' (Type: {q_type})")
+                
+                success = False
+                if q_type == 'MCQ':
+                    success = _solve_mcq(pages['question'], solver, report, section_name, q_text, 1)
+                else:
+                    success = _solve_coding(pages['question'], solver, report, section_name, q_text, 1)
+                    
+                if not success:
+                    log.warning(f"Question '{active_q_title}' failed to resolve. Flagging to prevent retry loop.")
+                    failed_questions.append(active_q_title)
+                else:
+                    log.info(f"Question '{active_q_title}' solved successfully. Tracking to prevent redundant attempts.")
+                    solved_questions_in_section.append(active_q_title)
+                    
+                # Navigate back to overall summary dashboard to prepare for the next question/section.
+                pages['question'].open_sidebar()
+                time.sleep(0.3)
+                if not pages['question'].click_overall_summary():
+                    if not pages['question'].return_to_summary():
+                        try: driver.back()
+                        except: pass
+                time.sleep(1.5)
 
         report.build_html_dashboard()
         
-        # Final completion validation checking fail threshold.
-        if report.data["meta"]["fail"] == 0 and report.data["meta"]["pass"] > 0:
+        # Final completion validation checking fail threshold and total attempted count.
+        attempted = report.data["meta"]["pass"] + report.data["meta"]["fail"]
+        total_questions = report.data["meta"].get("questions", 0)
+        
+        if report.data["meta"]["fail"] == 0 and attempted >= total_questions and total_questions > 0:
             log.info("All questions successfully attempted and validated! Submitting final assessment...")
             pages['summary'].submit_assessment()
             time.sleep(1.5)
             report.add_timeline_event("Assessment successfully submitted automatically.")
         else:
-            log.warning("Some questions were not fully validated or remain unsolved. Leaving assessment open for manual review.")
-            report.add_timeline_event("Assessment left open for manual review due to failed/unsolved questions.")
+            log.warning(f"Validation failed (Attempted: {attempted}/{total_questions}, Failures: {report.data['meta']['fail']}). Leaving assessment open for manual review.")
+            report.add_timeline_event("Assessment left open for manual review due to failed/unsolved/unattempted questions.")
             
         # Persist consolidated execution telemetry.
         report.build_html_dashboard()

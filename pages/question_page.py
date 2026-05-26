@@ -755,6 +755,20 @@ class QuestionPage(BasePage):
             if sidebar_el: break
             
         container = sidebar_el if sidebar_el else self.driver
+        
+        # High-fidelity debug dump of the sidebar element
+        try:
+            import os
+            debug_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "reports")
+            os.makedirs(debug_dir, exist_ok=True)
+            debug_path = os.path.join(debug_dir, "sidebar_debug.html")
+            if not os.path.exists(debug_path) and sidebar_el:
+                with open(debug_path, "w", encoding="utf-8") as f:
+                    f.write(sidebar_el.get_attribute("outerHTML") or "")
+                log.info(f"✔ Successfully dumped sidebar HTML structure to {debug_path}")
+        except Exception as dump_err:
+            log.warning(f"Failed to dump sidebar HTML: {dump_err}")
+            
         items = container.find_elements(By.XPATH, ".//a | .//button | .//div[@role='button'] | .//*[contains(@class, 'question-item') or contains(@class, 'question-link') or contains(@class, 'Q')]")
         
         for el in items:
@@ -762,56 +776,70 @@ class QuestionPage(BasePage):
                 if el.is_displayed():
                     raw_text = el.text.strip()
                     text = " ".join([line.strip() for line in raw_text.splitlines() if line.strip()])
-                    match = re.search(r'\b(?:Q|Question\s*)?(\d+)\b', text, re.IGNORECASE)
-                    if match:
-                        q_idx = int(match.group(1))
-                        if any(q['index'] == q_idx for q in questions):
-                            continue
-                            
-                        is_solved = False
-                        html = el.get_attribute("outerHTML") or ""
+                    if not text or len(text) < 3:
+                        continue
                         
-                        badge_els = el.find_elements(By.XPATH, ".//*[contains(@class, 'badge') or contains(@class, 'status') or contains(@class, 'circle')]")
-                        if not badge_els:
-                            badge_els = [el]
-                            
-                        for badge in badge_els:
-                            bg_color = badge.value_of_css_property("background-color") or ""
-                            if "rgb" in bg_color or "rgba" in bg_color:
-                                nums = [int(s) for s in re.findall(r'\d+', bg_color)]
-                                if len(nums) >= 3:
-                                    r, g, b = nums[0], nums[1], nums[2]
-                                    if g > r * 1.4 and g > b * 1.4 and g > 110:
-                                        is_solved = True
-                                        break
-                                        
-                            classes = (badge.get_attribute("class") or "").lower()
-                            if any(x in classes for x in ["success", "passed", "solved", "badge-success", "q-solved"]):
-                                if not any(x in classes for x in ["partial", "warning", "unsolved", "failed"]):
+                    # Filter out non-question utility elements
+                    lower_text = text.lower()
+                    if any(u in lower_text for u in ["overall summary", "next question", "previous question", "instructions", "review", "submit", "section:", "coding section", "mcq section"]):
+                        continue
+                        
+                    # Enforce strict digit check so we only match real question nodes (e.g. "Q1", "Question 1", "1.")
+                    match = re.search(r'\b(?:Q|Question\s*)?(\d+)\b', text, re.IGNORECASE)
+                    if not match:
+                        continue
+                        
+                    q_idx = int(match.group(1))
+                    if any(q['index'] == q_idx for q in questions):
+                        continue
+                        
+                    if any(q['name'] == text for q in questions):
+                        continue
+                        
+                    is_solved = False
+                    html = el.get_attribute("outerHTML") or ""
+                    
+                    badge_els = el.find_elements(By.XPATH, ".//*[contains(@class, 'badge') or contains(@class, 'status') or contains(@class, 'circle')]")
+                    if not badge_els:
+                        badge_els = [el]
+                        
+                    for badge in badge_els:
+                        bg_color = badge.value_of_css_property("background-color") or ""
+                        if "rgb" in bg_color or "rgba" in bg_color:
+                            nums = [int(s) for s in re.findall(r'\d+', bg_color)]
+                            if len(nums) >= 3:
+                                r, g, b = nums[0], nums[1], nums[2]
+                                if g > r * 1.4 and g > b * 1.4 and g > 110:
                                     is_solved = True
                                     break
-                                
-                        if not is_solved:
-                            if any(marker in html.lower() for marker in ["status-success", "q-solved", "badge-success", "solved-badge", "class=\"solved\""]):
+                                    
+                        classes = (badge.get_attribute("class") or "").lower()
+                        if any(x in classes for x in ["success", "passed", "solved", "badge-success", "q-solved"]):
+                            if not any(x in classes for x in ["partial", "warning", "unsolved", "failed"]):
                                 is_solved = True
+                                break
                             
-                        q_type = "CODING"
-                        try:
-                            parent_text = el.find_element(By.XPATH, "./ancestor::*[contains(text(), 'MCQ') or contains(text(), 'mcq')]").text
-                            if "mcq" in parent_text.lower():
-                                q_type = "MCQ"
-                        except: pass
+                    if not is_solved:
+                        if any(marker in html.lower() for marker in ["status-success", "q-solved", "badge-success", "solved-badge", "class=\"solved\""]):
+                            is_solved = True
                         
-                        if "mcq" in text.lower() or "mcq" in html.lower():
+                    q_type = "CODING"
+                    try:
+                        parent_text = el.find_element(By.XPATH, "./ancestor::*[contains(text(), 'MCQ') or contains(text(), 'mcq')]").text
+                        if "mcq" in parent_text.lower():
                             q_type = "MCQ"
-                            
-                        questions.append({
-                            'index': q_idx,
-                            'name': text,
-                            'type': q_type,
-                            'is_solved': is_solved,
-                            'element': el
-                        })
+                    except: pass
+                    
+                    if "mcq" in text.lower() or "mcq" in html.lower():
+                        q_type = "MCQ"
+                        
+                    questions.append({
+                        'index': q_idx,
+                        'name': text,
+                        'type': q_type,
+                        'is_solved': is_solved,
+                        'element': el
+                    })
             except: pass
                 
         questions.sort(key=lambda q: q['index'])
@@ -820,7 +848,7 @@ class QuestionPage(BasePage):
             log.info(f" - Q{q['index']}: {q['name'][:30]} | Type: {q['type']} | Solved: {q['is_solved']}")
         return questions
 
-    def switch_sidebar_section(self, section_name):
+    def switch_sidebar_section(self, section_name, section_idx=None):
         """
         Locate and click the sidebar section header/accordion to switch to the target section.
         """
@@ -831,12 +859,74 @@ class QuestionPage(BasePage):
         clean_name = section_name.replace("Section:", "").strip()
         log.info(f"Attempting to switch sidebar section to: '{clean_name}'")
         
-        # Build candidates to search for
-        keywords = [clean_name]
-        if "-" in clean_name:
-            keywords.extend([k.strip() for k in clean_name.split("-")])
+        # Search for sidebar container to inspect current state
+        sidebar_el = None
+        for sel in ["//*[contains(@class, 'sidebar') or contains(@class, 'drawer') or contains(@class, 'panel')]", "//div[contains(@class, 'right')]"]:
+            elements = self.driver.find_elements(By.XPATH, sel)
+            for el in elements:
+                try:
+                    if el.is_displayed() and el.rect['x'] > (self.driver.execute_script("return window.innerWidth;") * 0.5):
+                        sidebar_el = el
+                        break
+                except: pass
+            if sidebar_el: break
+            
+        container = sidebar_el if sidebar_el else self.driver
         
-        # Search for sidebar container
+        # First, check if the target section is already expanded/visible.
+        # We can detect this by checking if any question elements belonging to this section are already visible.
+        current_visible_questions = []
+        try:
+            items = container.find_elements(By.XPATH, ".//a | .//button | .//div[@role='button'] | .//*[contains(@class, 'question-item') or contains(@class, 'question-link') or contains(@class, 'Q')]")
+            for el in items:
+                if el.is_displayed():
+                    txt = el.text.strip()
+                    if re.search(r'\b(?:Q|Question\s*)?(\d+)\b', txt, re.IGNORECASE):
+                        q_type = "CODING"
+                        html = el.get_attribute("outerHTML") or ""
+                        try:
+                            parent_text = el.find_element(By.XPATH, "./ancestor::*[contains(text(), 'MCQ') or contains(text(), 'mcq')]").text
+                            if "mcq" in parent_text.lower():
+                                q_type = "MCQ"
+                        except: pass
+                        if "mcq" in txt.lower() or "mcq" in html.lower():
+                            q_type = "MCQ"
+                        current_visible_questions.append(q_type)
+        except: pass
+        
+        target_type = "CODING"
+        if any(x in clean_name.lower() for x in ["mcq", "multiple choice"]):
+            target_type = "MCQ"
+            
+        if target_type in current_visible_questions:
+            log.info(f"✔ Section '{clean_name}' is already expanded in the sidebar (found visible {target_type} questions). Skipping click toggle.")
+            return True
+        
+        # Build candidates to search for in order of specificity
+        keywords = [clean_name]
+        parts = [p.strip() for p in re.split(r'[\s\-:]+', clean_name) if p.strip()]
+        
+        # Add non-generic specific sub-parts
+        for p in parts:
+            if p.lower() not in ["section", "part", "questions", "question"] and p not in keywords:
+                keywords.append(p)
+                
+        # Perform acronym expansion (e.g., MCQ -> Multiple Choice)
+        expanded_keywords = []
+        for kw in keywords:
+            expanded_keywords.append(kw)
+            if kw.lower() == "mcq" or kw.lower() == "mcqs":
+                expanded_keywords.extend(["multiple choice", "multiple choice questions", "mcqs", "mcq"])
+            elif "multiple choice" in kw.lower():
+                expanded_keywords.extend(["mcq", "mcqs"])
+                
+        # Filter duplicates while maintaining prioritized order
+        unique_keywords = []
+        for kw in expanded_keywords:
+            if kw not in unique_keywords:
+                unique_keywords.append(kw)
+        keywords = unique_keywords
+        
         sidebar_el = None
         for sel in ["//*[contains(@class, 'sidebar') or contains(@class, 'drawer') or contains(@class, 'panel')]", "//div[contains(@class, 'right')]"]:
             elements = self.driver.find_elements(By.XPATH, sel)
@@ -851,7 +941,7 @@ class QuestionPage(BasePage):
         container = sidebar_el if sidebar_el else self.driver
         
         for kw in keywords:
-            if not kw or len(kw) < 3: continue
+            if not kw or len(kw) < 2: continue
             log.info(f"Searching sidebar for section element containing: '{kw}'")
             xpath = f".//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '{kw.lower()}')]"
             elements = container.find_elements(By.XPATH, xpath)
@@ -859,18 +949,67 @@ class QuestionPage(BasePage):
                 try:
                     if el.is_displayed():
                         tag = el.tag_name.lower()
-                        if tag in ["div", "span", "button", "h3", "h4", "h5", "a"]:
-                            log.info(f"Found candidate section element in sidebar: <{tag}> '{el.text[:30]}'. Clicking...")
-                            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", el)
+                        if tag in ["div", "span", "button", "h3", "h4", "h5", "a", "p"]:
+                            # Find the closest clickable parent container (up to 3 levels up)
+                            click_target = el
+                            curr = el
+                            for _ in range(3):
+                                try:
+                                    curr = curr.find_element(By.XPATH, "./parent::*")
+                                    classes = (curr.get_attribute("class") or "").lower()
+                                    if "cursor-pointer" in classes or curr.tag_name.lower() in ["button", "a"]:
+                                        click_target = curr
+                                        if "cursor-pointer" in classes:
+                                            break
+                                except:
+                                    break
+                            
+                            log.info(f"Found candidate section element in sidebar: <{tag}> '{el.text[:30]}'. Clicking target <{click_target.tag_name}> (Class: '{click_target.get_attribute('class')}')")
+                            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", click_target)
                             time.sleep(0.2)
                             try:
-                                el.click()
-                                log.info("Natively clicked sidebar section element.")
-                            except:
-                                self.driver.execute_script("arguments[0].click();", el)
-                                log.info("Clicked sidebar section element via JS.")
+                                self.driver.execute_script("arguments[0].click();", click_target)
+                                log.info("Successfully toggled sidebar section accordion via JS click.")
+                            except Exception as js_err:
+                                log.warning(f"JS click failed: {js_err}. Trying native click...")
+                                click_target.click()
+                                log.info("Natively clicked sidebar section target.")
                             time.sleep(0.5)
                             return True
                 except: pass
+                
+        # Index-based section header fallback in sidebar if text matching failed
+        if section_idx is not None:
+            log.info(f"Name-based section switch failed. Attempting index-based switch for section index: {section_idx}")
+            headers_xpath = ".//button | .//h3 | .//h4 | .//h5 | .//div[contains(@class, 'header') or contains(@class, 'title') or contains(@class, 'accordion')]"
+            headers = container.find_elements(By.XPATH, headers_xpath)
+            candidates = []
+            for h in headers:
+                try:
+                    if h.is_displayed() and h.text.strip():
+                        txt = h.text.lower()
+                        # Strictly filter out non-header utility elements
+                        if not any(x in txt for x in ["q1", "q2", "q3", "question", "overall summary", "next", "prev", "previous", "submit", "run", "test", "clear", "save", "cancel", "back", "next question"]):
+                            if h not in candidates:
+                                candidates.append(h)
+                except: pass
+                
+            log.info(f"Found {len(candidates)} potential section headers in sidebar.")
+            if candidates and section_idx - 1 < len(candidates):
+                target_header = candidates[section_idx - 1]
+                log.info(f"Clicking header at index {section_idx - 1}: '{target_header.text}'")
+                try:
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", target_header)
+                    time.sleep(0.2)
+                    target_header.click()
+                    time.sleep(0.5)
+                    return True
+                except:
+                    try:
+                        self.driver.execute_script("arguments[0].click();", target_header)
+                        time.sleep(0.5)
+                        return True
+                    except: pass
+        
         log.warning(f"Could not find or switch to sidebar section: '{clean_name}'")
         return False

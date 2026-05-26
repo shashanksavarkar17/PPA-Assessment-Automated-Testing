@@ -50,7 +50,7 @@ class SummaryPage(BasePage):
             log.warning(f"Error starting section: {e}")
             return False
 
-    def start_first_unsolved_in_section(self, section_name):
+    def start_first_unsolved_in_section(self, section_name, exclude_names=None):
         clean_sec_target = self.clean_section_name(section_name).lower()
         log.info(f"Looking for first unsolved/failed question in section: '{clean_sec_target}'")
         try:
@@ -59,7 +59,7 @@ class SummaryPage(BasePage):
             for r in rows:
                 try:
                     th = r.find_elements(By.TAG_NAME, "th")
-                    if th and "section:" in th[0].text.lower():
+                    if th and "section" in th[0].text.lower():
                         curr_sec = self.clean_section_name(th[0].text).lower()
                     elif curr_sec and curr_sec == clean_sec_target:
                         tds = [t.text.strip() for t in r.find_elements(By.TAG_NAME, "td")]
@@ -67,8 +67,11 @@ class SummaryPage(BasePage):
                             status = tds[3].lower() if len(tds) >= 4 else tds[2].lower()
                             problem_name = tds[1]
                             
-                            # We want to solve any question that isn't already solved/passed.
-                            if "success" not in status and "pass" not in status:
+                            if exclude_names and problem_name in exclude_names:
+                                continue
+                                
+                            # We want to solve any question that isn't already solved/passed/attempted.
+                            if "success" not in status and "pass" not in status and "attempted" not in status and "submitted" not in status:
                                 # Find all possible action elements within this row
                                 btn_elements = []
                                 for xpath in [".//button", ".//a", ".//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'solve') or contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'resume') or contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'attempt') or contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'start')]"]:
@@ -111,9 +114,11 @@ class SummaryPage(BasePage):
             
             for r in rows:
                 th = r.find_elements(By.TAG_NAME, "th")
-                if th and "Section:" in th[0].text:
+                if th and "section" in th[0].text.lower():
                     # Found a new section header row. Clean it to base title name and group questions under it.
-                    curr_sec = th[0].text[th[0].text.find("Section:"):].strip()
+                    th_text = th[0].text
+                    sec_idx = th_text.lower().find("section")
+                    curr_sec = th_text[sec_idx:].strip()
                     curr_sec = self.clean_section_name(curr_sec)
                     data[curr_sec] = []
                 elif curr_sec:
