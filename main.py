@@ -106,84 +106,62 @@ def run_assessment_flow():
             solved_in_this_run = []
             failed_questions = []
             
-            # Streamlined linear MCQ section handler (bypasses sidebar navigation completely)
-            if "multiple choice" in section_name.lower() or "mcq" in section_name.lower():
-                log.info(f"Detected MCQ section: '{section_name}'. Starting streamlined linear MCQ solving pipeline...")
-                q_idx = 1
-                while True:
+            # Standard sidebar-driven question traversal for all sections (both coding and MCQ)
+            while True:
+                pages['question'].wait_for_page_load()
+                
+                # Switch to correct section sidebar accordion/tab
+                pages['question'].switch_sidebar_section(section_name)
+                
+                # Open sidebar control panel to inspect active questions list.
+                pages['question'].open_sidebar()
+                time.sleep(0.2)
+                
+                # Scan sidebar structural elements.
+                sidebar_questions = pages['question'].get_sidebar_questions()
+                
+                # Filter all unsolved questions in this section (Solved=False status detection)
+                unsolved = [q for q in sidebar_questions if not q['is_solved'] and q['index'] not in failed_questions and q['index'] not in solved_in_this_run]
+                
+                if unsolved:
+                    next_q = unsolved[0]
+                    log.info(f"Transitioning to Question {next_q['index']} ({next_q['type']})")
+                    
+                    try:
+                        driver.execute_script("arguments[0].click();", next_q['element'])
+                    except:
+                        try: next_q['element'].click()
+                        except: pass
+                    time.sleep(0.6)
+                    
+                    # Ensure sidebar is closed before attempting the question
+                    if pages['question'].is_sidebar_open():
+                        log.info("Sidebar remains open. Explicitly closing sidebar to prevent overlay obstruction...")
+                        pages['question'].close_sidebar()
+                    else:
+                        log.info("Sidebar is already closed.")
+                    time.sleep(0.4)
+                    
                     pages['question'].wait_for_page_load()
                     q_type = pages['question'].get_question_type()
-                    
-                    if q_type != 'MCQ':
-                        log.info("Reached non-MCQ viewport or completed MCQ section. Returning to summary...")
-                        break
-                        
                     q_text = pages['question'].get_question_text()
-                    log.info(f"Solving MCQ {q_idx} on screen...")
                     
-                    success = _solve_mcq(pages['question'], solver, report, section_name, q_text, q_idx)
-                    
-                    # Check if next button is disabled (this was the last question)
-                    if pages['question'].is_next_button_disabled():
-                        log.info("Reached the last MCQ question (Next button is disabled). Gracefully finishing MCQ section solving loop...")
-                        break
+                    success = False
+                    if q_type == 'MCQ':
+                        success = _solve_mcq(pages['question'], solver, report, section_name, q_text, next_q['index'])
+                    else:
+                        success = _solve_coding(pages['question'], solver, report, section_name, q_text, next_q['index'])
                         
                     if not success:
-                        log.warning(f"MCQ {q_idx} failed to resolve. Clicking Next to skip...")
-                        try: pages['question'].click_save_and_next()
-                        except: pass
-                        
-                    q_idx += 1
-                    time.sleep(1.5)
-            else:
-                # Standard sidebar-driven question traversal for coding sections
-                while True:
-                    pages['question'].wait_for_page_load()
-                    
-                    # Switch to correct section sidebar elements (e.g. accordion/tab)
-                    pages['question'].switch_sidebar_section(section_name)
-                    
-                    # Open sidebar control panel to inspect active questions list.
-                    pages['question'].open_sidebar()
-                    time.sleep(0.2)
-                    
-                    # Scan sidebar structural elements.
-                    sidebar_questions = pages['question'].get_sidebar_questions()
-                    
-                    # Filter all unsolved questions in this section.
-                    unsolved = [q for q in sidebar_questions if not q['is_solved'] and q['index'] not in failed_questions and q['index'] not in solved_in_this_run]
-                    
-                    if unsolved:
-                        next_q = unsolved[0]
-                        log.info(f"Transitioning to Question {next_q['index']} ({next_q['type']})")
-                        
-                        try:
-                            driver.execute_script("arguments[0].click();", next_q['element'])
-                        except:
-                            try: next_q['element'].click()
-                            except: pass
-                        time.sleep(0.6)
-                        
-                        pages['question'].wait_for_page_load()
-                        q_type = pages['question'].get_question_type()
-                        q_text = pages['question'].get_question_text()
-                        
-                        success = False
-                        if q_type == 'MCQ':
-                            success = _solve_mcq(pages['question'], solver, report, section_name, q_text, next_q['index'])
-                        else:
-                            success = _solve_coding(pages['question'], solver, report, section_name, q_text, next_q['index'])
-                            
-                        if not success:
-                            log.warning(f"Question {next_q['index']} failed to resolve. Flagging to prevent retry loop.")
-                            failed_questions.append(next_q['index'])
-                        else:
-                            solved_in_this_run.append(next_q['index'])
+                        log.warning(f"Question {next_q['index']} failed to resolve. Flagging to prevent retry loop.")
+                        failed_questions.append(next_q['index'])
                     else:
-                        log.info(f"All scanned questions in section '{section_name}' successfully processed.")
-                        break
-                        
-                    time.sleep(0.5)
+                        solved_in_this_run.append(next_q['index'])
+                else:
+                    log.info(f"All scanned questions in section '{section_name}' successfully processed.")
+                    break
+                    
+                time.sleep(0.5)
                 
             # Navigate back to overall summary dashboard to prepare for the next section.
             pages['question'].open_sidebar()

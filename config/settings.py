@@ -14,7 +14,7 @@ if os.path.exists(env_path):
                 os.environ[k.strip()] = v.strip()
 
 # Target assessment portal URL.
-BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KSHMHWQ9AEZ9VSS8PA03C71G"
+BASE_URL = "https://instatest.programmingpathshala.com/assessment/01KSJ22F1TT311TCDCYKPC5PWQ"
 
 # Retrieve NVIDIA API keys and model configuration from environment variables.
 NVIDIA_API_KEYS = [k.strip() for k in [os.environ.get("NVIDIA_NIM_API_KEY", ""), os.environ.get("NVIDIA_NIM_API_KEY_FALLBACK", "")] if k.strip()]
