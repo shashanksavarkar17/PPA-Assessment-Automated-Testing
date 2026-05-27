@@ -142,31 +142,6 @@ class SummaryPage(BasePage):
             sec_counts = {k: len(v) for k, v in data.items()}
             tot_q = sum(sec_counts.values())
             
-            from config import settings
-            txt_path = os.path.join(settings.REPORTS_DIR, "assessment_summary.txt")
-            html_path = os.path.join(settings.REPORTS_DIR, "assessment_summary.html")
-            
-            # Write formatted assessment statistics to plain text format.
-            with open(txt_path, "w", encoding="utf-8") as f:
-                f.write(f"Assessment Summary\n==================\n\nOverview:\nTotal Sections: {len(sec_counts)}\nTotal Questions: {tot_q}\n\nScanned Sections:\n")
-                for s, c in sec_counts.items(): f.write(f"- {s}: {c} questions\n")
-                f.write("\nQuestions:\n")
-                for s, qs in data.items():
-                    f.write(f"\n--- {s} ---\n")
-                    for q in qs: f.write(f"- {q['id']} | Question: {q['desc']} | Type/Status: {q['status']}\n")
-            
-            # Compile summary dashboard HTML output.
-            html = f'''<!DOCTYPE html><html><head><title>Assessment Summary</title></head><body><h1>Assessment Summary</h1>
-<h2>Overview</h2><table border="1"><tr><th>Total Sections</th><th>Total Questions</th></tr><tr><td>{len(sec_counts)}</td><td>{tot_q}</td></tr></table>
-<h2>Scanned Sections</h2><table border="1"><tr><th>Section Name</th><th>Questions Count</th></tr>'''
-            for s, c in sec_counts.items(): html += f"<tr><td>{s}</td><td>{c}</td></tr>"
-            html += '''</table><h2>Questions</h2><table border="1"><tr><th>Section</th><th>Question Index</th><th>Question</th><th>Type/Status</th></tr>'''
-            for s, qs in data.items():
-                for q in qs: html += f"<tr><td>{s}</td><td>{q['id']}</td><td>{q['desc']}</td><td>{q['status']}</td></tr>"
-            html += "</table></body></html>"
- 
-            with open(html_path, "w", encoding="utf-8") as f: f.write(html)
-            print(f"Summary logs written to {txt_path} and {html_path}")
             return sec_counts
         except Exception as e:
             log.warning(f"Failed to scan assessment summary: {e}")
