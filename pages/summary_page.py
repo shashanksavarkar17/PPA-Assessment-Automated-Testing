@@ -67,8 +67,17 @@ class SummaryPage(BasePage):
                             status = tds[3].lower() if len(tds) >= 4 else tds[2].lower()
                             problem_name = tds[1]
                             
-                            if exclude_names and problem_name in exclude_names:
-                                continue
+                            if exclude_names:
+                                norm_str = lambda s: "".join(c for c in s.lower() if c.isalnum())
+                                prob_norm = norm_str(problem_name)
+                                match_found = False
+                                for ex in exclude_names:
+                                    ex_norm = norm_str(ex)
+                                    if ex_norm in prob_norm or prob_norm in ex_norm:
+                                        match_found = True
+                                        break
+                                if match_found:
+                                    continue
                                 
                             # We want to solve any question that isn't already solved/passed/attempted.
                             if "success" not in status and "pass" not in status and "attempted" not in status and "submitted" not in status:

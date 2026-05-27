@@ -1013,3 +1013,33 @@ class QuestionPage(BasePage):
         
         log.warning(f"Could not find or switch to sidebar section: '{clean_name}'")
         return False
+
+    def click_sidebar_question(self, q_idx):
+        """
+        Navigate directly to a question by its index in the sidebar list.
+        """
+        log.info(f"Attempting to click sidebar question index: {q_idx}")
+        self.open_sidebar()
+        time.sleep(0.3)
+        
+        questions = self.get_sidebar_questions()
+        for q in questions:
+            if q['index'] == q_idx:
+                el = q['element']
+                try:
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", el)
+                    time.sleep(0.2)
+                    try:
+                        self.driver.execute_script("arguments[0].click();", el)
+                        log.info(f"Successfully clicked Q{q_idx} via JS.")
+                    except:
+                        el.click()
+                        log.info(f"Successfully clicked Q{q_idx} natively.")
+                    time.sleep(1.0)
+                    self.dismiss_reset_popup()
+                    return True
+                except Exception as e:
+                    log.warning(f"Failed to click sidebar question element for Q{q_idx}: {e}")
+                    
+        log.warning(f"Could not locate Q{q_idx} in the sidebar.")
+        return False

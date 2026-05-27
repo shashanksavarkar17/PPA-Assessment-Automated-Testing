@@ -29,4 +29,20 @@ def get_logger(name="Runner"):
         ch = logging.StreamHandler(sys.stdout)
         ch.setFormatter(ConsoleFmt())
         log.addHandler(ch)
+
+        # Direct logs to reports/execution_log.txt file
+        try:
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            reports_dir = os.path.join(base_dir, "reports")
+            os.makedirs(reports_dir, exist_ok=True)
+            log_path = os.path.join(reports_dir, "execution_log.txt")
+            
+            # Clear log file on fresh run if initialized by the MainRunner
+            mode = "w" if name == "MainRunner" or not os.path.exists(log_path) else "a"
+            fh = logging.FileHandler(log_path, mode=mode, encoding="utf-8")
+            fh.setFormatter(logging.Formatter("[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s"))
+            log.addHandler(fh)
+        except Exception as e:
+            print(f"Failed to add file handler to logger: {e}", file=sys.stderr)
+            
     return log

@@ -88,157 +88,152 @@ class ReportGenerator:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scanned Assessment Questions & Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-primary: #0a0e17;
-            --bg-secondary: #131924;
-            --accent-primary: #3b82f6;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #1f2937;
-        }
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #333333;
+            background-color: #ffffff;
+            line-height: 1.5;
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 24px;
         }
         .container {
-            width: 100%;
-            max-width: 1000px;
+            max-width: 900px;
+            margin: 0 auto;
         }
         header {
-            margin-bottom: 40px;
-            text-align: center;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            text-align: left;
         }
         h1 {
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #111111;
         }
-        p.subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+        .subtitle {
+            color: #666666;
+            font-size: 15px;
             margin: 0;
         }
         .question-card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid #dddddd;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 24px;
+            background-color: #f9f9f9;
         }
         .q-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
         }
         .q-title {
-            font-size: 1.6rem;
+            font-size: 18px;
             font-weight: 600;
             margin: 0;
-            color: #60a5fa;
+            color: #222222;
         }
         .badge {
-            padding: 6px 12px;
-            border-radius: 9999px;
-            font-size: 0.85rem;
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
+            border: 1px solid #ccc;
         }
         .badge-solved {
-            background-color: rgba(16, 185, 129, 0.15);
-            color: var(--accent-green);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            background-color: #e6f4ea;
+            color: #137333;
+            border-color: #c2e7cd;
         }
         .badge-failed {
-            background-color: rgba(239, 68, 68, 0.15);
-            color: var(--accent-red);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background-color: #fce8e6;
+            color: #c5221f;
+            border-color: #fad2cf;
         }
         .badge-unsolved {
-            background-color: rgba(156, 163, 175, 0.15);
-            color: var(--text-muted);
-            border: 1px solid rgba(156, 163, 175, 0.3);
+            background-color: #f1f3f4;
+            color: #5f6368;
+            border-color: #dadce0;
         }
         .timestamp {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 12px;
+            color: #777777;
         }
         .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 20px 0 10px 0;
-            color: var(--text-main);
-            border-left: 3px solid var(--accent-primary);
-            padding-left: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            margin: 16px 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #555555;
         }
         .problem-statement {
             white-space: pre-wrap;
-            line-height: 1.6;
-            color: #d1d5db;
-            background-color: #0d1117;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #21262d;
-            font-size: 0.95rem;
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #eaeaea;
+            font-size: 14px;
+            color: #333333;
         }
         .metadata-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 15px;
+            gap: 16px;
+            margin-bottom: 12px;
         }
         .metadata-box {
-            background-color: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 8px;
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            padding: 12px;
+            border-radius: 4px;
         }
         .metadata-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 5px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #777777;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            margin-bottom: 4px;
         }
         .metadata-value {
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 13px;
             white-space: pre-wrap;
         }
         .code-container {
-            font-family: 'Fira Code', monospace;
-            background-color: #0d1117;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #21262d;
+            font-family: Consolas, Monaco, monospace;
+            background-color: #f4f4f4;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #eaeaea;
             overflow-x: auto;
             margin: 0;
-            color: #e6edf3;
-            font-size: 0.9rem;
+            color: #333333;
+            font-size: 13px;
         }
         .verdict-box {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #eaeaea;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 13px;
             white-space: pre-wrap;
+        }
+        ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        li {
+            font-size: 14px;
+            margin-bottom: 4px;
         }
     </style>
 </head>
@@ -338,8 +333,285 @@ class ReportGenerator:
         # Compile both analytical reports upon execution completion.
         self.save_scanned_questions_html()
         from config import settings
+        
+        # Save telemetry data first
         try:
             with open(os.path.join(settings.REPORTS_DIR, "telemetry.json"), "w") as f:
                 json.dump(self.data, f, indent=2)
             log.info("Saved telemetry.json")
         except: pass
+        
+        # Load raw log text for embedding
+        log_content = "Log file not found."
+        try:
+            log_path = os.path.join(settings.REPORTS_DIR, "execution_log.txt")
+            if os.path.exists(log_path):
+                with open(log_path, "r", encoding="utf-8", errors="replace") as f:
+                    log_content = f.read()
+        except Exception as e:
+            log_content = f"Error reading log file: {e}"
+            
+        file_path = os.path.join(settings.REPORTS_DIR, "assessment_dashboard.html")
+        try:
+            from html import escape
+            
+            meta = self.data.get("meta", {})
+            timeline = self.data.get("timeline", [])
+            questions = self.data.get("questions", [])
+            
+            total_sec = meta.get("sections", 0)
+            total_q = meta.get("questions", 0)
+            passed = meta.get("pass", 0)
+            failed = meta.get("fail", 0)
+            unsolved = max(0, total_q - (passed + failed))
+            
+            start_time = meta.get("start", time.time())
+            start_time_str = datetime.fromtimestamp(start_time).strftime("%Y-%m-%d %H:%M:%S")
+            duration_str = f"{int(time.time() - start_time)} seconds"
+                
+            html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Execution Dashboard</title>
+    <style>
+        body {{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            margin: 0;
+            padding: 24px;
+            line-height: 1.5;
+        }}
+        .container {{
+            max-width: 1100px;
+            margin: 0 auto;
+        }}
+        header {{
+            margin-bottom: 24px;
+            text-align: left;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 16px;
+        }}
+        h1 {{
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #111111;
+        }}
+        .subtitle {{
+            color: #666666;
+            font-size: 15px;
+            margin: 0;
+        }}
+        .grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }}
+        .card {{
+            background-color: #f9f9f9;
+            border: 1px solid #dddddd;
+            border-radius: 6px;
+            padding: 20px;
+        }}
+        .card-title {{
+            font-size: 12px;
+            font-weight: 700;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 6px;
+        }}
+        .stat-value {{
+            font-size: 32px;
+            font-weight: 700;
+            color: #111111;
+            margin-bottom: 8px;
+        }}
+        .stat-grid {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }}
+        .stat-item {{
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+        }}
+        .stat-item-label {{
+            font-size: 11px;
+            color: #777777;
+        }}
+        .stat-item-value {{
+            font-size: 14px;
+            font-weight: 600;
+        }}
+        .timeline-section {{
+            margin-bottom: 30px;
+        }}
+        .section-title {{
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #222222;
+            border-bottom: 1px solid #dddddd;
+            padding-bottom: 6px;
+        }}
+        .timeline-container {{
+            background-color: #f9f9f9;
+            border: 1px solid #dddddd;
+            border-radius: 6px;
+            padding: 16px;
+            max-height: 350px;
+            overflow-y: auto;
+        }}
+        .timeline-item {{
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #eaeaea;
+        }}
+        .timeline-item:last-child {{
+            border-bottom: none;
+        }}
+        .timeline-time {{
+            font-family: Consolas, Monaco, monospace;
+            width: 80px;
+            color: #0066cc;
+            font-weight: 600;
+            font-size: 13px;
+        }}
+        .timeline-desc {{
+            flex: 1;
+            color: #333333;
+            font-size: 13px;
+        }}
+        .log-section {{
+            margin-bottom: 30px;
+        }}
+        .log-viewer {{
+            font-family: Consolas, Monaco, monospace;
+            background-color: #f4f4f4;
+            padding: 16px;
+            border-radius: 6px;
+            border: 1px solid #eaeaea;
+            max-height: 350px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            color: #333333;
+            font-size: 13px;
+            line-height: 1.4;
+        }}
+        .footer {{
+            text-align: center;
+            color: #777777;
+            font-size: 12px;
+            margin-top: 40px;
+            border-top: 1px solid #eaeaea;
+            padding-top: 16px;
+        }}
+        .link-btn {{
+            display: inline-block;
+            background-color: #0066cc;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 12px;
+            text-align: center;
+            border: 1px solid #0052a3;
+        }}
+        .link-btn:hover {{
+            background-color: #0052a3;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Assessment Traversal & Execution Dashboard</h1>
+            <p class="subtitle">Complete telemetry, real-time logs, and question statements with code solutions</p>
+        </header>
+        
+        <div class="grid">
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-title">Portal & Candidate Information</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--text-muted);">Candidate:</strong> {escape(str(meta.get("user", "BOT")))}</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--text-muted);">Started At:</strong> {escape(start_time_str)}</div>
+                    <div style="margin-bottom: 8px;"><strong style="color: var(--text-muted);">Execution Duration:</strong> {escape(duration_str)}</div>
+                </div>
+                <a href="scanned_questions.html" class="link-btn">View Scanned Questions</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">Assessment Question Stats</div>
+                <div class="stat-value">{escape(str(total_q))}</div>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-item-label">Passed / Solved</div>
+                        <div class="stat-item-value" style="color: var(--accent-green);">{escape(str(passed))}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item-label">Failed / Partial</div>
+                        <div class="stat-item-value" style="color: var(--accent-red);">{escape(str(failed))}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">Structure Summary</div>
+                <div style="margin-bottom: 12px;"><strong style="color: var(--text-muted);">Total Sections Scanned:</strong> {escape(str(total_sec))}</div>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-item-label">Unsolved Remaining</div>
+                        <div class="stat-item-value" style="color: var(--text-muted);">{escape(str(unsolved))}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item-label">Success Rate</div>
+                        <div class="stat-item-value" style="color: var(--accent-green);">{escape(str(int(passed * 100 / total_q) if total_q > 0 else 0))}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline-section">
+            <div class="section-title">Execution Event Timeline</div>
+            <div class="timeline-container">
+"""
+            for evt in timeline:
+                html += f"""
+                <div class="timeline-item">
+                    <div class="timeline-time">{escape(str(evt.get("t", "")))}</div>
+                    <div class="timeline-desc">{escape(str(evt.get("e", "")))}</div>
+                </div>
+"""
+            html += f"""
+            </div>
+        </div>
+        
+        <div class="log-section">
+            <div class="section-title">Raw Execution Console Logs</div>
+            <pre class="log-viewer"><code>{escape(log_content)}</code></pre>
+        </div>
+        
+        <div class="footer">
+            Generated autonomously by Antigravity Automation Solver • {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+        </div>
+    </div>
+</body>
+</html>"""
+            
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write(html)
+            log.info("Saved integrated telemetry dashboard to assessment_dashboard.html.")
+        except Exception as e:
+            log.error(f"Error compiling assessment_dashboard.html: {e}")
